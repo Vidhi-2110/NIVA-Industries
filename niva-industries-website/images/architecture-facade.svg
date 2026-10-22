@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="facadeSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="60%" stop-color="#BAE6FD"/>
+      <stop offset="100%" stop-color="#E0F2FE"/>
+    </linearGradient>
+    <linearGradient id="panelLight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#CBD5E1"/>
+    </linearGradient>
+    <linearGradient id="panelDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#64748B"/>
+      <stop offset="100%" stop-color="#1E293B"/>
+    </linearGradient>
+    <filter id="louverShadow">
+      <feDropShadow dx="-2" dy="6" stdDeviation="4" flood-color="#0F172A" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <!-- Clear Sky -->
+  <rect width="600" height="450" fill="url(#facadeSky)"/>
+
+  <!-- Modern Parametric Steel Facade with Triangular Kinetic Sunshade Louvers -->
+  <!-- Sweeping curved diagrid building curve -->
+  <g filter="url(#louverShadow)" transform="translate(-20, -10)">
+    <!-- Repeating Rows of Folded Steel Parametric Louvers -->
+    <!-- Row 1 -->
+    <g transform="translate(60, 40)">
+      <polygon points="40,20 90,80 140,20" fill="url(#panelLight)"/>
+      <polygon points="90,80 140,20 120,0" fill="url(#panelDark)"/>
+      
+      <polygon points="140,20 190,80 240,20" fill="url(#panelLight)"/>
+      <polygon points="190,80 240,20 220,0" fill="url(#panelDark)"/>
+
+      <polygon points="240,20 290,80 340,20" fill="url(#panelLight)"/>
+      <polygon points="290,80 340,20 320,0" fill="url(#panelDark)"/>
+
+      <polygon points="340,20 390,80 440,20" fill="url(#panelLight)"/>
+      <polygon points="390,80 440,20 420,0" fill="url(#panelDark)"/>
+
+      <polygon points="440,20 490,80 540,20" fill="url(#panelLight)"/>
+      <polygon points="490,80 540,20 520,0" fill="url(#panelDark)"/>
+    </g>
+
+    <!-- Row 2 -->
+    <g transform="translate(40, 110)">
+      <polygon points="40,20 90,80 140,20" fill="url(#panelLight)"/>
+      <polygon points="90,80 140,20 120,0" fill="url(#panelDark)"/>
+
+      <polygon points="140,20 190,80 240,20" fill="url(#panelLight)"/>
+      <polygon points="190,80 240,20 220,0" fill="url(#panelDark)"/>
+
+      <polygon points="240,20 290,80 340,20" fill="url(#panelLight)"/>
+      <polygon points="290,80 340,20 320,0" fill="url(#panelDark)"/>
+
+      <polygon points="340,20 390,80 440,20" fill="url(#panelLight)"/>
+      <polygon points="390,80 440,20 420,0" fill="url(#panelDark)"/>
+
+      <polygon points="440,20 490,80 540,20" fill="url(#panelLight)"/>
+      <polygon points="490,80 540,20 520,0" fill="url(#panelDark)"/>
+
+      <polygon points="540,20 590,80 640,20" fill="url(#panelLight)"/>
+      <polygon points="590,80 640,20 620,0" fill="url(#panelDark)"/>
+    </g>
+
+    <!-- Row 3 -->
+    <g transform="translate(20, 180)">
+      <polygon points="40,20 90,80 140,20" fill="url(#panelLight)"/>
+      <polygon points="90,80 140,20 120,0" fill="url(#panelDark)"/>
+
+      <polygon points="140,20 190,80 240,20" fill="url(#panelLight)"/>
+      <polygon points="190,80 240,20 220,0" fill="url(#panelDark)"/>
+
+      <polygon points="240,20 290,80 340,20" fill="url(#panelLight)"/>
+      <polygon points="290,80 340,20 320,0" fill="url(#panelDark)"/>
+
+      <polygon points="340,20 390,80 440,20" fill="url(#panelLight)"/>
+      <polygon points="390,80 440,20 420,0" fill="url(#panelDark)"/>
+
+      <polygon points="440,20 490,80 540,20" fill="url(#panelLight)"/>
+      <polygon points="490,80 540,20 520,0" fill="url(#panelDark)"/>
+
+      <polygon points="540,20 590,80 640,20" fill="url(#panelLight)"/>
+      <polygon points="590,80 640,20 620,0" fill="url(#panelDark)"/>
+    </g>
+
+    <!-- Row 4 -->
+    <g transform="translate(0, 250)">
+      <polygon points="40,20 90,80 140,20" fill="url(#panelLight)"/>
+      <polygon points="90,80 140,20 120,0" fill="url(#panelDark)"/>
+
+      <polygon points="140,20 190,80 240,20" fill="url(#panelLight)"/>
+      <polygon points="190,80 240,20 220,0" fill="url(#panelDark)"/>
+
+      <polygon points="240,20 290,80 340,20" fill="url(#panelLight)"/>
+      <polygon points="290,80 340,20 320,0" fill="url(#panelDark)"/>
+
+      <polygon points="340,20 390,80 440,20" fill="url(#panelLight)"/>
+      <polygon points="390,80 440,20 420,0" fill="url(#panelDark)"/>
+
+      <polygon points="440,20 490,80 540,20" fill="url(#panelLight)"/>
+      <polygon points="490,80 540,20 520,0" fill="url(#panelDark)"/>
+
+      <polygon points="540,20 590,80 640,20" fill="url(#panelLight)"/>
+      <polygon points="590,80 640,20 620,0" fill="url(#panelDark)"/>
+    </g>
+
+    <!-- Row 5 -->
+    <g transform="translate(-20, 320)">
+      <polygon points="40,20 90,80 140,20" fill="url(#panelLight)"/>
+      <polygon points="90,80 140,20 120,0" fill="url(#panelDark)"/>
+
+      <polygon points="140,20 190,80 240,20" fill="url(#panelLight)"/>
+      <polygon points="190,80 240,20 220,0" fill="url(#panelDark)"/>
+
+      <polygon points="240,20 290,80 340,20" fill="url(#panelLight)"/>
+      <polygon points="290,80 340,20 320,0" fill="url(#panelDark)"/>
+
+      <polygon points="340,20 390,80 440,20" fill="url(#panelLight)"/>
+      <polygon points="390,80 440,20 420,0" fill="url(#panelDark)"/>
+
+      <polygon points="440,20 490,80 540,20" fill="url(#panelLight)"/>
+      <polygon points="490,80 540,20 520,0" fill="url(#panelDark)"/>
+
+      <polygon points="540,20 590,80 640,20" fill="url(#panelLight)"/>
+      <polygon points="590,80 640,20 620,0" fill="url(#panelDark)"/>
+    </g>
+  </g>
+</svg>

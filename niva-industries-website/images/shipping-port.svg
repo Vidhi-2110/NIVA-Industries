@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 350" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="portSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="60%" stop-color="#93C5FD"/>
+      <stop offset="100%" stop-color="#E2E8F0"/>
+    </linearGradient>
+    <linearGradient id="seaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0284C7"/>
+      <stop offset="100%" stop-color="#0369A1"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="600" height="220" fill="url(#portSky)"/>
+  <!-- Sea Ocean -->
+  <rect y="220" width="600" height="130" fill="url(#seaGrad)"/>
+
+  <!-- Concrete Quayside Pier -->
+  <polygon points="0,270 340,240 340,350 0,350" fill="#64748B"/>
+  <polygon points="0,270 340,240 340,250 0,280" fill="#94A3B8"/>
+
+  <!-- Giant Blue Industrial Container Crane / Gantry -->
+  <g stroke="#0284C7" stroke-width="3">
+    <!-- Pylons -->
+    <line x1="420" y1="240" x2="450" y2="70"/>
+    <line x1="480" y1="240" x2="450" y2="70"/>
+    <!-- Cross horizontal boom beam -->
+    <line x1="320" y1="80" x2="580" y2="80" stroke-width="6"/>
+    <!-- Cables -->
+    <line x1="450" y1="30" x2="330" y2="80" stroke-width="2"/>
+    <line x1="450" y1="30" x2="570" y2="80" stroke-width="2"/>
+    <!-- Tower Apex -->
+    <line x1="435" y1="70" x2="450" y2="30"/>
+    <line x1="465" y1="70" x2="450" y2="30"/>
+  </g>
+
+  <!-- Cargo Vessel Hull on Right -->
+  <polygon points="360,250 580,250 600,220 380,220" fill="#0F172A"/>
+  <!-- Orange Containers on Ship Deck -->
+  <rect x="420" y="195" width="40" height="25" fill="#FF4D00" stroke="#CBD5E1" stroke-width="1"/>
+  <rect x="465" y="195" width="40" height="25" fill="#3B82F6" stroke="#CBD5E1" stroke-width="1"/>
+  <rect x="510" y="195" width="40" height="25" fill="#FF4D00" stroke="#CBD5E1" stroke-width="1"/>
+  <rect x="440" y="170" width="40" height="25" fill="#E2E8F0" stroke="#0F172A" stroke-width="1"/>
+</svg>

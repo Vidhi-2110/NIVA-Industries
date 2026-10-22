@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 380" width="100%" height="100%">
+  <defs>
+    <linearGradient id="marineBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F8FAFC"/>
+      <stop offset="100%" stop-color="#E2E8F0"/>
+    </linearGradient>
+    <linearGradient id="armorSteel" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#CBD5E1"/>
+      <stop offset="40%" stop-color="#64748B"/>
+      <stop offset="100%" stop-color="#334155"/>
+    </linearGradient>
+    <filter id="marineShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#0F172A" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+
+  <rect width="500" height="380" rx="12" fill="url(#marineBg)"/>
+  
+  <g stroke="#CBD5E1" stroke-width="0.8" opacity="0.6">
+    <line x1="40" y1="40" x2="460" y2="40"/>
+    <line x1="40" y1="340" x2="460" y2="340"/>
+    <line x1="40" y1="40" x2="40" y2="340"/>
+    <line x1="460" y1="40" x2="460" y2="340"/>
+  </g>
+
+  <!-- Thick Heavy Boiler / Marine Plate -->
+  <g filter="url(#marineShadow)" transform="translate(60, 45)">
+    <!-- Plate Top Surface -->
+    <polygon points="60,90 320,40 390,140 130,190" fill="url(#armorSteel)"/>
+    
+    <!-- Plate Bevel & Front Thick Edge -->
+    <polygon points="60,90 130,190 130,225 60,125" fill="#1E293B"/>
+    <!-- Plate Right Edge -->
+    <polygon points="130,190 390,140 390,175 130,225" fill="#0F172A"/>
+
+    <!-- Ultrasonic Test Grid Lines on Top Surface -->
+    <g stroke="#38BDF8" stroke-width="1.2" opacity="0.7">
+      <line x1="125" y1="78" x2="195" y2="178"/>
+      <line x1="190" y1="65" x2="260" y2="165"/>
+      <line x1="255" y1="52" x2="325" y2="152"/>
+      
+      <line x1="85" y1="125" x2="345" y2="75"/>
+      <line x1="105" y1="155" x2="365" y2="105"/>
+    </g>
+
+    <!-- Certification Heat Mark Stencil -->
+    <g transform="rotate(-11 220 110)">
+      <rect x="140" y="95" width="160" height="40" fill="#0F172A" opacity="0.8" rx="4"/>
+      <text x="150" y="112" font-family="'JetBrains Mono', monospace" font-size="9" fill="#FF4D00" font-weight="700">HEAT NO: #NV-8842-X</text>
+      <text x="150" y="127" font-family="'JetBrains Mono', monospace" font-size="9" fill="#FFFFFF" font-weight="700">ASTM A516 GR 70 / DNV-GL</text>
+    </g>
+  </g>
+
+  <g transform="translate(290, 290)">
+    <rect width="170" height="34" rx="4" fill="#0F172A"/>
+    <text x="85" y="22" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#FF4D00" text-anchor="middle">BOILER &amp; PRESSURE VESSEL</text>
+  </g>
+</svg>

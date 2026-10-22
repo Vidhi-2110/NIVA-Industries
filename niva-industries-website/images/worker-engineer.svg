@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="engBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+    <linearGradient id="suitGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#1D4ED8"/>
+    </linearGradient>
+    <linearGradient id="helmetGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF7A33"/>
+      <stop offset="50%" stop-color="#FF4D00"/>
+      <stop offset="100%" stop-color="#C23600"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="500" height="500" fill="url(#engBg)"/>
+  
+  <!-- Steel Foundry Plant Blur Backdrop -->
+  <g opacity="0.2" stroke="#64748B" stroke-width="2">
+    <line x1="60" y1="0" x2="60" y2="500"/>
+    <line x1="180" y1="0" x2="180" y2="500"/>
+    <line x1="400" y1="0" x2="400" y2="500"/>
+    <line x1="0" y1="180" x2="500" y2="180"/>
+    <line x1="0" y1="320" x2="500" y2="320"/>
+  </g>
+
+  <!-- Engineer Silhouette & Features -->
+  <g transform="translate(100, 70)">
+    <!-- Shoulders & Workwear Coveralls -->
+    <path d="M 10 350 C 30 260, 100 240, 150 240 C 200 240, 270 260, 290 350 Z" fill="url(#suitGrad)"/>
+    <path d="M 110 240 L 150 290 L 190 240 Z" fill="#1E40AF"/>
+    <line x1="150" y1="290" x2="150" y2="350" stroke="#0F172A" stroke-width="4"/>
+
+    <!-- High-Vis Reflective Strips -->
+    <path d="M 60 280 L 100 250" stroke="#E2E8F0" stroke-width="8" stroke-linecap="round"/>
+    <path d="M 240 280 L 200 250" stroke="#E2E8F0" stroke-width="8" stroke-linecap="round"/>
+
+    <!-- Neck & Face -->
+    <rect x="125" y="195" width="50" height="55" rx="10" fill="#F87171" opacity="0.85"/>
+    <!-- Head Oval -->
+    <ellipse cx="150" cy="160" rx="55" ry="65" fill="#FCA5A5"/>
+
+    <!-- Facial features (Minimal / stylized) -->
+    <!-- Eyes & safety glasses -->
+    <g fill="#1E293B">
+      <ellipse cx="130" cy="155" rx="5" ry="4"/>
+      <ellipse cx="170" cy="155" rx="5" ry="4"/>
+      <!-- Glasses Frame -->
+      <path d="M 110 152 Q 130 142, 150 152 Q 170 142, 190 152" fill="none" stroke="#0F172A" stroke-width="4"/>
+      <!-- Nose & Smile -->
+      <path d="M 150 160 L 152 172 L 146 175" stroke="#E11D48" stroke-width="2" fill="none"/>
+      <path d="M 136 190 Q 150 200, 164 190" fill="none" stroke="#BE123C" stroke-width="3" stroke-linecap="round"/>
+    </g>
+
+    <!-- Hard Hat / Industrial Safety Helmet -->
+    <!-- Rim -->
+    <ellipse cx="150" cy="115" rx="72" ry="18" fill="url(#helmetGrad)"/>
+    <!-- Dome -->
+    <path d="M 85 115 C 85 45, 215 45, 215 115 Z" fill="url(#helmetGrad)"/>
+    <!-- Top Ridge -->
+    <path d="M 142 50 C 142 50, 150 45, 158 50 L 158 110 L 142 110 Z" fill="#FF8A4D"/>
+    <!-- Reflective sticker on helmet -->
+    <rect x="135" y="80" width="30" height="10" rx="2" fill="#FFFFFF" opacity="0.9"/>
+  </g>
+
+  <!-- Technical Overlay HUD Badge -->
+  <g transform="translate(40, 410)">
+    <rect width="250" height="60" rx="6" fill="#0F172A" stroke="#334155" stroke-width="1.5"/>
+    <text x="20" y="26" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" font-weight="700" fill="#FFFFFF">MARCUS VANCE</text>
+    <text x="20" y="44" font-family="'JetBrains Mono', monospace" font-size="10" fill="#FF4D00">CHIEF METALLURGICAL ENGINEER</text>
+  </g>
+</svg>

@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="roofSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E2E8F0"/>
+      <stop offset="60%" stop-color="#CBD5E1"/>
+      <stop offset="100%" stop-color="#94A3B8"/>
+    </linearGradient>
+    <linearGradient id="orangeTruss1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF6B26"/>
+      <stop offset="50%" stop-color="#FF4D00"/>
+      <stop offset="100%" stop-color="#C23600"/>
+    </linearGradient>
+    <linearGradient id="orangeTruss2" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#E03E00"/>
+      <stop offset="50%" stop-color="#FF4D00"/>
+      <stop offset="100%" stop-color="#FF7A33"/>
+    </linearGradient>
+    <filter id="trussGlow">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#0F172A" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <!-- Sky and Glass Roof Framework -->
+  <rect width="1200" height="600" fill="url(#roofSky)"/>
+
+  <!-- Curved Glass Skylight Arches -->
+  <g stroke="#94A3B8" stroke-width="2" opacity="0.6">
+    <path d="M 0 350 Q 600 80, 1200 350" fill="none"/>
+    <path d="M 0 300 Q 600 40, 1200 300" fill="none"/>
+    <path d="M 0 250 Q 600 0, 1200 250" fill="none"/>
+    <!-- Glass Mullions -->
+    <line x1="200" y1="290" x2="200" y2="400"/>
+    <line x1="400" y1="180" x2="400" y2="350"/>
+    <line x1="600" y1="140" x2="600" y2="350"/>
+    <line x1="800" y1="180" x2="800" y2="350"/>
+    <line x1="1000" y1="290" x2="1000" y2="400"/>
+  </g>
+
+  <!-- Massive Curved Steel Beams Converging in Center (As seen in the shared image) -->
+  <g filter="url(#trussGlow)">
+    <!-- Left Major Curved Cantilever Arch -->
+    <path d="M -100 650 C 200 450, 450 350, 600 340 L 600 390 C 420 400, 200 520, -50 680 Z" fill="url(#orangeTruss1)"/>
+    
+    <!-- Right Major Curved Cantilever Arch -->
+    <path d="M 1300 650 C 1000 450, 750 350, 600 340 L 600 390 C 780 400, 1000 520, 1250 680 Z" fill="url(#orangeTruss2)"/>
+
+    <!-- Diagonal Cross Bracing Girders -->
+    <polygon points="600,340 380,180 430,160 620,320" fill="url(#orangeTruss2)"/>
+    <polygon points="600,340 820,180 770,160 580,320" fill="url(#orangeTruss1)"/>
+
+    <!-- Vertical Central Junction Node (Giant Steel Gusset Plate) -->
+    <circle cx="600" cy="340" r="45" fill="#C23600"/>
+    <circle cx="600" cy="340" r="32" fill="#FF4D00"/>
+
+    <!-- Structural Rivet Array on Central Node -->
+    <g fill="#FFFFFF" opacity="0.8">
+      <circle cx="585" cy="325" r="3.5"/>
+      <circle cx="615" cy="325" r="3.5"/>
+      <circle cx="615" cy="355" r="3.5"/>
+      <circle cx="585" cy="355" r="3.5"/>
+      <circle cx="600" cy="315" r="3.5"/>
+      <circle cx="600" cy="365" r="3.5"/>
+      <circle cx="575" cy="340" r="3.5"/>
+      <circle cx="625" cy="340" r="3.5"/>
+    </g>
+
+    <!-- Lower Supporting Girders -->
+    <polygon points="0,520 600,340 600,360 0,550" fill="#9A2200"/>
+    <polygon points="1200,520 600,340 600,360 1200,550" fill="#9A2200"/>
+  </g>
+</svg>

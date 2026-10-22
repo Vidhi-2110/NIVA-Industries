@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 280" width="100%" height="100%" fill="none">
+  <!-- Centerline indicator -->
+  <line x1="155" y1="90" x2="155" y2="200" stroke="#CBD5E1" stroke-width="1.2" stroke-dasharray="14,4,3,4"/>
+
+  <!-- Isometric Vertical I-Beam Column -->
+  <!-- Bottom Flange -->
+  <g stroke="#94A3B8" stroke-width="1.6" stroke-linejoin="round">
+    <!-- Bottom flange bottom base -->
+    <path d="M 95 240 L 195 200 L 235 216 L 135 256 Z" fill="#E2E8F0"/>
+    <!-- Bottom flange thickness sides -->
+    <path d="M 95 228 L 95 240 L 135 256 L 135 244 Z" fill="#CBD5E1"/>
+    <path d="M 135 244 L 135 256 L 235 216 L 235 204 Z" fill="#94A3B8" opacity="0.6"/>
+    <!-- Bottom flange top surface -->
+    <path d="M 95 228 L 195 188 L 235 204 L 135 244 Z" fill="#F8FAFC"/>
+
+    <!-- Web (Vertical Column Body) -->
+    <path d="M 150 114 L 150 214 L 160 210 L 160 110 Z" fill="#F1F5F9"/>
+    <line x1="150" y1="114" x2="150" y2="214"/>
+    <line x1="160" y1="110" x2="160" y2="210"/>
+
+    <!-- Top Flange -->
+    <!-- Thickness sides -->
+    <path d="M 95 110 L 95 122 L 135 138 L 135 126 Z" fill="#CBD5E1"/>
+    <path d="M 135 126 L 135 138 L 235 98 L 235 86 Z" fill="#94A3B8" opacity="0.6"/>
+    <!-- Top flange top surface -->
+    <path d="M 95 110 L 195 70 L 235 86 L 135 126 Z" fill="#F8FAFC"/>
+  </g>
+
+  <!-- Exploded Floating Top Plate with Orange Dashed Boundary -->
+  <g>
+    <!-- Semi-transparent plate body -->
+    <polygon points="95,44 195,4 235,20 135,60" fill="#F1F5F9" fill-opacity="0.85"/>
+    <!-- Orange dashed perimeter -->
+    <polygon points="95,44 195,4 235,20 135,60" stroke="#EE4D22" stroke-width="1.8" stroke-dasharray="5,4" stroke-linejoin="round"/>
+  </g>
+</svg>

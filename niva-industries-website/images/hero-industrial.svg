@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 680" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E2E8F0"/>
+      <stop offset="60%" stop-color="#F1F5F9"/>
+      <stop offset="100%" stop-color="#F8FAFC"/>
+    </linearGradient>
+    <linearGradient id="orangeSteel1" x1="0%" y1="0%" x2="100%" y2="80%">
+      <stop offset="0%" stop-color="#FF5C00"/>
+      <stop offset="60%" stop-color="#D93800"/>
+      <stop offset="100%" stop-color="#9A2200"/>
+    </linearGradient>
+    <linearGradient id="orangeSteel2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF7A33"/>
+      <stop offset="50%" stop-color="#FF4D00"/>
+      <stop offset="100%" stop-color="#B83200"/>
+    </linearGradient>
+    <linearGradient id="darkSteel" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#334155"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+    <pattern id="cadGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#CBD5E1" stroke-width="0.5" stroke-opacity="0.6"/>
+    </pattern>
+    <filter id="dropGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="15" stdDeviation="25" flood-color="#0F172A" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="1200" height="680" fill="url(#skyGrad)"/>
+  <rect width="1200" height="680" fill="url(#cadGrid)"/>
+
+  <!-- Architectural Horizon and Industrial Plant Outlines -->
+  <path d="M0 540 L180 540 L210 490 L260 490 L280 540 L450 540 L480 460 L540 460 L560 540 L820 540 L850 480 L920 480 L940 540 L1200 540 L1200 680 L0 680 Z" fill="#E2E8F0" opacity="0.7"/>
+
+  <!-- Cranes & Lattice Towers -->
+  <g stroke="#94A3B8" stroke-width="1.5" opacity="0.6">
+    <line x1="180" y1="540" x2="220" y2="340"/>
+    <line x1="220" y1="340" x2="260" y2="540"/>
+    <line x1="190" y1="460" x2="250" y2="460"/>
+    <line x1="205" y1="390" x2="235" y2="390"/>
+    <line x1="180" y1="340" x2="330" y2="340"/>
+    <line x1="220" y1="340" x2="310" y2="370"/>
+
+    <line x1="980" y1="540" x2="1020" y2="310"/>
+    <line x1="1020" y1="310" x2="1060" y2="540"/>
+    <line x1="990" y1="450" x2="1050" y2="450"/>
+    <line x1="1005" y1="380" x2="1035" y2="380"/>
+    <line x1="970" y1="310" x2="1140" y2="310"/>
+  </g>
+
+  <!-- Massive Curved Steel Arch - Inspired by reference hero image -->
+  <!-- Left Supporting Pillar -->
+  <g filter="url(#dropGlow)">
+    <path d="M-50 680 L180 680 L320 220 L240 220 L-50 680 Z" fill="url(#orangeSteel1)"/>
+    <path d="M240 220 L320 220 L300 200 L220 200 Z" fill="#FF8A4D"/>
+    
+    <!-- Giant Sweeping Arch Girder -->
+    <path d="M120 680 C360 280, 680 80, 1250 140 L1250 260 C720 200, 440 380, 260 680 Z" fill="url(#orangeSteel2)"/>
+    
+    <!-- Girder Underside / Shadow Plane -->
+    <path d="M120 680 C360 280, 680 80, 1250 140 L1250 170 C690 110, 380 300, 150 680 Z" fill="#9A2200"/>
+
+    <!-- Interlocking Crossing Truss Girder -->
+    <path d="M520 680 L760 180 L880 180 L620 680 Z" fill="url(#orangeSteel1)"/>
+    <path d="M880 180 L940 180 L680 680 L620 680 Z" fill="#B83200"/>
+    
+    <!-- Secondary Dynamic Span -->
+    <path d="M720 190 C900 160, 1080 190, 1250 260 L1250 360 C1050 280, 880 260, 680 320 Z" fill="url(#orangeSteel2)"/>
+  </g>
+
+  <!-- Precision Rivets & Bolt Patterns on Girders -->
+  <g fill="#FFFFFF" opacity="0.6">
+    <circle cx="340" cy="380" r="3"/>
+    <circle cx="355" cy="360" r="3"/>
+    <circle cx="370" cy="340" r="3"/>
+    <circle cx="385" cy="320" r="3"/>
+    <circle cx="400" cy="300" r="3"/>
+    <circle cx="420" cy="285" r="3"/>
+    <circle cx="445" cy="270" r="3"/>
+    <circle cx="470" cy="255" r="3"/>
+
+    <circle cx="700" cy="290" r="3"/>
+    <circle cx="725" cy="265" r="3"/>
+    <circle cx="750" cy="240" r="3"/>
+    <circle cx="775" cy="215" r="3"/>
+  </g>
+
+  <!-- Technical Overlay Elements & Dimension Lines -->
+  <g stroke="#0F172A" stroke-width="1.2" opacity="0.4" stroke-dasharray="4 4">
+    <line x1="300" y1="120" x2="300" y2="600"/>
+    <line x1="800" y1="80" x2="800" y2="600"/>
+    <line x1="100" y1="400" x2="1100" y2="400"/>
+  </g>
+
+  <!-- Modern Industrial Tag Floating -->
+  <g transform="translate(860, 80)">
+    <rect width="260" height="74" rx="8" fill="#0F172A" opacity="0.95"/>
+    <rect width="6" height="74" rx="3" fill="#FF4D00"/>
+    <text x="24" y="32" font-family="'JetBrains Mono', monospace" font-size="11" fill="#FF4D00" font-weight="700" letter-spacing="2">SPEC // S355JR / ASTM A36</text>
+    <text x="24" y="54" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" fill="#FFFFFF" font-weight="700">HEAVY STRUCTURAL TRUSS</text>
+  </g>
+
+  <!-- Bottom Gradient Fade for Section Harmony -->
+  <rect y="640" width="1200" height="40" fill="url(#skyGrad)" opacity="0.6"/>
+</svg>

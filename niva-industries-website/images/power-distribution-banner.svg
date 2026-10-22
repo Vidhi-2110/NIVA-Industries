@@ -1,0 +1,202 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1320 520" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <!-- Sky & Atmosphere -->
+    <linearGradient id="distSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E2E8F0"/>
+      <stop offset="60%" stop-color="#F1F5F9"/>
+      <stop offset="100%" stop-color="#FFFFFF"/>
+    </linearGradient>
+
+    <!-- Industrial Transformer Orange -->
+    <linearGradient id="distOrange" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF6B26"/>
+      <stop offset="45%" stop-color="#FF4D00"/>
+      <stop offset="100%" stop-color="#C23600"/>
+    </linearGradient>
+
+    <!-- Metal Enclosure Gradients -->
+    <linearGradient id="housingGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1E293B"/>
+      <stop offset="50%" stop-color="#334155"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+
+    <linearGradient id="plinthGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#64748B"/>
+      <stop offset="100%" stop-color="#334155"/>
+    </linearGradient>
+
+    <!-- Concrete Foundation Pad -->
+    <linearGradient id="concretePad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F8FAFC"/>
+      <stop offset="100%" stop-color="#CBD5E1"/>
+    </linearGradient>
+
+    <!-- Soft Drop Shadow -->
+    <filter id="distShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#0F172A" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- Canvas Background -->
+  <rect width="1320" height="520" fill="url(#distSky)"/>
+
+  <!-- Blueprint Coordinate Grid Lines -->
+  <g stroke="#CBD5E1" stroke-width="0.75" opacity="0.45" stroke-dasharray="6 6">
+    <line x1="200" y1="0" x2="200" y2="520"/>
+    <line x1="660" y1="0" x2="660" y2="520"/>
+    <line x1="1120" y1="0" x2="1120" y2="520"/>
+    <line x1="0" y1="280" x2="1320" y2="280"/>
+  </g>
+
+  <!-- Distant Background Transmission Pylons -->
+  <g stroke="#94A3B8" stroke-width="1.8" opacity="0.45">
+    <!-- Far Pylon Left -->
+    <line x1="120" y1="360" x2="150" y2="160"/>
+    <line x1="180" y1="360" x2="150" y2="160"/>
+    <line x1="130" y1="280" x2="170" y2="280"/>
+    <line x1="138" y1="220" x2="162" y2="220"/>
+    <line x1="115" y1="180" x2="185" y2="180" stroke-width="2.5"/>
+
+    <!-- Far Pylon Right -->
+    <line x1="1140" y1="360" x2="1170" y2="140"/>
+    <line x1="1200" y1="360" x2="1170" y2="140"/>
+    <line x1="1150" y1="270" x2="1190" y2="270"/>
+    <line x1="1156" y1="210" x2="1184" y2="210"/>
+    <line x1="1135" y1="170" x2="1205" y2="170" stroke-width="2.5"/>
+  </g>
+
+  <!-- High-Voltage Power Lines Across Sky -->
+  <g stroke="#64748B" stroke-width="1.5" opacity="0.35" fill="none">
+    <path d="M 0 170 Q 660 250, 1320 160"/>
+    <path d="M 0 190 Q 660 270, 1320 180"/>
+  </g>
+
+  <!-- Industrial Plant Concrete Apron / Foundation Ground -->
+  <polygon points="0,340 1320,310 1320,520 0,520" fill="url(#concretePad)"/>
+  <line x1="0" y1="340" x2="1320" y2="310" stroke="#94A3B8" stroke-width="2"/>
+
+  <!-- Left Side: Compact Secondary Substation (Outdoor Pad-Mounted Housing) -->
+  <g filter="url(#distShadow)" transform="translate(180, 160)">
+    <!-- Heavy Concrete Plinth -->
+    <rect x="0" y="220" width="340" height="30" rx="3" fill="url(#plinthGrad)"/>
+
+    <!-- Metal Enclosure Main Body -->
+    <rect x="15" y="30" width="310" height="195" rx="4" fill="url(#housingGrad)"/>
+
+    <!-- Sloped Weatherproof Roof Canopy with Safety Orange Trim -->
+    <polygon points="5,30 335,30 320,10 20,10" fill="#0F172A"/>
+    <line x1="5" y1="30" x2="335" y2="30" stroke="#FF4D00" stroke-width="3"/>
+
+    <!-- Medium Voltage Compartment Door -->
+    <rect x="28" y="44" width="135" height="168" rx="2" fill="#334155" stroke="#1E293B" stroke-width="1.5"/>
+    <rect x="40" y="58" width="111" height="26" rx="2" fill="#1E293B" opacity="0.8"/>
+    <!-- Louvers -->
+    <line x1="48" y1="65" x2="143" y2="65" stroke="#64748B" stroke-width="1.5"/>
+    <line x1="48" y1="71" x2="143" y2="71" stroke="#64748B" stroke-width="1.5"/>
+    <line x1="48" y1="77" x2="143" y2="77" stroke="#64748B" stroke-width="1.5"/>
+    <!-- Lock & Handle -->
+    <rect x="150" y="125" width="6" height="24" rx="2" fill="#CBD5E1"/>
+    <!-- Safety Warning Lightning Symbol -->
+    <polygon points="95,145 90,157 96,157 92,169 101,155 95,155" fill="#FF4D00"/>
+
+    <!-- Low Voltage Distribution Compartment Door -->
+    <rect x="175" y="44" width="135" height="168" rx="2" fill="#334155" stroke="#1E293B" stroke-width="1.5"/>
+    <rect x="187" y="58" width="111" height="26" rx="2" fill="#1E293B" opacity="0.8"/>
+    <line x1="195" y1="65" x2="290" y2="65" stroke="#64748B" stroke-width="1.5"/>
+    <line x1="195" y1="71" x2="290" y2="71" stroke="#64748B" stroke-width="1.5"/>
+    <line x1="195" y1="77" x2="290" y2="77" stroke="#64748B" stroke-width="1.5"/>
+    <rect x="182" y="125" width="6" height="24" rx="2" fill="#CBD5E1"/>
+
+    <!-- Smart Digital Controller Telemetry Screen -->
+    <rect x="200" y="115" width="85" height="48" rx="3" fill="#0F172A"/>
+    <circle cx="218" cy="132" r="4.5" fill="#22C55E"/>
+    <circle cx="242" cy="132" r="4.5" fill="#38BDF8"/>
+    <circle cx="266" cy="132" r="4.5" fill="#F59E0B"/>
+    <line x1="210" y1="148" x2="274" y2="148" stroke="#FF4D00" stroke-width="2"/>
+  </g>
+
+  <!-- Center-Right: High-Performance Industrial Transformer in NIVA Safety Orange -->
+  <g filter="url(#distShadow)" transform="translate(620, 130)">
+    <!-- Base mounting I-Beams -->
+    <rect x="20" y="250" width="420" height="22" rx="2" fill="#0F172A"/>
+    <line x1="40" y1="250" x2="40" y2="272" stroke="#475569" stroke-width="4"/>
+    <line x1="230" y1="250" x2="230" y2="272" stroke="#475569" stroke-width="4"/>
+    <line x1="420" y1="250" x2="420" y2="272" stroke="#475569" stroke-width="4"/>
+
+    <!-- Main Tank Body (Bold Orange) -->
+    <rect x="50" y="70" width="360" height="185" rx="6" fill="url(#distOrange)"/>
+    <rect x="65" y="85" width="330" height="155" rx="4" fill="none" stroke="#FFFFFF" stroke-width="1.5" opacity="0.3"/>
+
+    <!-- External Cooling Radiator Fins (Left side) -->
+    <g fill="#B83200" stroke="#FF6B26" stroke-width="1">
+      <rect x="15" y="90" width="30" height="145" rx="2"/>
+      <line x1="15" y1="110" x2="45" y2="110"/>
+      <line x1="15" y1="130" x2="45" y2="130"/>
+      <line x1="15" y1="150" x2="45" y2="150"/>
+      <line x1="15" y1="170" x2="45" y2="170"/>
+      <line x1="15" y1="190" x2="45" y2="190"/>
+      <line x1="15" y1="210" x2="45" y2="210"/>
+    </g>
+
+    <!-- External Cooling Radiator Fins (Right side) -->
+    <g fill="#B83200" stroke="#FF6B26" stroke-width="1">
+      <rect x="415" y="90" width="30" height="145" rx="2"/>
+      <line x1="415" y1="110" x2="445" y2="110"/>
+      <line x1="415" y1="130" x2="445" y2="130"/>
+      <line x1="415" y1="150" x2="445" y2="150"/>
+      <line x1="415" y1="170" x2="445" y2="170"/>
+      <line x1="415" y1="190" x2="445" y2="190"/>
+      <line x1="415" y1="210" x2="445" y2="210"/>
+    </g>
+
+    <!-- Top Conservator Oil Tank (Cylinder) -->
+    <rect x="140" y="32" width="180" height="34" rx="17" fill="#1E293B" stroke="#0F172A" stroke-width="2"/>
+    <line x1="160" y1="66" x2="160" y2="72" stroke="#0F172A" stroke-width="4"/>
+    <line x1="300" y1="66" x2="300" y2="72" stroke="#0F172A" stroke-width="4"/>
+
+    <!-- High-Voltage Bushings (Insulators on top) -->
+    <!-- Bushing 1 -->
+    <g transform="translate(100, 10)">
+      <polygon points="12,60 28,60 24,10 16,10" fill="#64748B"/>
+      <ellipse cx="20" cy="50" rx="14" ry="4" fill="#94A3B8"/>
+      <ellipse cx="20" cy="40" rx="12" ry="3.5" fill="#94A3B8"/>
+      <ellipse cx="20" cy="30" rx="10" ry="3" fill="#94A3B8"/>
+      <ellipse cx="20" cy="20" rx="8" ry="2.5" fill="#CBD5E1"/>
+      <circle cx="20" cy="10" r="4" fill="#FF4D00"/>
+    </g>
+    <!-- Bushing 2 -->
+    <g transform="translate(210, 0)">
+      <polygon points="12,60 28,60 24,10 16,10" fill="#64748B"/>
+      <ellipse cx="20" cy="50" rx="14" ry="4" fill="#94A3B8"/>
+      <ellipse cx="20" cy="40" rx="12" ry="3.5" fill="#94A3B8"/>
+      <ellipse cx="20" cy="30" rx="10" ry="3" fill="#94A3B8"/>
+      <ellipse cx="20" cy="20" rx="8" ry="2.5" fill="#CBD5E1"/>
+      <circle cx="20" cy="10" r="4" fill="#FF4D00"/>
+    </g>
+    <!-- Bushing 3 -->
+    <g transform="translate(320, 10)">
+      <polygon points="12,60 28,60 24,10 16,10" fill="#64748B"/>
+      <ellipse cx="20" cy="50" rx="14" ry="4" fill="#94A3B8"/>
+      <ellipse cx="20" cy="40" rx="12" ry="3.5" fill="#94A3B8"/>
+      <ellipse cx="20" cy="30" rx="10" ry="3" fill="#94A3B8"/>
+      <ellipse cx="20" cy="20" rx="8" ry="2.5" fill="#CBD5E1"/>
+      <circle cx="20" cy="10" r="4" fill="#FF4D00"/>
+    </g>
+
+    <!-- NIVA Nameplate Plate on Tank -->
+    <rect x="180" y="140" width="100" height="34" rx="3" fill="#0F172A"/>
+    <text x="230" y="162" font-family="'Plus Jakarta Sans', sans-serif" font-size="13" font-weight="900" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">NIVA</text>
+  </g>
+
+  <!-- Foreground Technical Dimension Lines -->
+  <g stroke="#FF4D00" stroke-width="1.2" opacity="0.6">
+    <line x1="180" y1="460" x2="520" y2="460"/>
+    <line x1="180" y1="452" x2="180" y2="468"/>
+    <line x1="520" y1="452" x2="520" y2="468"/>
+
+    <line x1="640" y1="460" x2="1070" y2="460"/>
+    <line x1="640" y1="452" x2="640" y2="468"/>
+    <line x1="1070" y1="452" x2="1070" y2="468"/>
+  </g>
+</svg>

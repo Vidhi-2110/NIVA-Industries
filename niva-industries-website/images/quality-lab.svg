@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="labBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#1E293B"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="450" fill="url(#labBg)"/>
+
+  <!-- Optical Spectral Waveform Grid -->
+  <g stroke="#334155" stroke-width="0.8" opacity="0.5">
+    <line x1="50" y1="50" x2="750" y2="50"/>
+    <line x1="50" y1="150" x2="750" y2="150"/>
+    <line x1="50" y1="250" x2="750" y2="250"/>
+    <line x1="50" y1="350" x2="750" y2="350"/>
+    <line x1="150" y1="50" x2="150" y2="400"/>
+    <line x1="300" y1="50" x2="300" y2="400"/>
+    <line x1="450" y1="50" x2="450" y2="400"/>
+    <line x1="600" y1="50" x2="600" y2="400"/>
+  </g>
+
+  <!-- Spectrometry Graph Wave -->
+  <path d="M 60 300 Q 150 290, 200 120 T 320 280 T 420 80 T 520 260 T 640 180 T 740 280" fill="none" stroke="#FF4D00" stroke-width="3"/>
+  <path d="M 60 310 Q 150 300, 200 180 T 320 290 T 420 140 T 520 270 T 640 220 T 740 290" fill="none" stroke="#38BDF8" stroke-width="2" stroke-dasharray="4 2"/>
+
+  <!-- Testing Rig Instrument UI -->
+  <g transform="translate(100, 80)">
+    <rect width="280" height="150" rx="8" fill="#0B0F19" stroke="#475569" stroke-width="1.5"/>
+    <rect width="280" height="30" rx="8" fill="#1E293B"/>
+    <circle cx="20" cy="15" r="4" fill="#EF4444"/>
+    <circle cx="35" cy="15" r="4" fill="#EAB308"/>
+    <circle cx="50" cy="15" r="4" fill="#10B981"/>
+    <text x="70" y="19" font-family="'JetBrains Mono', monospace" font-size="10" fill="#94A3B8">SPECTROMETRIC ALLOY ASSAY</text>
+    
+    <text x="25" y="60" font-family="'JetBrains Mono', monospace" font-size="12" fill="#E2E8F0">Fe (Iron): 98.42%</text>
+    <text x="25" y="85" font-family="'JetBrains Mono', monospace" font-size="12" fill="#E2E8F0">C (Carbon): 0.18% [OPTIMAL]</text>
+    <text x="25" y="110" font-family="'JetBrains Mono', monospace" font-size="12" fill="#E2E8F0">Mn (Manganese): 1.45%</text>
+    <text x="25" y="135" font-family="'JetBrains Mono', monospace" font-size="12" fill="#FF4D00">Yield Strength: 520 MPa</text>
+  </g>
+
+  <!-- Hardness Indenter & Microscope Illustration -->
+  <g transform="translate(480, 120)">
+    <!-- Base -->
+    <rect x="30" y="220" width="180" height="30" rx="6" fill="#334155"/>
+    <rect x="70" y="200" width="100" height="20" fill="#475569"/>
+    <!-- Steel Sample Block -->
+    <polygon points="90,190 150,190 140,200 80,200" fill="#CBD5E1"/>
+    <!-- Indenter Pillar -->
+    <rect x="105" y="60" width="30" height="130" fill="#64748B"/>
+    <!-- Testing Head Sensor -->
+    <circle cx="120" cy="60" r="40" fill="#1E293B" stroke="#FF4D00" stroke-width="3"/>
+    <circle cx="120" cy="60" r="28" fill="#0F172A"/>
+    <path d="M 120 40 L 120 80" stroke="#38BDF8" stroke-width="2"/>
+    <path d="M 100 60 L 140 60" stroke="#38BDF8" stroke-width="2"/>
+    <!-- Diamond probe pointer -->
+    <polygon points="115,190 125,190 120,200" fill="#FF4D00"/>
+  </g>
+</svg>

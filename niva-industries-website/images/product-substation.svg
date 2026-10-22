@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 380" width="100%" height="100%">
+  <defs>
+    <linearGradient id="substationBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F8FAFC"/>
+      <stop offset="100%" stop-color="#E2E8F0"/>
+    </linearGradient>
+    <linearGradient id="housingSteel" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#334155"/>
+      <stop offset="50%" stop-color="#475569"/>
+      <stop offset="100%" stop-color="#1E293B"/>
+    </linearGradient>
+    <linearGradient id="doorAccent" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#64748B"/>
+      <stop offset="100%" stop-color="#334155"/>
+    </linearGradient>
+    <linearGradient id="orangeSub" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF6B26"/>
+      <stop offset="100%" stop-color="#FF4D00"/>
+    </linearGradient>
+    <filter id="subShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#0F172A" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <rect width="500" height="380" rx="12" fill="url(#substationBg)"/>
+  
+  <!-- Subtle Blueprint Grid -->
+  <g stroke="#CBD5E1" stroke-width="0.8" opacity="0.6">
+    <line x1="40" y1="40" x2="460" y2="40"/>
+    <line x1="40" y1="340" x2="460" y2="340"/>
+    <line x1="40" y1="40" x2="40" y2="340"/>
+    <line x1="460" y1="40" x2="460" y2="340"/>
+    <line x1="250" y1="40" x2="250" y2="340" stroke-dasharray="4 4"/>
+  </g>
+
+  <!-- Compact Substation Enclosure / Switchgear Cabinet -->
+  <g filter="url(#subShadow)" transform="translate(100, 70)">
+    <!-- Base plinth -->
+    <rect x="15" y="210" width="270" height="25" rx="3" fill="#0F172A"/>
+
+    <!-- Main Cabinet Enclosure -->
+    <rect x="25" y="30" width="250" height="185" rx="5" fill="url(#housingSteel)"/>
+
+    <!-- Enclosure Roof Canopy -->
+    <polygon points="15,30 285,30 270,12 30,12" fill="#1E293B"/>
+    <line x1="15" y1="30" x2="285" y2="30" stroke="#FF4D00" stroke-width="2.5"/>
+
+    <!-- Left Compartment Door (MV Section) -->
+    <rect x="35" y="42" width="110" height="162" rx="3" fill="url(#doorAccent)" stroke="#1E293B" stroke-width="1.5"/>
+    <rect x="43" y="55" width="94" height="24" rx="2" fill="#1E293B" opacity="0.7"/>
+    <!-- Ventilation Louvers -->
+    <line x1="48" y1="62" x2="132" y2="62" stroke="#64748B" stroke-width="1.5"/>
+    <line x1="48" y1="68" x2="132" y2="68" stroke="#64748B" stroke-width="1.5"/>
+    <line x1="48" y1="74" x2="132" y2="74" stroke="#64748B" stroke-width="1.5"/>
+    <!-- Door Handle -->
+    <rect x="135" y="115" width="5" height="22" rx="2" fill="#94A3B8"/>
+    <!-- Warning Flash Badge -->
+    <polygon points="90,140 85,152 91,152 87,164 96,150 90,150" fill="#FF4D00"/>
+
+    <!-- Right Compartment Door (LV Section) -->
+    <rect x="155" y="42" width="110" height="162" rx="3" fill="url(#doorAccent)" stroke="#1E293B" stroke-width="1.5"/>
+    <rect x="163" y="55" width="94" height="24" rx="2" fill="#1E293B" opacity="0.7"/>
+    <!-- Ventilation Louvers -->
+    <line x1="168" y1="62" x2="252" y2="62" stroke="#64748B" stroke-width="1.5"/>
+    <line x1="168" y1="68" x2="252" y2="68" stroke="#64748B" stroke-width="1.5"/>
+    <line x1="168" y1="74" x2="252" y2="74" stroke="#64748B" stroke-width="1.5"/>
+    <!-- Door Handle -->
+    <rect x="160" y="115" width="5" height="22" rx="2" fill="#94A3B8"/>
+
+    <!-- Digital Mimic Indicator Panel -->
+    <rect x="175" y="105" width="70" height="40" rx="3" fill="#0F172A"/>
+    <circle cx="190" cy="120" r="4" fill="#22C55E"/>
+    <circle cx="210" cy="120" r="4" fill="#3B82F6"/>
+    <circle cx="230" cy="120" r="4" fill="#EAB308"/>
+    <line x1="185" y1="133" x2="235" y2="133" stroke="#FF4D00" stroke-width="2"/>
+  </g>
+</svg>
