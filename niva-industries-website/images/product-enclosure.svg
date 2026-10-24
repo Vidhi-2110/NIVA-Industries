@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 380" width="100%" height="100%">
+  <defs>
+    <linearGradient id="encBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F8FAFC"/>
+      <stop offset="100%" stop-color="#E2E8F0"/>
+    </linearGradient>
+    <!-- RAL 7032 Pebble Grey tone gradient -->
+    <linearGradient id="ral7032" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#DCD9D1"/>
+      <stop offset="50%" stop-color="#CFCABF"/>
+      <stop offset="100%" stop-color="#B8B2A6"/>
+    </linearGradient>
+    <filter id="encShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#0F172A" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+
+  <rect width="500" height="380" rx="12" fill="url(#encBg)"/>
+
+  <!-- Blueprint Dimension Lines -->
+  <g stroke="#94A3B8" stroke-width="0.8" opacity="0.4">
+    <line x1="30" y1="40" x2="470" y2="40"/>
+    <line x1="30" y1="340" x2="470" y2="340"/>
+    <line x1="50" y1="30" x2="50" y2="350"/>
+    <line x1="450" y1="30" x2="450" y2="350"/>
+  </g>
+
+  <!-- Complete Outdoor Substation Weatherproof Enclosure (RAL 7032, IP 54, Tropicalized) -->
+  <g filter="url(#encShadow)" transform="translate(85, 55)">
+    <!-- Sloped Overhanging Roof Canopy (Protects against heavy tropical rain & UV) -->
+    <polygon points="10,40 320,40 300,15 30,15" fill="#A8A295" stroke="#78716C" stroke-width="1.5"/>
+    <line x1="10" y1="40" x2="320" y2="40" stroke="#FF4D00" stroke-width="2.5"/>
+
+    <!-- Main Enclosure Structure in RAL 7032 -->
+    <rect x="20" y="40" width="290" height="190" rx="3" fill="url(#ral7032)" stroke="#78716C" stroke-width="2"/>
+
+    <!-- Dual Center Flush Access Doors with Blue Acoustic Ventilation Louvers (Brochure Match) -->
+    <rect x="95" y="55" width="140" height="160" rx="2" fill="#E7E5E4" stroke="#78716C" stroke-width="1.5"/>
+    <line x1="165" y1="55" x2="165" y2="215" stroke="#78716C" stroke-width="1.5"/>
+
+    <!-- Left Door Louvers in Vibrant Industrial Blue (#0284C7) -->
+    <rect x="108" y="70" width="45" height="30" rx="2" fill="#0284C7"/>
+    <line x1="110" y1="76" x2="151" y2="76" stroke="#BAE6FD" stroke-width="1.5"/>
+    <line x1="110" y1="82" x2="151" y2="82" stroke="#BAE6FD" stroke-width="1.5"/>
+    <line x1="110" y1="88" x2="151" y2="88" stroke="#BAE6FD" stroke-width="1.5"/>
+    <line x1="110" y1="94" x2="151" y2="94" stroke="#BAE6FD" stroke-width="1.5"/>
+
+    <rect x="108" y="115" width="45" height="30" rx="2" fill="#0284C7"/>
+    <line x1="110" y1="121" x2="151" y2="121" stroke="#BAE6FD" stroke-width="1.5"/>
+    <line x1="110" y1="127" x2="151" y2="127" stroke="#BAE6FD" stroke-width="1.5"/>
+    <line x1="110" y1="133" x2="151" y2="133" stroke="#BAE6FD" stroke-width="1.5"/>
+    <line x1="110" y1="139" x2="151" y2="139" stroke="#BAE6FD" stroke-width="1.5"/>
+
+    <!-- Right Door Louvers in Vibrant Industrial Blue (#0284C7) -->
+    <rect x="177" y="70" width="45" height="30" rx="2" fill="#0284C7"/>
+    <line x1="179" y1="76" x2="220" y2="76" stroke="#BAE6FD" stroke-width="1.5"/>
+    <line x1="179" y1="82" x2="220" y2="82" stroke="#BAE6FD" stroke-width="1.5"/>
+    <line x1="179" y1="88" x2="220" y2="88" stroke="#BAE6FD" stroke-width="1.5"/>
+    <line x1="179" y1="94" x2="220" y2="94" stroke="#BAE6FD" stroke-width="1.5"/>
+
+    <rect x="177" y="115" width="45" height="30" rx="2" fill="#0284C7"/>
+    <line x1="179" y1="121" x2="220" y2="121" stroke="#BAE6FD" stroke-width="1.5"/>
+    <line x1="179" y1="127" x2="220" y2="127" stroke="#BAE6FD" stroke-width="1.5"/>
+    <line x1="179" y1="133" x2="220" y2="133" stroke="#BAE6FD" stroke-width="1.5"/>
+    <line x1="179" y1="139" x2="220" y2="139" stroke="#BAE6FD" stroke-width="1.5"/>
+
+    <!-- Heavy Padlock Handles -->
+    <rect x="156" y="150" width="5" height="22" rx="2" fill="#44403C"/>
+    <rect x="169" y="150" width="5" height="22" rx="2" fill="#44403C"/>
+
+    <!-- NIVA Industries Substation Signplate (Brochure Page 4) -->
+    <rect x="36" y="75" width="46" height="28" rx="2" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+    <circle cx="59" cy="84" r="5" fill="#0F172A"/>
+    <text x="59" y="87" font-family="sans-serif" font-size="6" fill="#FF4D00" font-weight="bold" text-anchor="middle">N</text>
+    <text x="59" y="97" font-family="sans-serif" font-size="4" fill="#0F172A" font-weight="bold" text-anchor="middle">NIVA SUB</text>
+
+    <!-- Heavy Galvanized Base Channel Plinth -->
+    <rect x="12" y="230" width="306" height="24" rx="3" fill="#292524"/>
+    <circle cx="28" cy="242" r="4" fill="#78716C"/>
+    <circle cx="302" cy="242" r="4" fill="#78716C"/>
+    <line x1="12" y1="230" x2="318" y2="230" stroke="#FF4D00" stroke-width="2"/>
+  </g>
+</svg>

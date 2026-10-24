@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 380" width="100%" height="100%">
+  <defs>
+    <linearGradient id="smBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F8FAFC"/>
+      <stop offset="100%" stop-color="#E2E8F0"/>
+    </linearGradient>
+    <linearGradient id="frameGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#94A3B8"/>
+      <stop offset="50%" stop-color="#CBD5E1"/>
+      <stop offset="100%" stop-color="#64748B"/>
+    </linearGradient>
+    <filter id="smShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#0F172A" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <rect width="500" height="380" rx="12" fill="url(#smBg)"/>
+
+  <!-- Blueprint Lines -->
+  <g stroke="#CBD5E1" stroke-width="0.8" opacity="0.6">
+    <line x1="30" y1="40" x2="470" y2="40"/>
+    <line x1="30" y1="340" x2="470" y2="340"/>
+    <line x1="50" y1="30" x2="50" y2="350"/>
+    <line x1="450" y1="30" x2="450" y2="350"/>
+  </g>
+
+  <!-- Modular Sheet Metal Skeleton Enclosure Frame (CNC Bent & Laser Cut) -->
+  <g filter="url(#smShadow)" transform="translate(100, 45)">
+    <!-- Base Channel Plinth -->
+    <rect x="15" y="265" width="270" height="18" rx="2" fill="#0F172A"/>
+
+    <!-- Skeleton Corner Pillars (Galvanized / CRCA Steel) -->
+    <!-- Back Corner Left -->
+    <rect x="45" y="30" width="14" height="235" fill="#475569"/>
+    <!-- Back Corner Right -->
+    <rect x="240" y="30" width="14" height="235" fill="#475569"/>
+    <!-- Back Top Cross Beam -->
+    <rect x="45" y="30" width="209" height="12" fill="#334155"/>
+
+    <!-- Front Corner Left -->
+    <rect x="25" y="45" width="16" height="220" fill="url(#frameGrad)" stroke="#475569" stroke-width="1"/>
+    <!-- Front Corner Right -->
+    <rect x="260" y="45" width="16" height="220" fill="url(#frameGrad)" stroke="#475569" stroke-width="1"/>
+    <!-- Front Top Cross Beam -->
+    <rect x="25" y="45" width="251" height="14" fill="url(#frameGrad)" stroke="#475569" stroke-width="1"/>
+    <!-- Front Bottom Cross Beam -->
+    <rect x="25" y="250" width="251" height="15" fill="url(#frameGrad)" stroke="#475569" stroke-width="1"/>
+
+    <!-- Depth Connecting Struts -->
+    <polygon points="45,30 25,45 41,45 61,30" fill="#64748B"/>
+    <polygon points="240,30 260,45 276,45 254,30" fill="#64748B"/>
+
+    <!-- CNC Laser Cut Internal Mounting Plate with Precision Cutouts -->
+    <rect x="55" y="70" width="190" height="175" rx="3" fill="#1E293B" stroke="#0284C7" stroke-width="1.5"/>
+    <text x="150" y="90" font-family="monospace" font-size="9" fill="#38BDF8" text-anchor="middle" font-weight="bold">CNC LASER CUT CHASSIS</text>
+
+    <!-- Cutout 1: Incomer Breaker Opening -->
+    <rect x="75" y="105" width="65" height="50" rx="3" fill="#0F172A" stroke="#38BDF8" stroke-dasharray="4,2"/>
+    <text x="107" y="133" font-family="monospace" font-size="7" fill="#64748B" text-anchor="middle">CUTOUT 1</text>
+
+    <!-- Cutout 2: Metering Window -->
+    <rect x="160" y="105" width="65" height="25" rx="2" fill="#0F172A" stroke="#38BDF8" stroke-dasharray="4,2"/>
+    <text x="192" y="121" font-family="monospace" font-size="7" fill="#64748B" text-anchor="middle">METER WINDOW</text>
+
+    <!-- Cutout 3: Pushbutton Cluster 22.5mm Holes -->
+    <circle cx="170" cy="148" r="6" fill="#0F172A" stroke="#22C55E"/>
+    <circle cx="190" cy="148" r="6" fill="#0F172A" stroke="#22C55E"/>
+    <circle cx="210" cy="148" r="6" fill="#0F172A" stroke="#EF4444"/>
+
+    <!-- CNC Bending Lines & Louver Slits (Bottom) -->
+    <g stroke="#475569" stroke-width="1.5">
+      <line x1="75" y1="180" x2="225" y2="180"/>
+      <line x1="75" y1="190" x2="225" y2="190"/>
+      <line x1="75" y1="200" x2="225" y2="200"/>
+      <line x1="75" y1="210" x2="225" y2="210"/>
+      <line x1="75" y1="220" x2="225" y2="220"/>
+    </g>
+
+    <!-- Micron Tolerance Indicator Tag -->
+    <rect x="90" y="235" width="120" height="18" rx="2" fill="#0F172A" stroke="#94A3B8"/>
+    <text x="150" y="247" font-family="monospace" font-size="7" fill="#F8FAFC" text-anchor="middle" font-weight="bold">+/- 0.1mm CNC REPEATABILITY</text>
+
+    <!-- Pillar 25mm Pitch Hole Pattern -->
+    <g fill="#0F172A">
+      <circle cx="33" cy="70" r="2"/>
+      <circle cx="33" cy="90" r="2"/>
+      <circle cx="33" cy="110" r="2"/>
+      <circle cx="33" cy="130" r="2"/>
+      <circle cx="33" cy="150" r="2"/>
+      <circle cx="33" cy="170" r="2"/>
+      <circle cx="33" cy="190" r="2"/>
+      <circle cx="33" cy="210" r="2"/>
+      <circle cx="33" cy="230" r="2"/>
+
+      <circle cx="268" cy="70" r="2"/>
+      <circle cx="268" cy="90" r="2"/>
+      <circle cx="268" cy="110" r="2"/>
+      <circle cx="268" cy="130" r="2"/>
+      <circle cx="268" cy="150" r="2"/>
+      <circle cx="268" cy="170" r="2"/>
+      <circle cx="268" cy="190" r="2"/>
+      <circle cx="268" cy="210" r="2"/>
+      <circle cx="268" cy="230" r="2"/>
+    </g>
+  </g>
+</svg>

@@ -38,12 +38,15 @@
 
 ## 1. Project Overview
 
-**NIVA Power Industries** is a fictional industrial company specialising in:
-- Compact Secondary Substations & Power Distribution
-- Structural Steel Manufacturing
-- Eco-Sustainable Steelmaking (Electric Arc Furnace)
+**NIVA INDUSTRIES** (Vadodara, Gujarat, India) is a premier OEM manufacturer specializing in:
+- **Compact Secondary Substations (CSS)** up to 33 kV & 2.5 MVA (conforming to IEC 62271-202)
+- **"All Set to Go" Plug & Play Substations** reducing delivery & start-up cycle times by up to 20%
+- **Mobile & Skid-Mounted Substations** for rapid grid energization, mining, and temporary power
+- **High-Tension (HT) Switchgear & Ring Main Units (RMU)**
+- **Low-Tension (LT) Distribution Panels & Multi-way MCCB Feeders**
+- **In-House OEM Manufacturing Facilities**: 1 kW Fiber Laser Cutting, 110T CNC DELEM Bending, 9-Tank Pre-Treatment Bath, Electrostatic Powder Coating Oven, and Namsung Busbar Machinery.
 
-The website communicates the brand's authority, innovation, and sustainability story through a premium architectural layout — inspired by top-tier industrial brands. Every section has been crafted pixel-by-pixel to match a reference design, using **CSS Grid, Flexbox, IntersectionObserver, and subtle micro-animations**.
+The website communicates NIVA Industries' engineering authority, type-tested safety certifications, and premier client track record (Voltamp, Rishabh, Gayatri, Sunrise, Akshar, etc.) through a high-impact architectural layout.
 
 ---
 

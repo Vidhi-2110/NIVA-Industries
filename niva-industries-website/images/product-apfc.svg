@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 380" width="100%" height="100%">
+  <defs>
+    <linearGradient id="apfcBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F8FAFC"/>
+      <stop offset="100%" stop-color="#E2E8F0"/>
+    </linearGradient>
+    <linearGradient id="apfcDoor" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#E2E8F0"/>
+      <stop offset="50%" stop-color="#F8FAFC"/>
+      <stop offset="100%" stop-color="#CBD5E1"/>
+    </linearGradient>
+    <filter id="apfcShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#0F172A" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <rect width="500" height="380" rx="12" fill="url(#apfcBg)"/>
+
+  <!-- Blueprint Lines -->
+  <g stroke="#CBD5E1" stroke-width="0.8" opacity="0.6">
+    <line x1="30" y1="40" x2="470" y2="40"/>
+    <line x1="30" y1="340" x2="470" y2="340"/>
+    <line x1="50" y1="30" x2="50" y2="350"/>
+    <line x1="450" y1="30" x2="450" y2="350"/>
+  </g>
+
+  <!-- APFC Panel -->
+  <g filter="url(#apfcShadow)" transform="translate(115, 45)">
+    <!-- Base Channel -->
+    <rect x="15" y="270" width="240" height="18" rx="2" fill="#0F172A"/>
+
+    <!-- Main Cabinet -->
+    <rect x="20" y="20" width="230" height="250" rx="4" fill="url(#apfcDoor)" stroke="#64748B" stroke-width="1.5"/>
+
+    <!-- Digital APFC Controller Relay Display -->
+    <rect x="40" y="35" width="190" height="55" rx="4" fill="#0F172A" stroke="#334155" stroke-width="1.5"/>
+    <rect x="50" y="43" width="90" height="38" rx="2" fill="#022C22" stroke="#059669"/>
+    <text x="95" y="58" font-family="monospace" font-size="11" fill="#34D399" text-anchor="middle" font-weight="bold">PF: 0.99</text>
+    <text x="95" y="73" font-family="monospace" font-size="8" fill="#6EE7B7" text-anchor="middle">TARGET: 1.00</text>
+    <!-- Keypad Buttons -->
+    <circle cx="160" cy="50" r="4" fill="#334155"/>
+    <circle cx="175" cy="50" r="4" fill="#334155"/>
+    <circle cx="190" cy="50" r="4" fill="#334155"/>
+    <circle cx="210" cy="50" r="5" fill="#EF4444"/>
+    <circle cx="160" cy="68" r="4" fill="#334155"/>
+    <circle cx="175" cy="68" r="4" fill="#334155"/>
+    <circle cx="190" cy="68" r="4" fill="#334155"/>
+    <circle cx="210" cy="68" r="5" fill="#22C55E"/>
+
+    <!-- 12-Step Capacitor Bank LED Matrix -->
+    <rect x="40" y="100" width="190" height="40" rx="3" fill="#1E293B"/>
+    <text x="135" y="112" font-family="sans-serif" font-size="7" fill="#94A3B8" text-anchor="middle" font-weight="bold">STEP CAPACITOR STATUS (12 STAGE)</text>
+    <!-- Row 1: Steps 1-6 -->
+    <circle cx="55" cy="126" r="3.5" fill="#22C55E"/>
+    <circle cx="75" cy="126" r="3.5" fill="#22C55E"/>
+    <circle cx="95" cy="126" r="3.5" fill="#22C55E"/>
+    <circle cx="115" cy="126" r="3.5" fill="#22C55E"/>
+    <circle cx="135" cy="126" r="3.5" fill="#22C55E"/>
+    <circle cx="155" cy="126" r="3.5" fill="#22C55E"/>
+    <!-- Row 2: Steps 7-12 -->
+    <circle cx="175" cy="126" r="3.5" fill="#22C55E"/>
+    <circle cx="195" cy="126" r="3.5" fill="#22C55E"/>
+    <circle cx="215" cy="126" r="3.5" fill="#64748B"/>
+
+    <!-- Capacitor Bank Heavy Duty Compartment (Cutaway Louvers) -->
+    <rect x="40" y="150" width="190" height="105" rx="3" fill="#0F172A"/>
+    <!-- Capacitors Cylinders Illustration inside -->
+    <rect x="52" y="165" width="22" height="55" rx="11" fill="#38BDF8"/>
+    <rect x="82" y="165" width="22" height="55" rx="11" fill="#38BDF8"/>
+    <rect x="112" y="165" width="22" height="55" rx="11" fill="#38BDF8"/>
+    <rect x="142" y="165" width="22" height="55" rx="11" fill="#38BDF8"/>
+    <rect x="172" y="165" width="22" height="55" rx="11" fill="#38BDF8"/>
+    <rect x="202" y="165" width="22" height="55" rx="11" fill="#64748B"/>
+
+    <!-- Detuned Harmonic Reactors -->
+    <rect x="48" y="230" width="174" height="15" rx="2" fill="#D97706"/>
+    <text x="135" y="241" font-family="monospace" font-size="8" fill="#FEF3C7" text-anchor="middle" font-weight="bold">7% DETUNED HARMONIC REACTORS</text>
+
+    <!-- Cooling Exhaust Fans Louver Grid -->
+    <g stroke="#64748B" stroke-width="1.5">
+      <line x1="222" y1="205" x2="228" y2="205"/>
+      <line x1="222" y1="210" x2="228" y2="210"/>
+      <line x1="222" y1="215" x2="228" y2="215"/>
+    </g>
+  </g>
+</svg>

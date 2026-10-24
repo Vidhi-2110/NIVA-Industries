@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 380" width="100%" height="100%">
+  <defs>
+    <linearGradient id="plcBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F8FAFC"/>
+      <stop offset="100%" stop-color="#E2E8F0"/>
+    </linearGradient>
+    <linearGradient id="plcDoor" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#E2E8F0"/>
+      <stop offset="50%" stop-color="#F8FAFC"/>
+      <stop offset="100%" stop-color="#CBD5E1"/>
+    </linearGradient>
+    <filter id="plcShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#0F172A" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <rect width="500" height="380" rx="12" fill="url(#plcBg)"/>
+
+  <!-- Blueprint Lines -->
+  <g stroke="#CBD5E1" stroke-width="0.8" opacity="0.6">
+    <line x1="30" y1="40" x2="470" y2="40"/>
+    <line x1="30" y1="340" x2="470" y2="340"/>
+    <line x1="50" y1="30" x2="50" y2="350"/>
+    <line x1="450" y1="30" x2="450" y2="350"/>
+  </g>
+
+  <!-- Open Door Cutaway View of PLC Automation Panel -->
+  <g filter="url(#plcShadow)" transform="translate(100, 45)">
+    <!-- Base Channel -->
+    <rect x="15" y="270" width="270" height="18" rx="2" fill="#0F172A"/>
+
+    <!-- Outer Frame & Backplate -->
+    <rect x="20" y="20" width="260" height="250" rx="4" fill="#0F172A" stroke="#0284C7" stroke-width="2"/>
+
+    <!-- Door swung open on left -->
+    <path d="M 20 20 L -25 35 L -25 255 L 20 270 Z" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1.5" opacity="0.85"/>
+    <!-- HMI Touch Screen on Door -->
+    <polygon points="-20,80 5,70 5,160 -20,170" fill="#1E293B" stroke="#38BDF8"/>
+    <polygon points="-15,90 0,83 0,150 -15,157" fill="#0284C7"/>
+
+    <!-- Inside Panel: DIN Rail 1 (Top) - SMPS Power Supply & Safety Relays -->
+    <rect x="35" y="40" width="230" height="6" rx="1" fill="#64748B"/>
+    <!-- 24VDC SMPS -->
+    <rect x="45" y="28" width="45" height="32" rx="2" fill="#1E293B" stroke="#38BDF8"/>
+    <text x="67" y="47" font-family="monospace" font-size="7" fill="#38BDF8" text-anchor="middle">24V SMPS</text>
+    <!-- Circuit Breakers / MCBs -->
+    <rect x="95" y="28" width="55" height="32" rx="2" fill="#334155"/>
+    <g fill="#22C55E">
+      <circle cx="103" cy="35" r="2"/>
+      <circle cx="113" cy="35" r="2"/>
+      <circle cx="123" cy="35" r="2"/>
+      <circle cx="133" cy="35" r="2"/>
+      <circle cx="143" cy="35" r="2"/>
+    </g>
+
+    <!-- DIN Rail 2 (Middle) - Modular PLC CPU & I/O Modules -->
+    <rect x="35" y="115" width="230" height="6" rx="1" fill="#64748B"/>
+    <!-- PLC CPU Rack -->
+    <rect x="45" y="80" width="60" height="70" rx="3" fill="#0369A1" stroke="#38BDF8" stroke-width="1.5"/>
+    <text x="75" y="100" font-family="monospace" font-size="9" fill="#FFFFFF" text-anchor="middle" font-weight="bold">PLC CPU</text>
+    <rect x="52" y="108" width="46" height="14" rx="2" fill="#0F172A"/>
+    <text x="75" y="119" font-family="monospace" font-size="7" fill="#4ADE80" text-anchor="middle">RUN · OK</text>
+    <circle cx="58" cy="132" r="2.5" fill="#22C55E"/>
+    <circle cx="68" cy="132" r="2.5" fill="#EAB308"/>
+    <circle cx="78" cy="132" r="2.5" fill="#EF4444"/>
+
+    <!-- Digital Input (DI) Modules -->
+    <rect x="110" y="80" width="35" height="70" rx="2" fill="#1E293B" stroke="#475569"/>
+    <text x="127" y="95" font-family="monospace" font-size="7" fill="#94A3B8" text-anchor="middle">16x DI</text>
+    <g fill="#22C55E">
+      <circle cx="118" cy="105" r="1.5"/>
+      <circle cx="127" cy="105" r="1.5"/>
+      <circle cx="136" cy="105" r="1.5"/>
+      <circle cx="118" cy="115" r="1.5"/>
+      <circle cx="127" cy="115" r="1.5"/>
+      <circle cx="136" cy="115" r="1.5"/>
+      <circle cx="118" cy="125" r="1.5"/>
+      <circle cx="127" cy="125" r="1.5"/>
+      <circle cx="136" cy="125" r="1.5"/>
+    </g>
+
+    <!-- Digital Output (DO) Modules -->
+    <rect x="150" y="80" width="35" height="70" rx="2" fill="#1E293B" stroke="#475569"/>
+    <text x="167" y="95" font-family="monospace" font-size="7" fill="#94A3B8" text-anchor="middle">16x DO</text>
+    <g fill="#38BDF8">
+      <circle cx="158" cy="105" r="1.5"/>
+      <circle cx="167" cy="105" r="1.5"/>
+      <circle cx="176" cy="105" r="1.5"/>
+      <circle cx="158" cy="115" r="1.5"/>
+      <circle cx="167" cy="115" r="1.5"/>
+      <circle cx="176" cy="115" r="1.5"/>
+    </g>
+
+    <!-- Analog Input/Output (AI/AO) -->
+    <rect x="190" y="80" width="35" height="70" rx="2" fill="#1E293B" stroke="#475569"/>
+    <text x="207" y="95" font-family="monospace" font-size="7" fill="#F59E0B" text-anchor="middle">AI / AO</text>
+    <g fill="#F59E0B">
+      <circle cx="198" cy="105" r="1.5"/>
+      <circle cx="207" cy="105" r="1.5"/>
+      <circle cx="216" cy="105" r="1.5"/>
+    </g>
+
+    <!-- Communication Module (Ethernet / Modbus) -->
+    <rect x="230" y="80" width="35" height="70" rx="2" fill="#065F46" stroke="#10B981"/>
+    <text x="247" y="95" font-family="monospace" font-size="7" fill="#A7F3D0" text-anchor="middle">SCADA</text>
+    <rect x="237" y="110" width="20" height="14" rx="2" fill="#022C22"/>
+    <circle cx="247" cy="117" r="3" fill="#34D399"/>
+
+    <!-- DIN Rail 3 (Bottom) - Interposing Relays & Terminal Blocks -->
+    <rect x="35" y="195" width="230" height="6" rx="1" fill="#64748B"/>
+    <g fill="#475569">
+      <rect x="45" y="175" width="12" height="40" rx="2"/>
+      <rect x="60" y="175" width="12" height="40" rx="2"/>
+      <rect x="75" y="175" width="12" height="40" rx="2"/>
+      <rect x="90" y="175" width="12" height="40" rx="2"/>
+      <rect x="105" y="175" width="12" height="40" rx="2"/>
+      <rect x="120" y="175" width="12" height="40" rx="2"/>
+      <rect x="135" y="175" width="12" height="40" rx="2"/>
+    </g>
+    <!-- Multi-tier Terminal Strip -->
+    <rect x="155" y="180" width="110" height="30" rx="2" fill="#1E293B"/>
+    <g stroke="#94A3B8" stroke-width="1">
+      <line x1="165" y1="180" x2="165" y2="210"/>
+      <line x1="175" y1="180" x2="175" y2="210"/>
+      <line x1="185" y1="180" x2="185" y2="210"/>
+      <line x1="195" y1="180" x2="195" y2="210"/>
+      <line x1="205" y1="180" x2="205" y2="210"/>
+      <line x1="215" y1="180" x2="215" y2="210"/>
+      <line x1="225" y1="180" x2="225" y2="210"/>
+      <line x1="235" y1="180" x2="235" y2="210"/>
+      <line x1="245" y1="180" x2="245" y2="210"/>
+      <line x1="255" y1="180" x2="255" y2="210"/>
+    </g>
+
+    <!-- Bottom Wiring Trough / Ducting -->
+    <rect x="35" y="235" width="230" height="20" rx="2" fill="#334155"/>
+    <text x="150" y="248" font-family="monospace" font-size="8" fill="#CBD5E1" text-anchor="middle">SLOTTED CABLE DUCTS &amp; MARSHALLING</text>
+  </g>
+</svg>

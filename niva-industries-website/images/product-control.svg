@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 380" width="100%" height="100%">
+  <defs>
+    <linearGradient id="ctrlBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F8FAFC"/>
+      <stop offset="100%" stop-color="#E2E8F0"/>
+    </linearGradient>
+    <linearGradient id="ctrlBody" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#E2E8F0"/>
+      <stop offset="50%" stop-color="#F1F5F9"/>
+      <stop offset="100%" stop-color="#CBD5E1"/>
+    </linearGradient>
+    <filter id="ctrlShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#0F172A" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <rect width="500" height="380" rx="12" fill="url(#ctrlBg)"/>
+
+  <!-- Blueprint Lines -->
+  <g stroke="#CBD5E1" stroke-width="0.8" opacity="0.6">
+    <line x1="30" y1="40" x2="470" y2="40"/>
+    <line x1="30" y1="340" x2="470" y2="340"/>
+    <line x1="50" y1="30" x2="50" y2="350"/>
+    <line x1="450" y1="30" x2="450" y2="350"/>
+  </g>
+
+  <!-- Industrial Control Panel with Mimic Flow Diagram & Operator Desk -->
+  <g filter="url(#ctrlShadow)" transform="translate(100, 45)">
+    <!-- Base Channel -->
+    <rect x="15" y="270" width="270" height="18" rx="2" fill="#0F172A"/>
+
+    <!-- Cabinet -->
+    <rect x="20" y="20" width="260" height="250" rx="4" fill="url(#ctrlBody)" stroke="#475569" stroke-width="2"/>
+
+    <!-- Top Digital Flow Meter & Mimic Single Line -->
+    <rect x="35" y="32" width="230" height="95" rx="3" fill="#0F172A" stroke="#0284C7" stroke-width="1.5"/>
+    <text x="150" y="48" font-family="monospace" font-size="9" fill="#38BDF8" text-anchor="middle" font-weight="bold">SYSTEM PROCESS MIMIC BUS</text>
+
+    <!-- Mimic Flow Lines & Valve Nodes -->
+    <g stroke="#0284C7" stroke-width="2">
+      <line x1="50" y1="75" x2="110" y2="75"/>
+      <line x1="110" y1="75" x2="110" y2="105"/>
+      <line x1="110" y1="75" x2="190" y2="75"/>
+      <line x1="190" y1="75" x2="250" y2="75"/>
+    </g>
+    <!-- Node Indicators -->
+    <circle cx="80" cy="75" r="7" fill="#22C55E" stroke="#FFFFFF" stroke-width="1.5"/>
+    <polygon points="105,70 115,70 110,80" fill="#EF4444"/>
+    <circle cx="150" cy="75" r="7" fill="#38BDF8" stroke="#FFFFFF" stroke-width="1.5"/>
+    <circle cx="190" cy="75" r="7" fill="#EAB308" stroke="#FFFFFF" stroke-width="1.5"/>
+    <circle cx="230" cy="75" r="7" fill="#22C55E" stroke="#FFFFFF" stroke-width="1.5"/>
+    <rect x="95" y="100" width="30" height="18" rx="2" fill="#1E293B"/>
+    <text x="110" y="112" font-family="monospace" font-size="7" fill="#4ADE80" text-anchor="middle">PUMP 1</text>
+
+    <!-- Operator Control Matrix (Pushbuttons & Selector Switches) -->
+    <rect x="35" y="135" width="230" height="75" rx="3" fill="#1E293B" stroke="#64748B"/>
+    <!-- Row 1: Start (Green) & Stop (Red) Pushbuttons -->
+    <g>
+      <!-- Station 1 -->
+      <circle cx="60" cy="155" r="9" fill="#22C55E"/>
+      <circle cx="85" cy="155" r="9" fill="#EF4444"/>
+      <!-- Station 2 -->
+      <circle cx="120" cy="155" r="9" fill="#22C55E"/>
+      <circle cx="145" cy="155" r="9" fill="#EF4444"/>
+      <!-- Station 3 -->
+      <circle cx="180" cy="155" r="9" fill="#22C55E"/>
+      <circle cx="205" cy="155" r="9" fill="#EF4444"/>
+      <!-- Emergency Stop Mushroom -->
+      <circle cx="240" cy="155" r="13" fill="#DC2626" stroke="#FEF08A" stroke-width="2"/>
+    </g>
+    <!-- Row 2: 2-Way & 3-Way Selector Switches -->
+    <g>
+      <circle cx="60" cy="190" r="8" fill="#0F172A" stroke="#94A3B8"/>
+      <rect x="58" y="184" width="4" height="12" fill="#FFFFFF"/>
+      <text x="60" y="204" font-family="monospace" font-size="6" fill="#94A3B8" text-anchor="middle">AUTO/MAN</text>
+
+      <circle cx="120" cy="190" r="8" fill="#0F172A" stroke="#94A3B8"/>
+      <rect x="118" y="184" width="4" height="12" fill="#FFFFFF"/>
+      <text x="120" y="204" font-family="monospace" font-size="6" fill="#94A3B8" text-anchor="middle">LOCAL/REM</text>
+
+      <circle cx="180" cy="190" r="8" fill="#0F172A" stroke="#94A3B8"/>
+      <rect x="178" y="184" width="4" height="12" fill="#FFFFFF"/>
+      <text x="180" y="204" font-family="monospace" font-size="6" fill="#94A3B8" text-anchor="middle">RESET</text>
+    </g>
+
+    <!-- Bottom Marshalling & Gland Plate Cover -->
+    <rect x="35" y="218" width="230" height="42" rx="2" fill="#334155" stroke="#475569"/>
+    <text x="150" y="235" font-family="sans-serif" font-size="8" fill="#CBD5E1" text-anchor="middle" font-weight="bold">CUSTOM INTERLOCKS &amp; SAFETY RELAYS</text>
+    <text x="150" y="248" font-family="monospace" font-size="7" fill="#94A3B8" text-anchor="middle">IP 55 ENCLOSURE · ZERO VOLTAGE RELEASE</text>
+  </g>
+</svg>

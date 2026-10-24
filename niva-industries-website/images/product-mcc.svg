@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 380" width="100%" height="100%">
+  <defs>
+    <linearGradient id="mccBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F8FAFC"/>
+      <stop offset="100%" stop-color="#E2E8F0"/>
+    </linearGradient>
+    <linearGradient id="mccDoor" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#E2E8F0"/>
+      <stop offset="50%" stop-color="#F8FAFC"/>
+      <stop offset="100%" stop-color="#CBD5E1"/>
+    </linearGradient>
+    <filter id="mccShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#0F172A" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <rect width="500" height="380" rx="12" fill="url(#mccBg)"/>
+
+  <!-- Blueprint Lines -->
+  <g stroke="#CBD5E1" stroke-width="0.8" opacity="0.6">
+    <line x1="30" y1="40" x2="470" y2="40"/>
+    <line x1="30" y1="340" x2="470" y2="340"/>
+    <line x1="50" y1="30" x2="50" y2="350"/>
+    <line x1="450" y1="30" x2="450" y2="350"/>
+  </g>
+
+  <!-- MCC Modular Motor Control Centre Panel -->
+  <g filter="url(#mccShadow)" transform="translate(70, 45)">
+    <!-- Base Channel -->
+    <rect x="15" y="270" width="330" height="18" rx="2" fill="#0F172A"/>
+
+    <!-- Left Column: Incomer & Bus Chamber -->
+    <rect x="20" y="20" width="100" height="250" rx="4" fill="url(#mccDoor)" stroke="#64748B" stroke-width="1.5"/>
+    <rect x="28" y="28" width="84" height="40" rx="2" fill="#0F172A"/>
+    <text x="70" y="46" font-family="monospace" font-size="9" fill="#38BDF8" text-anchor="middle" font-weight="bold">MCC INCOMER</text>
+    <text x="70" y="58" font-family="monospace" font-size="8" fill="#4ADE80" text-anchor="middle">800A MPCB</text>
+    <circle cx="45" cy="80" r="4" fill="#EF4444"/>
+    <circle cx="60" cy="80" r="4" fill="#EAB308"/>
+    <circle cx="75" cy="80" r="4" fill="#3B82F6"/>
+    <!-- Main Incomer Switch -->
+    <rect x="35" y="95" width="70" height="70" rx="3" fill="#1E293B"/>
+    <circle cx="70" cy="130" r="14" fill="#0F172A" stroke="#EF4444" stroke-width="2"/>
+    <rect x="68" y="118" width="4" height="24" fill="#EF4444"/>
+    <rect x="28" y="180" width="84" height="80" rx="2" fill="#E2E8F0" stroke="#94A3B8"/>
+    <text x="70" y="225" font-family="sans-serif" font-size="8" fill="#64748B" text-anchor="middle">COMMON BUSBAR</text>
+
+    <!-- Column 2 & 3: Modular Motor Starter Drawers (Grid of 6 Starters) -->
+    <!-- Col 2: Starters 1, 2, 3 -->
+    <rect x="125" y="20" width="105" height="250" rx="4" fill="url(#mccDoor)" stroke="#64748B" stroke-width="1.5"/>
+    <!-- Starter 1: DOL 15kW -->
+    <rect x="131" y="28" width="93" height="74" rx="2" fill="#1E293B" stroke="#475569"/>
+    <text x="140" y="44" font-family="monospace" font-size="8" fill="#38BDF8">MOTOR 1 (15kW)</text>
+    <circle cx="210" cy="42" r="3" fill="#22C55E"/>
+    <rect x="140" y="52" width="18" height="14" rx="2" fill="#22C55E"/>
+    <rect x="164" y="52" width="18" height="14" rx="2" fill="#EF4444"/>
+    <rect x="188" y="52" width="28" height="14" rx="2" fill="#0F172A"/>
+    <text x="202" y="62" font-family="monospace" font-size="7" fill="#F8FAFC" text-anchor="middle">TRIP</text>
+    <rect x="140" y="72" width="75" height="20" rx="2" fill="#334155"/>
+    <text x="177" y="85" font-family="monospace" font-size="8" fill="#CBD5E1" text-anchor="middle">DOL STARTER</text>
+
+    <!-- Starter 2: Star-Delta 30kW -->
+    <rect x="131" y="108" width="93" height="74" rx="2" fill="#1E293B" stroke="#475569"/>
+    <text x="140" y="124" font-family="monospace" font-size="8" fill="#38BDF8">MOTOR 2 (30kW)</text>
+    <circle cx="210" cy="122" r="3" fill="#22C55E"/>
+    <rect x="140" y="132" width="18" height="14" rx="2" fill="#22C55E"/>
+    <rect x="164" y="132" width="18" height="14" rx="2" fill="#EF4444"/>
+    <rect x="188" y="132" width="28" height="14" rx="2" fill="#0F172A"/>
+    <text x="202" y="142" font-family="monospace" font-size="7" fill="#F8FAFC" text-anchor="middle">TRIP</text>
+    <rect x="140" y="152" width="75" height="20" rx="2" fill="#334155"/>
+    <text x="177" y="165" font-family="monospace" font-size="8" fill="#CBD5E1" text-anchor="middle">STAR-DELTA</text>
+
+    <!-- Starter 3: DOL 7.5kW -->
+    <rect x="131" y="188" width="93" height="74" rx="2" fill="#1E293B" stroke="#475569"/>
+    <text x="140" y="204" font-family="monospace" font-size="8" fill="#38BDF8">MOTOR 3 (7.5kW)</text>
+    <circle cx="210" cy="202" r="3" fill="#22C55E"/>
+    <rect x="140" y="212" width="18" height="14" rx="2" fill="#22C55E"/>
+    <rect x="164" y="212" width="18" height="14" rx="2" fill="#EF4444"/>
+    <rect x="188" y="212" width="28" height="14" rx="2" fill="#0F172A"/>
+    <rect x="140" y="232" width="75" height="20" rx="2" fill="#334155"/>
+    <text x="177" y="245" font-family="monospace" font-size="8" fill="#CBD5E1" text-anchor="middle">DOL MODULE</text>
+
+    <!-- Col 3: Starters 4, 5, 6 -->
+    <rect x="235" y="20" width="105" height="250" rx="4" fill="url(#mccDoor)" stroke="#64748B" stroke-width="1.5"/>
+    <!-- Starter 4 -->
+    <rect x="241" y="28" width="93" height="74" rx="2" fill="#1E293B" stroke="#475569"/>
+    <text x="250" y="44" font-family="monospace" font-size="8" fill="#38BDF8">MOTOR 4 (45kW)</text>
+    <circle cx="320" cy="42" r="3" fill="#22C55E"/>
+    <rect x="250" y="52" width="18" height="14" rx="2" fill="#22C55E"/>
+    <rect x="274" y="52" width="18" height="14" rx="2" fill="#EF4444"/>
+    <rect x="298" y="52" width="28" height="14" rx="2" fill="#0F172A"/>
+    <rect x="250" y="72" width="75" height="20" rx="2" fill="#334155"/>
+    <text x="287" y="85" font-family="monospace" font-size="8" fill="#CBD5E1" text-anchor="middle">SOFT STARTER</text>
+
+    <!-- Starter 5 -->
+    <rect x="241" y="108" width="93" height="74" rx="2" fill="#1E293B" stroke="#475569"/>
+    <text x="250" y="124" font-family="monospace" font-size="8" fill="#38BDF8">MOTOR 5 (22kW)</text>
+    <circle cx="320" cy="122" r="3" fill="#22C55E"/>
+    <rect x="250" y="132" width="18" height="14" rx="2" fill="#22C55E"/>
+    <rect x="274" y="132" width="18" height="14" rx="2" fill="#EF4444"/>
+    <rect x="298" y="132" width="28" height="14" rx="2" fill="#0F172A"/>
+    <rect x="250" y="152" width="75" height="20" rx="2" fill="#334155"/>
+    <text x="287" y="165" font-family="monospace" font-size="8" fill="#CBD5E1" text-anchor="middle">STAR-DELTA</text>
+
+    <!-- Starter 6 -->
+    <rect x="241" y="188" width="93" height="74" rx="2" fill="#1E293B" stroke="#475569"/>
+    <text x="250" y="204" font-family="monospace" font-size="8" fill="#38BDF8">MOTOR 6 (11kW)</text>
+    <circle cx="320" cy="202" r="3" fill="#22C55E"/>
+    <rect x="250" y="212" width="18" height="14" rx="2" fill="#22C55E"/>
+    <rect x="274" y="212" width="18" height="14" rx="2" fill="#EF4444"/>
+    <rect x="298" y="212" width="28" height="14" rx="2" fill="#0F172A"/>
+    <rect x="250" y="232" width="75" height="20" rx="2" fill="#334155"/>
+    <text x="287" y="245" font-family="monospace" font-size="8" fill="#CBD5E1" text-anchor="middle">DOL MODULE</text>
+  </g>
+</svg>

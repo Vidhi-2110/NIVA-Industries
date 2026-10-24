@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 380" width="100%" height="100%">
+  <defs>
+    <linearGradient id="mobBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F1F5F9"/>
+      <stop offset="100%" stop-color="#E2E8F0"/>
+    </linearGradient>
+    <linearGradient id="skidSteel" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1E293B"/>
+      <stop offset="50%" stop-color="#334155"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+    <linearGradient id="canopyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E2E8F0"/>
+      <stop offset="100%" stop-color="#CBD5E1"/>
+    </linearGradient>
+    <filter id="skidShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#0F172A" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+
+  <rect width="500" height="380" rx="12" fill="url(#mobBg)"/>
+  
+  <!-- Technical Blueprint Grid -->
+  <g stroke="#94A3B8" stroke-width="0.8" opacity="0.4">
+    <line x1="30" y1="50" x2="470" y2="50"/>
+    <line x1="30" y1="330" x2="470" y2="330"/>
+    <line x1="50" y1="30" x2="50" y2="350"/>
+    <line x1="450" y1="30" x2="450" y2="350"/>
+  </g>
+
+  <!-- Heavy Duty Skid Substation Assembly -->
+  <g filter="url(#skidShadow)" transform="translate(60, 60)">
+    <!-- Lifting Lugs / Eyes -->
+    <circle cx="40" cy="50" r="10" fill="none" stroke="#FF4D00" stroke-width="4"/>
+    <circle cx="340" cy="50" r="10" fill="none" stroke="#FF4D00" stroke-width="4"/>
+    <line x1="40" y1="50" x2="40" y2="65" stroke="#FF4D00" stroke-width="6"/>
+    <line x1="340" y1="50" x2="340" y2="65" stroke="#FF4D00" stroke-width="6"/>
+
+    <!-- Slanted Canopy Roof -->
+    <polygon points="20,65 360,65 345,45 35,45" fill="#334155"/>
+    <rect x="25" y="65" width="330" height="150" rx="4" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+
+    <!-- Left MV Bay -->
+    <rect x="35" y="75" width="95" height="130" rx="3" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1.5"/>
+    <rect x="45" y="85" width="75" height="25" rx="2" fill="#334155"/>
+    <text x="82" y="101" font-family="monospace" font-size="11" fill="#38BDF8" font-weight="bold" text-anchor="middle">MV 33kV</text>
+    <line x1="45" y1="125" x2="120" y2="125" stroke="#94A3B8" stroke-width="1.5"/>
+    <line x1="45" y1="135" x2="120" y2="135" stroke="#94A3B8" stroke-width="1.5"/>
+    <line x1="45" y1="145" x2="120" y2="145" stroke="#94A3B8" stroke-width="1.5"/>
+
+    <!-- Center Transformer Bay with Louvers -->
+    <rect x="140" y="75" width="100" height="130" rx="3" fill="#CBD5E1" stroke="#64748B" stroke-width="1.5"/>
+    <rect x="150" y="85" width="80" height="110" fill="#94A3B8" opacity="0.3"/>
+    <!-- Radiator fins / Transformer Symbol -->
+    <line x1="160" y1="95" x2="160" y2="185" stroke="#475569" stroke-width="3"/>
+    <line x1="175" y1="95" x2="175" y2="185" stroke="#475569" stroke-width="3"/>
+    <line x1="190" y1="95" x2="190" y2="185" stroke="#FF4D00" stroke-width="3"/>
+    <line x1="205" y1="95" x2="205" y2="185" stroke="#475569" stroke-width="3"/>
+    <line x1="220" y1="95" x2="220" y2="185" stroke="#475569" stroke-width="3"/>
+
+    <!-- Right LV Bay -->
+    <rect x="250" y="75" width="95" height="130" rx="3" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1.5"/>
+    <rect x="260" y="85" width="75" height="25" rx="2" fill="#334155"/>
+    <text x="297" y="101" font-family="monospace" font-size="11" fill="#4ADE80" font-weight="bold" text-anchor="middle">LV 415V</text>
+    <!-- Circuit Breaker Indicators -->
+    <circle cx="275" cy="130" r="4" fill="#22C55E"/>
+    <circle cx="295" cy="130" r="4" fill="#EF4444"/>
+    <circle cx="315" cy="130" r="4" fill="#F59E0B"/>
+    <rect x="265" y="150" width="65" height="40" rx="2" fill="#334155" opacity="0.15"/>
+
+    <!-- Heavy Channel Skid Base with C-Channel Shape -->
+    <rect x="10" y="215" width="360" height="24" rx="3" fill="url(#skidSteel)"/>
+    <line x1="10" y1="215" x2="370" y2="215" stroke="#FF4D00" stroke-width="2"/>
+    <circle cx="30" cy="227" r="5" fill="#475569"/>
+    <circle cx="350" cy="227" r="5" fill="#475569"/>
+    <rect x="45" y="222" width="290" height="10" fill="#0F172A" rx="2"/>
+
+    <!-- High Voltage Hazard Symbol -->
+    <polygon points="190,48 185,58 191,58 187,68 196,56 190,56" fill="#FF4D00"/>
+  </g>
+</svg>

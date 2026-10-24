@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 380" width="100%" height="100%">
+  <defs>
+    <linearGradient id="jbBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F8FAFC"/>
+      <stop offset="100%" stop-color="#E2E8F0"/>
+    </linearGradient>
+    <linearGradient id="jbMetal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F1F5F9"/>
+      <stop offset="60%" stop-color="#E2E8F0"/>
+      <stop offset="100%" stop-color="#CBD5E1"/>
+    </linearGradient>
+    <filter id="jbShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#0F172A" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+
+  <rect width="500" height="380" rx="12" fill="url(#jbBg)"/>
+
+  <!-- Blueprint Lines -->
+  <g stroke="#CBD5E1" stroke-width="0.8" opacity="0.6">
+    <line x1="30" y1="40" x2="470" y2="40"/>
+    <line x1="30" y1="340" x2="470" y2="340"/>
+    <line x1="50" y1="30" x2="50" y2="350"/>
+    <line x1="450" y1="30" x2="450" y2="350"/>
+  </g>
+
+  <!-- Industrial Weatherproof Junction Box Isometric/Perspective View -->
+  <g filter="url(#jbShadow)" transform="translate(120, 50)">
+    <!-- External Wall Mounting Brackets -->
+    <rect x="10" y="30" width="15" height="35" rx="3" fill="#64748B"/>
+    <circle cx="17" cy="47" r="4" fill="#FFFFFF"/>
+    <rect x="10" y="195" width="15" height="35" rx="3" fill="#64748B"/>
+    <circle cx="17" cy="212" r="4" fill="#FFFFFF"/>
+
+    <rect x="235" y="30" width="15" height="35" rx="3" fill="#64748B"/>
+    <circle cx="242" cy="47" r="4" fill="#FFFFFF"/>
+    <rect x="235" y="195" width="15" height="35" rx="3" fill="#64748B"/>
+    <circle cx="242" cy="212" r="4" fill="#FFFFFF"/>
+
+    <!-- Main Enclosure Body (Deep Sheet Metal / Cast Aluminum) -->
+    <rect x="20" y="20" width="220" height="220" rx="8" fill="url(#jbMetal)" stroke="#94A3B8" stroke-width="2"/>
+
+    <!-- Neoprene / Polyurethane Seamless Gasket Perimeter -->
+    <rect x="30" y="30" width="200" height="200" rx="6" fill="#1E293B" stroke="#0F172A" stroke-width="2"/>
+
+    <!-- Cutaway Interior Backplate -->
+    <rect x="36" y="36" width="188" height="188" rx="4" fill="#0F172A"/>
+
+    <!-- Internal Galvanized DIN Rail -->
+    <rect x="46" y="90" width="168" height="10" rx="2" fill="#E2E8F0" stroke="#64748B"/>
+    <rect x="46" y="150" width="168" height="10" rx="2" fill="#E2E8F0" stroke="#64748B"/>
+
+    <!-- Top DIN Rail: Multi-way High-Density Terminal Blocks -->
+    <g fill="#0284C7" stroke="#38BDF8" stroke-width="0.5">
+      <rect x="52" y="75" width="8" height="40" rx="1"/>
+      <rect x="62" y="75" width="8" height="40" rx="1"/>
+      <rect x="72" y="75" width="8" height="40" rx="1"/>
+      <rect x="82" y="75" width="8" height="40" rx="1"/>
+      <rect x="92" y="75" width="8" height="40" rx="1"/>
+      <rect x="102" y="75" width="8" height="40" rx="1"/>
+      <rect x="112" y="75" width="8" height="40" rx="1"/>
+      <rect x="122" y="75" width="8" height="40" rx="1"/>
+      <rect x="132" y="75" width="8" height="40" rx="1"/>
+      <rect x="142" y="75" width="8" height="40" rx="1"/>
+      <rect x="152" y="75" width="8" height="40" rx="1"/>
+      <rect x="162" y="75" width="8" height="40" rx="1"/>
+      <!-- Earth Terminals (Green/Yellow) -->
+      <rect x="178" y="75" width="12" height="40" rx="1" fill="#22C55E" stroke="#86EFAC"/>
+      <rect x="194" y="75" width="12" height="40" rx="1" fill="#EAB308" stroke="#FEF08A"/>
+    </g>
+
+    <!-- Bottom DIN Rail: Heavy Duty Power Terminals -->
+    <g fill="#D97706" stroke="#FDE68A" stroke-width="0.5">
+      <rect x="60" y="135" width="22" height="40" rx="2"/>
+      <rect x="90" y="135" width="22" height="40" rx="2"/>
+      <rect x="120" y="135" width="22" height="40" rx="2"/>
+      <rect x="150" y="135" width="22" height="40" rx="2"/>
+      <rect x="180" y="135" width="22" height="40" rx="2" fill="#22C55E" stroke="#86EFAC"/>
+    </g>
+
+    <!-- Brass Cable Glands on Bottom Side -->
+    <g fill="#D97706" stroke="#92400E" stroke-width="1.5">
+      <rect x="55" y="240" width="20" height="16" rx="2"/>
+      <polygon points="50,256 80,256 75,268 55,268"/>
+
+      <rect x="95" y="240" width="20" height="16" rx="2"/>
+      <polygon points="90,256 120,256 115,268 95,268"/>
+
+      <rect x="145" y="240" width="20" height="16" rx="2"/>
+      <polygon points="140,256 170,256 165,268 145,268"/>
+
+      <rect x="185" y="240" width="20" height="16" rx="2"/>
+      <polygon points="180,256 210,256 205,268 185,268"/>
+    </g>
+
+    <!-- Internal Earthing Stud with Copper Braid -->
+    <circle cx="48" cy="208" r="5" fill="#EAB308"/>
+    <text x="130" y="208" font-family="monospace" font-size="8" fill="#38BDF8" text-anchor="middle" font-weight="bold">IP 65 / IP 66 WEATHERPROOF</text>
+
+    <!-- Corner Captive Screws -->
+    <circle cx="28" cy="28" r="3.5" fill="#64748B"/>
+    <circle cx="232" cy="28" r="3.5" fill="#64748B"/>
+    <circle cx="28" cy="232" r="3.5" fill="#64748B"/>
+    <circle cx="232" cy="232" r="3.5" fill="#64748B"/>
+  </g>
+</svg>

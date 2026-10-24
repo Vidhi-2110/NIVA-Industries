@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 380" width="100%" height="100%">
+  <defs>
+    <linearGradient id="swBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F8FAFC"/>
+      <stop offset="100%" stop-color="#E2E8F0"/>
+    </linearGradient>
+    <linearGradient id="panelSteel" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#334155"/>
+      <stop offset="100%" stop-color="#1E293B"/>
+    </linearGradient>
+    <filter id="swShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#0F172A" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <rect width="500" height="380" rx="12" fill="url(#swBg)"/>
+
+  <!-- Blueprint Grid -->
+  <g stroke="#CBD5E1" stroke-width="0.8" opacity="0.5">
+    <line x1="30" y1="40" x2="470" y2="40"/>
+    <line x1="30" y1="340" x2="470" y2="340"/>
+    <line x1="50" y1="30" x2="50" y2="350"/>
+    <line x1="450" y1="30" x2="450" y2="350"/>
+  </g>
+
+  <!-- Ring Main Unit (RMU) HT Switchgear Cabinet Bay -->
+  <g filter="url(#swShadow)" transform="translate(110, 45)">
+    <!-- Main Cabinet Frame -->
+    <rect x="20" y="20" width="240" height="250" rx="4" fill="url(#panelSteel)" stroke="#475569" stroke-width="2"/>
+    <rect x="20" y="270" width="240" height="20" rx="2" fill="#0F172A"/>
+
+    <!-- 3 Modular Functional Bays: Incomer 1, Incomer 2, Breaker Tee-Off -->
+    <!-- Bay 1 (Left RMU Cable Switch) -->
+    <rect x="30" y="30" width="68" height="230" rx="2" fill="#1E293B" stroke="#334155" stroke-width="1.5"/>
+    <rect x="36" y="40" width="56" height="28" rx="2" fill="#0F172A"/>
+    <text x="64" y="58" font-family="monospace" font-size="9" fill="#38BDF8" text-anchor="middle" font-weight="bold">LINE 1</text>
+    <!-- Switch position mimic -->
+    <line x1="64" y1="80" x2="64" y2="120" stroke="#E2E8F0" stroke-width="2"/>
+    <circle cx="64" cy="95" r="5" fill="#22C55E"/>
+    <!-- Gas Pressure Gauge mimic -->
+    <circle cx="64" cy="140" r="10" fill="#0F172A" stroke="#94A3B8" stroke-width="1.5"/>
+    <line x1="64" y1="140" x2="69" y2="135" stroke="#22C55E" stroke-width="1.5"/>
+    <!-- Cable testing access -->
+    <rect x="42" y="180" width="44" height="60" rx="2" fill="#0F172A" opacity="0.6"/>
+
+    <!-- Bay 2 (Middle RMU Cable Switch) -->
+    <rect x="106" y="30" width="68" height="230" rx="2" fill="#1E293B" stroke="#334155" stroke-width="1.5"/>
+    <rect x="112" y="40" width="56" height="28" rx="2" fill="#0F172A"/>
+    <text x="140" y="58" font-family="monospace" font-size="9" fill="#38BDF8" text-anchor="middle" font-weight="bold">LINE 2</text>
+    <line x1="140" y1="80" x2="140" y2="120" stroke="#E2E8F0" stroke-width="2"/>
+    <circle cx="140" cy="95" r="5" fill="#22C55E"/>
+    <circle cx="140" cy="140" r="10" fill="#0F172A" stroke="#94A3B8" stroke-width="1.5"/>
+    <line x1="140" y1="140" x2="145" y2="135" stroke="#22C55E" stroke-width="1.5"/>
+    <rect x="118" y="180" width="44" height="60" rx="2" fill="#0F172A" opacity="0.6"/>
+
+    <!-- Bay 3 (Right Transformer Circuit Breaker Tee-Off) -->
+    <rect x="182" y="30" width="68" height="230" rx="2" fill="#1E293B" stroke="#FF4D00" stroke-width="1.5"/>
+    <rect x="188" y="40" width="56" height="28" rx="2" fill="#0F172A"/>
+    <text x="216" y="58" font-family="monospace" font-size="9" fill="#FF4D00" text-anchor="middle" font-weight="bold">VCB TEE</text>
+    <!-- Protection Relay Digital Display Mimic -->
+    <rect x="190" y="80" width="52" height="35" rx="2" fill="#020617" stroke="#475569" stroke-width="1"/>
+    <line x1="195" y1="92" x2="225" y2="92" stroke="#4ADE80" stroke-width="2"/>
+    <line x1="195" y1="102" x2="215" y2="102" stroke="#38BDF8" stroke-width="2"/>
+    <!-- Vacuum Bottle Interrupter Indicator -->
+    <circle cx="216" cy="140" r="10" fill="#FF4D00" opacity="0.9"/>
+    <polygon points="216,134 212,141 216,141 214,147 220,139 216,139" fill="#FFFFFF"/>
+    <!-- Manual Trip & Close Pushbuttons -->
+    <circle cx="203" cy="175" r="6" fill="#EF4444"/>
+    <circle cx="229" cy="175" r="6" fill="#22C55E"/>
+    <!-- Interlock Handle Slot -->
+    <rect x="195" y="205" width="42" height="35" rx="2" fill="#0F172A"/>
+  </g>
+</svg>

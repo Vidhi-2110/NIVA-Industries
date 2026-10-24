@@ -166,10 +166,10 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ==========================================================================
      6. Product Catalog Category Filtering (products.html)
      ========================================================================== */
-  const filterButtons = document.querySelectorAll('.filter-btn');
-  const productCards = document.querySelectorAll('.product-card[data-category]');
+  const filterButtons = document.querySelectorAll('.filter-tabs .filter-btn, .product-filter-bar .filter-btn');
+  const catalogProductCards = document.querySelectorAll('.product-grid .product-card');
 
-  if (filterButtons.length > 0 && productCards.length > 0) {
+  if (filterButtons.length > 0 && catalogProductCards.length > 0) {
     filterButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         filterButtons.forEach(b => b.classList.remove('active'));
@@ -177,17 +177,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const selectedCategory = btn.getAttribute('data-filter');
 
-        productCards.forEach(card => {
+        catalogProductCards.forEach(card => {
           const cardCategory = card.getAttribute('data-category');
-          if (selectedCategory === 'all' || cardCategory === selectedCategory) {
-            card.classList.remove('card-hidden');
+          if (selectedCategory === 'all' || cardCategory === selectedCategory || (cardCategory && cardCategory.includes(selectedCategory))) {
+            card.style.display = 'flex';
           } else {
-            card.classList.add('card-hidden');
+            card.style.display = 'none';
           }
         });
       });
     });
   }
+
 
   /* ==========================================================================
      7. Interactive FAQ Accordion (contact.html & index.html)
@@ -364,16 +365,13 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ==========================================================================
      11. Back to Top Button
      ========================================================================== */
-  /* ==========================================================================
-     12. About Us Timeline Dot Indicators
-     ========================================================================== */
-  const timelineDots = document.querySelectorAll('.timeline-dot-indicator');
-  if (timelineDots.length) {
-    timelineDots.forEach(dot => {
-      dot.addEventListener('click', () => {
-        timelineDots.forEach(d => d.classList.remove('active'));
-        dot.classList.add('active');
-      });
+  const backToTopBtn = document.getElementById('back-to-top');
+  if (backToTopBtn) {
+    backToTopBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
 });
+
+
