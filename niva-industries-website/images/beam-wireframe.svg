@@ -30,7 +30,7 @@
   <g>
     <!-- Semi-transparent plate body -->
     <polygon points="95,44 195,4 235,20 135,60" fill="#F1F5F9" fill-opacity="0.85"/>
-    <!-- Orange dashed perimeter -->
-    <polygon points="95,44 195,4 235,20 135,60" stroke="#EE4D22" stroke-width="1.8" stroke-dasharray="5,4" stroke-linejoin="round"/>
+    <!-- Electric Blue dashed perimeter -->
+    <polygon points="95,44 195,4 235,20 135,60" stroke="#0063EB" stroke-width="1.8" stroke-dasharray="5,4" stroke-linejoin="round"/>
   </g>
 </svg>
