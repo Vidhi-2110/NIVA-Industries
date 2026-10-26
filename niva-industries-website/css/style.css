@@ -2481,12 +2481,12 @@ ul, ol {
 
 .footer-brand-statement {
   font-family: var(--font-primary);
-  font-size: clamp(2.1rem, 3.4vw, 2.9rem);
-  font-weight: 800;
-  line-height: 1.12;
+  font-size: clamp(1.35rem, 2vw, 1.75rem);
+  font-weight: 700;
+  line-height: 1.25;
   text-transform: uppercase;
   color: #ffffff;
-  letter-spacing: -0.015em;
+  letter-spacing: 0.01em;
   margin: 0;
 }
 
@@ -2554,10 +2554,10 @@ ul, ol {
   color: #ffffff;
 }
 
-/* 3-Cell Boxed Contact Grid */
+/* 3-Cell Contact Strip: Address (wider) / Email / Phone */
 .footer-contact-boxed-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1.6fr 1fr 1fr;
   border: 1px solid rgba(2, 143, 235, 0.25);
   margin-bottom: 2.5rem;
 }
@@ -2567,80 +2567,48 @@ ul, ol {
   border-right: 1px solid rgba(255, 255, 255, 0.15);
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
 }
 
 .footer-contact-cell:last-child {
   border-right: none;
 }
 
-.footer-contact-address-cell {
-  justify-content: space-between;
+.footer-contact-label {
+  font-family: var(--font-primary);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #028FEB;
 }
 
-.footer-contact-address-text {
-  color: #ffffff;
+.footer-contact-value {
   font-family: var(--font-primary);
-  font-size: 0.8125rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  font-size: 0.9375rem;
+  font-weight: 600;
   line-height: 1.55;
-  margin-bottom: 0.75rem;
+  color: #ffffff;
+  transition: color var(--transition-fast);
 }
 
-.footer-contact-link {
-  display: inline-flex;
+a.footer-contact-value:hover {
+  color: #028FEB;
+}
+
+.footer-contact-address {
+  font-style: normal;
+}
+
+.footer-contact-phones {
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  font-family: var(--font-primary);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  color: #ffffff;
-  text-transform: uppercase;
-  transition: color var(--transition-fast);
+  gap: 0.25rem 0.75rem;
 }
 
-.footer-contact-link:hover {
-  color: var(--color-accent);
-}
-
-.footer-contact-center-cell {
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.footer-contact-email-link,
-.footer-contact-phone-link {
-  color: #ffffff;
-  font-family: var(--font-primary);
-  font-size: 1.15rem;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  transition: color var(--transition-fast);
-}
-
-.footer-contact-email-link:hover,
-.footer-contact-phone-link:hover {
-  color: var(--color-accent);
-}
-
-.footer-contact-web-link {
-  display: inline-block;
-  margin-top: 0.65rem;
-  color: var(--color-blue-accent, #028FEB);
-  font-family: var(--font-primary);
-  font-size: 0.875rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: lowercase;
-  text-decoration: none;
-  transition: color var(--transition-fast);
-}
-
-.footer-contact-web-link:hover {
-  color: #ffffff;
-  text-decoration: underline;
+.footer-contact-sep {
+  color: rgba(255, 255, 255, 0.35);
 }
 
 /* Footer Page Navigation (mirrors header) */
@@ -5062,8 +5030,7 @@ textarea.form-control {
   .cards-row-4,
   .cards-row-3,
   .triple-stats-row,
-  .news-cards-row,
-  .footer-coordinates-row {
+  .news-cards-row {
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
   }
@@ -5410,8 +5377,7 @@ textarea.form-control {
   .triple-stats-row,
   .product-renders-row,
   .news-cards-row,
-  .video-under-grid,
-  .footer-coordinates-row {
+  .video-under-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
