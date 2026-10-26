@@ -2559,11 +2559,11 @@ ul, ol {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   border: 1px solid rgba(2, 143, 235, 0.25);
-  margin-bottom: 4.5rem;
+  margin-bottom: 2.5rem;
 }
 
 .footer-contact-cell {
-  padding: 2.75rem 2.5rem;
+  padding: 1.5rem 1.75rem;
   border-right: 1px solid rgba(255, 255, 255, 0.15);
   display: flex;
   flex-direction: column;
@@ -2584,7 +2584,7 @@ ul, ol {
   font-weight: 700;
   letter-spacing: 0.04em;
   line-height: 1.55;
-  margin-bottom: 2rem;
+  margin-bottom: 0.75rem;
 }
 
 .footer-contact-link {
@@ -2643,37 +2643,25 @@ ul, ol {
   text-decoration: underline;
 }
 
-/* 4 Navigation Columns */
-.footer-columns-row {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 3.5rem;
-  margin-bottom: 4.5rem;
+/* Footer Page Navigation (mirrors header) */
+.footer-page-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 2.5rem;
+  margin-bottom: 2.5rem;
 }
 
-.footer-nav-title {
+.footer-page-nav a {
   font-family: var(--font-primary);
   font-size: 0.8125rem;
-  font-weight: 800;
+  font-weight: 700;
   text-transform: uppercase;
-  color: #ffffff;
-  margin-bottom: 1.25rem;
   letter-spacing: 0.06em;
-}
-
-.footer-nav-list {
-  display: grid;
-  gap: 0.65rem;
-}
-
-.footer-nav-item a {
-  font-family: var(--font-primary);
-  font-size: 0.8125rem;
   color: #EBF3FD;
   transition: color var(--transition-fast);
 }
 
-.footer-nav-item a:hover {
+.footer-page-nav a:hover {
   color: #028FEB;
 }
 
@@ -5173,16 +5161,11 @@ textarea.form-control {
   .footer-contact-cell {
     border-right: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-    padding: 2rem 1.5rem;
+    padding: 1.25rem 1.5rem;
   }
 
   .footer-contact-cell:last-child {
     border-bottom: none;
-  }
-
-  .footer-columns-row {
-    grid-template-columns: 1fr 1fr;
-    gap: 2.5rem;
   }
 
   .statement-header-3col {
@@ -5428,8 +5411,7 @@ textarea.form-control {
   .product-renders-row,
   .news-cards-row,
   .video-under-grid,
-  .footer-coordinates-row,
-  .footer-columns-row {
+  .footer-coordinates-row {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
