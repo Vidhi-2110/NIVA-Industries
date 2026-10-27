@@ -138,6 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const decimals = parseInt(el.getAttribute('data-counter-decimals') || '0', 10);
           const duration = 1800; // ms
           const startTime = performance.now();
+          const format = (val) => val.toLocaleString('en-IN', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
 
           const updateCounter = (currentTime) => {
             const elapsed = currentTime - startTime;
@@ -145,12 +146,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const easeOutProgress = 1 - Math.pow(1 - progress, 3);
             const currentVal = easeOutProgress * target;
 
-            el.textContent = currentVal.toFixed(decimals) + suffix;
+            el.textContent = format(currentVal) + suffix;
 
             if (progress < 1) {
               requestAnimationFrame(updateCounter);
             } else {
-              el.textContent = target.toFixed(decimals) + suffix;
+              el.textContent = format(target) + suffix;
             }
           };
 
