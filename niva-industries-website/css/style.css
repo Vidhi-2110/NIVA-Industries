@@ -184,6 +184,11 @@ ul, ol {
   margin-bottom: 1rem;
 }
 
+.section-title.page-header-title,
+.heading-hero.page-header-title {
+  font-size: clamp(1.625rem, 2.6vw, 2.25rem);
+}
+
 .page-header-desc {
   color: var(--text-light-secondary);
   max-width: 720px;
@@ -2193,6 +2198,86 @@ ul, ol {
 }
 
 /* --------------------------------------------------------------------------
+   14.5 OUR CLIENTS LOGO WALL
+   -------------------------------------------------------------------------- */
+.clients-logo-section {
+  position: relative;
+  background-color: var(--color-white);
+  padding-top: 1rem;
+  padding-bottom: clamp(4.5rem, 6.5vw, 6.5rem);
+}
+
+.clients-logo-content-container {
+  position: relative;
+  z-index: 1;
+}
+
+.clients-logo-header {
+  text-align: left;
+  margin-bottom: clamp(2rem, 3.5vw, 2.75rem);
+}
+
+.clients-logo-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-primary);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text-dark-secondary);
+  margin-bottom: 1.25rem;
+}
+
+.clients-logo-eyebrow .accent-slash {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.clients-logo-main-title {
+  font-family: var(--font-primary);
+  font-size: clamp(1.85rem, 2.75vw, 2.6rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: var(--text-dark);
+  margin: 0;
+}
+
+.clients-logo-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1.25rem;
+}
+
+.clients-logo-item {
+  height: 110px;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border-light);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+
+.clients-logo-item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-border-subtle);
+}
+
+.clients-logo-item img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
    15. ROBOTIC AUTOMATION PANORAMA (Advancing Steel Industry)
    -------------------------------------------------------------------------- */
 .robotics-panorama-section {
@@ -2887,7 +2972,8 @@ a.footer-contact-value:hover {
 .about-panorama-frame,
 .about-panorama-frame.full-width-bleed {
   width: 100%;
-  height: clamp(340px, 35vw, 500px);
+  /* height: clamp(340px, 35vw, 500px); */
+  height: 100%;
   overflow: hidden;
   background-color: var(--color-bg-light);
   position: relative;
@@ -2911,7 +2997,7 @@ a.footer-contact-value:hover {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   border-bottom: none;
-  padding-bottom: 1.5rem;
+  padding-bottom: 100px;
 }
 
 .about-breakthrough-col {
@@ -3072,7 +3158,7 @@ a.footer-contact-value:hover {
   background-color: #00215E;
   background: linear-gradient(135deg, #00215E 0%, #012463 100%);
   padding-top: clamp(4.5rem, 6.2vw, 6.25rem);
-  padding-bottom: clamp(4.5rem, 6.2vw, 6.25rem);
+  padding-bottom: calc(clamp(4.5rem, 6.2vw, 6.25rem) + 64px);
   overflow: hidden;
   color: #FFFFFF;
 }
@@ -3417,146 +3503,96 @@ a.footer-contact-value:hover {
 /* --------------------------------------------------------------------------
    21.E ABOUT US INCEPTION & HERITAGE STATEMENT SECTION (Section 6 - Reference Match)
    -------------------------------------------------------------------------- */
-.about-inception-section {
+.about-plant-stepper-section {
   position: relative;
   background-color: #FFFFFF;
-  padding-top: clamp(1rem, 2vw, 2.25rem);
+  padding-top: clamp(4rem, 6vw, 6rem);
   padding-bottom: clamp(5rem, 7vw, 7.5rem);
   overflow: hidden;
 }
 
-.about-inception-container {
+.about-plant-stepper-container {
   position: relative;
   z-index: 2;
 }
 
-.about-inception-statement-box {
-  width: fit-content;
-  max-width: 680px;
-  margin: 0 auto clamp(3rem, 4.5vw, 4.5rem) auto;
-  text-align: left;
+.about-plant-stepper-container .about-eyebrow {
+  margin-bottom: clamp(3rem, 5vw, 4.5rem);
 }
 
-.about-inception-text {
-  font-family: var(--font-primary);
-  font-size: clamp(1rem, 1.25vw, 1.15rem);
-  font-weight: 800;
-  text-transform: uppercase;
-  line-height: 1.48;
-  letter-spacing: -0.015em;
-  color: #00215E;
-  margin: 0;
-}
-
-/* Timeline 3-Column Showcase Unit */
-.about-timeline-showcase {
+/* 3-Step Connected Stepper */
+.about-stepper-row {
   position: relative;
-  width: 100%;
-  margin-top: clamp(2.5rem, 4.5vw, 4rem);
-}
-
-.about-timeline-border-top,
-.about-timeline-border-bottom {
-  width: 100%;
-  height: 1px;
-  background-color: rgba(15, 23, 42, 0.08);
-}
-
-.about-timeline-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  width: 100%;
+  column-gap: clamp(1.5rem, 3vw, 3rem);
 }
 
-.about-timeline-col {
+.about-stepper-rail {
+  position: absolute;
+  top: 16px;
+  left: calc(100% / 6);
+  right: calc(100% / 6);
+  height: 2px;
+  background-color: rgba(15, 23, 42, 0.12);
+  z-index: 1;
+}
+
+.about-stepper-step {
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
-}
-
-.about-timeline-top-spacer {
-  height: 240px;
-  width: 100%;
-}
-
-.about-timeline-top-visual {
-  height: 240px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  padding-bottom: 1.25rem;
-}
-
-.about-timeline-beam-img {
-  width: 100%;
-  max-width: 250px;
-  height: auto;
-  display: block;
-}
-
-.about-timeline-accent-bar {
-  width: 78%;
-  max-width: 260px;
-  height: 2.5px;
-  background-color: #0063EB;
-  margin: 0 auto;
-}
-
-.about-timeline-body {
-  padding-top: 2rem;
-  padding-bottom: 2.75rem;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
+  position: relative;
+  z-index: 2;
 }
 
-.about-timeline-year {
+.about-stepper-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  height: 32px;
+  padding: 0 0.85rem;
+  margin-bottom: 1.5rem;
+  background-color: #FFFFFF;
+}
+
+.about-stepper-num {
   font-family: var(--font-primary);
-  font-size: clamp(1.4rem, 1.8vw, 1.625rem);
+  font-size: 0.8125rem;
   font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--color-accent);
+}
+
+.about-stepper-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+  box-shadow: 0 0 0 4px var(--color-accent-light);
+  flex-shrink: 0;
+}
+
+.about-stepper-title {
+  font-family: var(--font-primary);
+  font-size: clamp(1.3rem, 1.7vw, 1.5rem);
+  font-weight: 800;
+  text-transform: uppercase;
   color: #00215E;
   margin: 0 0 0.85rem 0;
   line-height: 1.2;
 }
 
-.about-timeline-desc {
+.about-stepper-desc {
   font-family: var(--font-primary);
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   font-weight: 400;
-  line-height: 1.58;
+  line-height: 1.65;
   color: #373737;
   max-width: 270px;
   margin: 0 auto;
-  text-align: center;
-}
-
-.about-timeline-dots {
-  display: flex;
-  gap: 6px;
-  justify-content: center;
-  align-items: center;
-  margin-top: 1.5rem;
-}
-
-.timeline-dot-indicator {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background-color: #D6E4F8;
-  cursor: pointer;
-  transition: background-color var(--transition-fast), transform var(--transition-fast);
-}
-
-.timeline-dot-indicator.active {
-  background-color: #0063EB;
-}
-
-.timeline-dot-indicator:hover {
-  transform: scale(1.3);
 }
 
 /* --------------------------------------------------------------------------
@@ -4276,7 +4312,8 @@ textarea.form-control {
 }
 
 .contact-panorama-frame {
-  height: clamp(340px, 32vw, 480px);
+  /* height: clamp(340px, 32vw, 480px); */
+  height: 70%;
   overflow: hidden;
   position: relative;
   z-index: 2;
@@ -4284,7 +4321,7 @@ textarea.form-control {
 
 .contact-panorama-img {
   width: 100%;
-  height: 100%;
+  height: 70%;
   object-fit: cover;
   object-position: center center;
   display: block;
@@ -4821,54 +4858,29 @@ textarea.form-control {
   column-gap: 0;
 }
 
-.media-card-report-visual {
+/* --------------------------------------------------------------------------
+   26.B MEDIA FINISHED PRODUCTS GALLERY (Section 3)
+   -------------------------------------------------------------------------- */
+.media-gallery-section {
   position: relative;
-  width: 100%;
-  height: 230px;
-  background-color: #00215E;
-  background: linear-gradient(135deg, #00215E 0%, #012463 100%);
-  padding: 1.75rem 1.75rem 1.25rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  overflow: hidden;
-  transition: transform var(--transition-slow);
+  background-color: var(--color-bg-light);
+  padding-top: clamp(3.5rem, 5vw, 5rem);
+  padding-bottom: clamp(5rem, 7vw, 7.5rem);
 }
 
-.media-card-link:hover .media-card-report-visual {
-  transform: scale(1.02);
+.media-gallery-header {
+  margin-bottom: clamp(2.5rem, 4vw, 3.5rem);
 }
 
-.media-report-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
+.media-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: clamp(1.25rem, 2vw, 2rem);
+  row-gap: clamp(2.5rem, 4vw, 3.5rem);
 }
 
-.media-report-title {
-  font-family: var(--font-primary);
-  font-size: clamp(1.4rem, 1.75vw, 1.85rem);
-  font-weight: 900;
-  color: #FFFFFF;
-  line-height: 1.08;
-  letter-spacing: -0.02em;
-  text-transform: uppercase;
-}
-
-.media-report-year {
-  font-family: var(--font-primary);
-  font-size: clamp(2.2rem, 2.8vw, 3rem);
-  font-weight: 900;
-  color: #FFFFFF;
-  line-height: 1;
-  text-align: right;
-  letter-spacing: -0.02em;
-}
-
-.media-card-report-visual .media-arrow-square-btn {
-  bottom: 0;
-  left: 0;
+.media-gallery-item .media-card-visual {
+  height: 260px;
 }
 
 /* --------------------------------------------------------------------------
@@ -4973,6 +4985,10 @@ textarea.form-control {
     row-gap: 3.5rem;
   }
 
+  .media-gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .hero-vertical-guides {
     display: none;
   }
@@ -5052,6 +5068,10 @@ textarea.form-control {
   .video-under-grid {
     grid-template-columns: 1fr;
     gap: 3rem;
+  }
+
+  .clients-logo-grid {
+    grid-template-columns: repeat(4, 1fr);
   }
 
   .investor-col {
@@ -5301,8 +5321,12 @@ textarea.form-control {
     height: 50px;
   }
 
-  .about-inception-statement-box {
-    max-width: 90%;
+  .about-stepper-row {
+    column-gap: 1.25rem;
+  }
+
+  .about-stepper-desc {
+    max-width: 220px;
   }
 }
 
@@ -5314,6 +5338,16 @@ textarea.form-control {
   .container {
     padding-left: 1.25rem;
     padding-right: 1.25rem;
+  }
+
+  .clients-logo-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .clients-logo-item {
+    height: 95px;
+    padding: 1rem;
   }
 
   .nav-logo-img {
@@ -5504,51 +5538,26 @@ textarea.form-control {
     font-size: 0.75rem;
   }
 
-  .about-inception-section {
-    padding-top: 1rem;
+  .about-plant-stepper-section {
+    padding-top: 3rem;
     padding-bottom: 4rem;
   }
 
-  .about-inception-statement-box {
-    max-width: 100%;
+  .about-plant-stepper-container .about-eyebrow {
     margin-bottom: 2.75rem;
   }
 
-  .about-inception-text {
-    font-size: 0.9375rem;
-    line-height: 1.55;
-  }
-
-  .about-inception-text br {
-    display: none;
-  }
-
-  .about-timeline-grid {
+  .about-stepper-row {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    row-gap: 2.75rem;
   }
 
-  .about-timeline-top-spacer {
+  .about-stepper-rail {
     display: none;
   }
 
-  .about-timeline-top-visual {
-    height: auto;
-    padding-bottom: 1.25rem;
-  }
-
-  .about-timeline-beam-img {
-    max-width: 200px;
-  }
-
-  .about-timeline-accent-bar {
-    width: 65%;
-    max-width: 220px;
-  }
-
-  .about-timeline-body {
-    padding-top: 1.25rem;
-    padding-bottom: 1.5rem;
+  .about-stepper-desc {
+    max-width: 280px;
   }
 
   .about-leadership-section {
@@ -5676,7 +5685,7 @@ textarea.form-control {
    14. PRODUCT CATALOG, BROCHURE METRICS & INTERACTIVE TABS (products.html)
    ========================================================================== */
 .brochure-metrics-section {
-  padding: 3rem 0;
+  padding: 1.75rem 0;
   background: var(--color-white);
   border-bottom: 1px solid var(--color-border-light);
 }
@@ -5684,41 +5693,42 @@ textarea.form-control {
 .brochure-metrics-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
 }
 
-.brochure-metric-card {
-  background: var(--color-bg-light);
-  border: 1px solid var(--color-border-light);
-  border-top: 4px solid var(--color-accent);
-  border-radius: 8px;
-  padding: 1.75rem 1.25rem;
+.brochure-metric-item {
   text-align: center;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  padding: 0 1.25rem;
 }
 
-.brochure-metric-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
-  border-top-color: var(--color-navy-deep);
+.brochure-metric-item:not(:first-child) {
+  border-left: 1px solid var(--color-border-light);
+}
+
+.brochure-metric-item::before {
+  content: '';
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: var(--color-accent);
+  margin: 0 auto 0.6rem auto;
 }
 
 .brochure-metric-num {
   font-family: var(--font-primary);
-  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  font-size: clamp(1.25rem, 1.6vw, 1.5rem);
   font-weight: 800;
   color: var(--color-navy-deep);
   line-height: 1;
-  margin-bottom: 0.5rem;
-  letter-spacing: -0.02em;
+  margin-bottom: 0.35rem;
+  letter-spacing: -0.01em;
 }
 
 .brochure-metric-label {
-  font-size: 0.875rem;
+  font-size: 0.6875rem;
   font-weight: 700;
   color: var(--text-dark-secondary);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
 }
 
 .filter-tabs {
@@ -5915,6 +5925,20 @@ textarea.form-control {
 @media (max-width: 992px) {
   .brochure-metrics-grid {
     grid-template-columns: repeat(2, 1fr);
+    row-gap: 1.25rem;
+  }
+
+  .brochure-metric-item:not(:first-child) {
+    border-left: none;
+  }
+
+  .brochure-metric-item:nth-child(2n) {
+    border-left: 1px solid var(--color-border-light);
+  }
+
+  .brochure-metric-item:nth-child(n+3) {
+    border-top: 1px solid var(--color-border-light);
+    padding-top: 1.25rem;
   }
 
   .mfg-services-highlight {
@@ -5928,8 +5952,35 @@ textarea.form-control {
 }
 
 @media (max-width: 576px) {
+  .clients-logo-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.85rem;
+  }
+
+  .clients-logo-item {
+    height: 85px;
+    padding: 0.85rem;
+  }
+
+  .media-gallery-grid {
+    grid-template-columns: 1fr;
+    row-gap: 2.25rem;
+  }
+
   .brochure-metrics-grid {
     grid-template-columns: 1fr;
+    row-gap: 1.25rem;
+  }
+
+  .brochure-metric-item {
+    border-left: none !important;
+    border-top: 1px solid var(--color-border-light);
+    padding-top: 1.25rem;
+  }
+
+  .brochure-metric-item:first-child {
+    border-top: none;
+    padding-top: 0;
   }
 
   .product-grid {
