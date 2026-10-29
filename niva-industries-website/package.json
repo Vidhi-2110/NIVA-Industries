@@ -1,0 +1,9 @@
+{
+  "name": "niva-industries-website",
+  "private": true,
+  "version": "1.0.0",
+  "description": "NIVA Power Industries Pvt. Ltd. — static website with a Vercel serverless function for the contact form.",
+  "dependencies": {
+    "nodemailer": "^10.3.0"
+  }
+}

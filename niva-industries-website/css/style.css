@@ -91,6 +91,7 @@
 
 html {
   font-size: 16px;
+  overflow-x: clip;
   scroll-behavior: smooth;
   scroll-padding-top: var(--header-height);
   -webkit-text-size-adjust: 100%;
@@ -362,6 +363,7 @@ ul, ol {
   color: var(--text-dark);
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  white-space: nowrap;
   padding: 0.5rem 0;
   position: relative;
 }
@@ -2245,12 +2247,16 @@ ul, ol {
 }
 
 .clients-logo-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 1.25rem;
+  --cols: 7;
+  --gap: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* centres a partial last row */
+  gap: var(--gap);
 }
 
 .clients-logo-item {
+  flex: 0 0 calc((100% - (var(--cols) - 1) * var(--gap)) / var(--cols));
   height: 110px;
   background-color: var(--color-white);
   border: 1px solid var(--color-border-light);
@@ -2747,6 +2753,11 @@ a.footer-contact-value:hover {
 
 .footer-legal-left a:hover {
   color: #028FEB;
+}
+
+.footer-legal-location {
+  color: var(--text-light-muted);
+  margin-left: 1rem;
 }
 
 .footer-social-links {
@@ -4148,6 +4159,15 @@ textarea.form-control {
   transform: translate(0);
 }
 
+/* Sideways slide-ins push content past the screen edge before they animate,
+   which makes the page scroll horizontally on touch devices. Slide up instead. */
+@media (max-width: 1024px) {
+  .reveal-left:not(.active),
+  .reveal-right:not(.active) {
+    transform: translateY(30px);
+  }
+}
+
 /* Fail-safe visibility for hero banners and critical headers */
 .page-header-banner .reveal,
 .brochure-metrics-section .reveal {
@@ -4176,6 +4196,54 @@ textarea.form-control {
   flex-direction: column;
   gap: 0.75rem;
   pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   27. STICKY BACK TO TOP BUTTON
+   -------------------------------------------------------------------------- */
+.back-to-top-btn {
+  position: fixed;
+  bottom: 1.75rem;
+  right: 1.75rem;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+  color: #FFFFFF;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-lg);
+  z-index: 950;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: opacity var(--transition-base), transform var(--transition-base), visibility var(--transition-base), background-color var(--transition-fast);
+}
+
+.back-to-top-btn.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top-btn:hover {
+  background-color: var(--color-accent-hover);
+}
+
+.back-to-top-btn svg {
+  flex-shrink: 0;
+}
+
+@media (max-width: 576px) {
+  .back-to-top-btn {
+    width: 42px;
+    height: 42px;
+    bottom: 1.25rem;
+    right: 1.25rem;
+  }
 }
 
 .toast {
@@ -4493,6 +4561,16 @@ textarea.form-control {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
+}
+
+/* Honeypot spam trap: off-screen for real visitors, still reachable by simple bots */
+.form-honeypot {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 
 .form-group {
@@ -4886,6 +4964,67 @@ textarea.form-control {
 /* --------------------------------------------------------------------------
    21. Responsive Media Queries
    -------------------------------------------------------------------------- */
+
+/* Slide-out navigation: below ~1150px the full desktop menu collides with the logo */
+@media (max-width: 1150px) {
+  .nav-hamburger {
+    display: flex;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    width: 100%;
+    height: calc(100vh - var(--header-height));
+    height: calc(100dvh - var(--header-height));
+    background-color: var(--color-white);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2rem 1.5rem;
+    gap: 1.5rem;
+    transform: translateX(-100%);
+    visibility: hidden;
+    transition: transform var(--transition-base), visibility var(--transition-base);
+    overflow-y: auto;
+    border-top: 1px solid var(--color-border-light);
+    box-shadow: var(--shadow-xl);
+  }
+
+  .nav-menu.active {
+    transform: translateX(0);
+    visibility: visible;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    gap: 1.25rem;
+  }
+
+  .nav-links > li {
+    width: 100%;
+  }
+
+  .nav-link {
+    display: block;
+    font-size: 1.125rem;
+    width: 100%;
+    border-bottom: 1px solid var(--color-border-light);
+    padding-bottom: 0.75rem;
+  }
+
+  .nav-actions {
+    width: 100%;
+    padding-top: 1rem;
+  }
+
+  .nav-actions .btn {
+    width: 100%;
+  }
+}
+
 @media (max-width: 1024px) {
   .hero-under-grid,
   .editorial-header-split,
@@ -5070,8 +5209,35 @@ textarea.form-control {
     gap: 3rem;
   }
 
+  /* Tablet & mobile: one swipeable row instead of a tall stack of logos.
+     --cols is the number of logos in view; the fraction lets the next one peek
+     in at the edge so it's obvious the row scrolls. */
   .clients-logo-grid {
-    grid-template-columns: repeat(4, 1fr);
+    --cols: 4.5;
+    --bleed: 2rem; /* matches .container side padding */
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--bleed);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    /* run the row to the screen edges, keeping the first logo aligned with the heading */
+    margin-inline: calc(-1 * var(--bleed));
+    padding: 6px var(--bleed) 10px; /* room for the hover lift and shadow */
+  }
+
+  .clients-logo-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .clients-logo-item {
+    scroll-snap-align: start;
+  }
+
+  .clients-logo-item:hover {
+    transform: none; /* no lift on touch screens */
   }
 
   .investor-col {
@@ -5092,6 +5258,10 @@ textarea.form-control {
 
   .stock-info-meta-col {
     text-align: left;
+  }
+
+  .stock-meta-text {
+    white-space: normal;
   }
 
   .careers-guidelines-container,
@@ -5172,6 +5342,14 @@ textarea.form-control {
 
   .feature-square-card {
     margin: 0;
+    min-height: 360px;
+    padding: 1.75rem 1.5rem;
+  }
+
+  /* Three cards: stay 3-across instead of 2 + an orphan */
+  .cards-row-3 {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
   }
 
   .statement-header-col-1,
@@ -5219,6 +5397,28 @@ textarea.form-control {
     height: 48px;
   }
 
+  /* Stacked: the strip is full-width, so bleed it to the right edge as well as the left */
+  .about-navy-strip::after,
+  .about-rail-badge::after {
+    content: "";
+    position: absolute;
+    left: 100%;
+    width: 100vw;
+  }
+
+  .about-navy-strip::after {
+    top: 0;
+    bottom: 0;
+    background-color: #00215E;
+  }
+
+  .about-rail-badge::after {
+    bottom: 0;
+    height: 22px;
+    background: rgba(255, 255, 255, 0.12);
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
   .about-action-col {
     height: 52px;
     border-top: none;
@@ -5258,10 +5458,15 @@ textarea.form-control {
   }
 
   /* Section 3 Responsive Adjustments */
+  .about-experience-section {
+    /* desktop keeps extra bottom room to stay tall; stacked layouts don't need it */
+    padding-bottom: clamp(4.5rem, 6.2vw, 6.25rem);
+  }
+
   .about-experience-top-row {
     grid-template-columns: 1fr;
     gap: 1.75rem;
-    margin-bottom: 3rem;
+    margin-bottom: 0;
   }
 
   .about-experience-title-col,
@@ -5341,8 +5546,9 @@ textarea.form-control {
   }
 
   .clients-logo-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+    --cols: 3.4;
+    --gap: 1rem;
+    --bleed: 1.25rem;
   }
 
   .clients-logo-item {
@@ -5359,55 +5565,6 @@ textarea.form-control {
     height: 80px;
   }
 
-  .nav-hamburger {
-    display: flex;
-  }
-
-  .nav-menu {
-    position: fixed;
-    top: var(--header-height);
-    left: 0;
-    width: 100%;
-    height: calc(100vh - var(--header-height));
-    background-color: var(--color-white);
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 2rem 1.5rem;
-    gap: 1.5rem;
-    transform: translateX(-100%);
-    transition: transform var(--transition-base);
-    overflow-y: auto;
-    border-top: 1px solid var(--color-border-light);
-    box-shadow: var(--shadow-xl);
-  }
-
-  .nav-menu.active {
-    transform: translateX(0);
-  }
-
-  .nav-links {
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
-    gap: 1.25rem;
-  }
-
-  .nav-link {
-    font-size: 1.125rem;
-    width: 100%;
-    border-bottom: 1px solid var(--color-border-light);
-    padding-bottom: 0.75rem;
-  }
-
-  .nav-actions {
-    width: 100%;
-    padding-top: 1rem;
-  }
-
-  .nav-actions .btn {
-    width: 100%;
-  }
-
   .cards-row-4,
   .cards-row-3,
   .triple-stats-row,
@@ -5416,6 +5573,15 @@ textarea.form-control {
   .video-under-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
+  }
+
+  /* Stacked full-width: let content set the height instead of the desktop square */
+  .feature-square-card {
+    min-height: 0;
+  }
+
+  .feature-square-card .card-bottom-group {
+    margin-top: 1.75rem;
   }
 
   .split-orange-col {
@@ -5768,7 +5934,8 @@ textarea.form-control {
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  /* 320px min fits two columns on a portrait tablet; min(100%,…) avoids overflow on tiny phones */
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
   gap: 2rem;
   margin-bottom: 4rem;
 }
@@ -5889,11 +6056,24 @@ textarea.form-control {
 
 .product-card-footer {
   display: flex;
+  flex-wrap: wrap; /* button drops below the badge instead of spilling out of narrow cards */
   justify-content: space-between;
   align-items: center;
+  gap: 0.75rem;
   margin-top: auto;
   padding-top: 1rem;
   border-top: 1px solid var(--color-border-light);
+}
+
+.product-card-footer .btn {
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+@media (max-width: 576px) {
+  .product-card-footer .btn {
+    width: 100%;
+  }
 }
 
 .mfg-services-highlight {
@@ -5952,9 +6132,124 @@ textarea.form-control {
 }
 
 @media (max-width: 576px) {
-  .clients-logo-grid {
-    grid-template-columns: repeat(2, 1fr);
+  /* ---- Footer: compact phone layout ---- */
+  .master-dark-footer {
+    padding-top: 2.75rem;
+    padding-bottom: 1.75rem;
+  }
+
+  .footer-logo-wrap {
+    margin-bottom: 1.25rem;
+  }
+
+  .footer-logo-img {
+    height: 56px;
+  }
+
+  .footer-statement-grid {
+    gap: 1.25rem;
+    padding-bottom: 0;
+    margin-bottom: 2rem;
+  }
+
+  .footer-brand-statement {
+    font-size: 1.125rem;
+  }
+
+  .footer-newsletter-label {
+    margin-bottom: 0.6rem;
+  }
+
+  .footer-newsletter-box {
+    max-width: none;
+  }
+
+  .footer-boxed-input input {
+    padding: 0 0.85rem;
+  }
+
+  .footer-boxed-input button.footer-subscribe-btn {
+    padding: 0 1rem;
+  }
+
+  .footer-contact-boxed-grid {
+    margin-bottom: 1.75rem;
+  }
+
+  .footer-contact-cell {
+    padding: 0.9rem 1rem;
+    gap: 0.3rem;
+  }
+
+  .footer-contact-value {
+    font-size: 0.875rem;
+  }
+
+  .footer-page-nav {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.85rem 0.5rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .footer-page-nav a {
+    font-size: 0.75rem;
+  }
+
+  .footer-bottom-legal {
+    align-items: flex-start;
+    text-align: left;
     gap: 0.85rem;
+    padding-top: 1.25rem;
+  }
+
+  .footer-legal-left,
+  .footer-social-links {
+    justify-content: flex-start;
+  }
+
+  .footer-legal-left {
+    gap: 0.4rem 1.1rem;
+  }
+
+  .footer-legal-left > span:first-child,
+  .footer-legal-location {
+    width: 100%;
+  }
+
+  .footer-legal-location {
+    margin-left: 0;
+  }
+
+  .about-hero-title {
+    font-size: clamp(1.5rem, 7vw, 1.875rem);
+    line-height: 1.15;
+  }
+
+  /* About page section headings: always a step below the hero title */
+  .about-experience-title,
+  .about-values-heading,
+  .about-excellence-title,
+  .page-about .clients-logo-main-title {
+    font-size: clamp(1.25rem, 5.6vw, 1.5rem);
+    line-height: 1.18;
+  }
+
+  .about-col-headline {
+    font-size: clamp(0.9375rem, 4.1vw, 1.0625rem);
+  }
+
+  .about-stepper-title {
+    font-size: clamp(1rem, 4.4vw, 1.125rem);
+  }
+
+  .about-value-name {
+    font-size: 0.8125rem;
+  }
+
+  .clients-logo-grid {
+    --cols: 2.3;
+    --gap: 0.85rem;
   }
 
   .clients-logo-item {

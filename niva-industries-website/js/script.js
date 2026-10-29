@@ -288,7 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ==========================================================================
      9. RFQ / Contact Form Handling (contact.html)
      ========================================================================== */
-  const contactForm = document.getElementById('contact-rfq-form');
+  const contactForm = document.getElementById('contact-inquiry-form');
 
   if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
@@ -315,26 +315,43 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
 
-      if (isValid) {
-        const submitBtn = contactForm.querySelector('button[type="submit"]');
-        const originalText = submitBtn.innerHTML;
+      if (!isValid) return;
 
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = `
-          <svg class="spinner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10" stroke-opacity="0.3"></circle>
-            <path d="M12 2 A 10 10 0 0 1 22 12"></path>
-          </svg>
-          Processing RFQ...
-        `;
+      const submitBtn = contactForm.querySelector('button[type="submit"]');
+      const originalText = submitBtn.innerHTML;
+      const formData = new FormData(contactForm);
+      const payload = Object.fromEntries(formData.entries());
 
-        setTimeout(() => {
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `
+        <svg class="spinner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10" stroke-opacity="0.3"></circle>
+          <path d="M12 2 A 10 10 0 0 1 22 12"></path>
+        </svg>
+        Processing RFQ...
+      `;
+
+      fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+        .then((response) => response.json().catch(() => ({})).then((data) => ({ ok: response.ok, data })))
+        .then(({ ok, data }) => {
+          if (ok && data.ok) {
+            contactForm.reset();
+            showToast('Thank you! Your quotation request has been sent to our team. We will respond within 4 business hours.', 'RFQ Submitted Successfully');
+          } else {
+            showToast((data && data.error) || 'Something went wrong. Please try again or call us directly.', 'Submission Failed');
+          }
+        })
+        .catch(() => {
+          showToast('Could not reach the server. Please check your connection and try again.', 'Submission Failed');
+        })
+        .finally(() => {
           submitBtn.disabled = false;
           submitBtn.innerHTML = originalText;
-          contactForm.reset();
-          showToast('Thank you! Your quotation request has been routed to our metallurgy desk. We will respond within 4 business hours.', 'RFQ Submitted Successfully');
-        }, 1200);
-      }
+        });
     });
 
     contactForm.querySelectorAll('input, select, textarea').forEach(field => {
@@ -368,6 +385,16 @@ document.addEventListener('DOMContentLoaded', () => {
      ========================================================================== */
   const backToTopBtn = document.getElementById('back-to-top');
   if (backToTopBtn) {
+    const toggleBackToTop = () => {
+      if (window.scrollY > 500) {
+        backToTopBtn.classList.add('is-visible');
+      } else {
+        backToTopBtn.classList.remove('is-visible');
+      }
+    };
+    toggleBackToTop();
+    window.addEventListener('scroll', toggleBackToTop, { passive: true });
+
     backToTopBtn.addEventListener('click', (e) => {
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: 'smooth' });
