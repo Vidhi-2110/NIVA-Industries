@@ -371,12 +371,38 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       const input = form.querySelector('.newsletter-input');
-      if (input && input.value.trim() && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value)) {
-        showToast('You have subscribed to NIVA Metallurgical & Market Reports.', 'Subscribed');
-        input.value = '';
-      } else if (input) {
+      const honeypot = form.querySelector('input[name="website"]');
+      const submitBtn = form.querySelector('button[type="submit"]');
+      if (!input) return;
+
+      const email = input.value.trim();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         showToast('Please enter a valid business email address.', 'Invalid Email');
+        return;
       }
+
+      if (submitBtn) submitBtn.disabled = true;
+
+      fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, page: window.location.pathname, website: honeypot ? honeypot.value : '' }),
+      })
+        .then((response) => response.json().catch(() => ({})).then((data) => ({ ok: response.ok, data })))
+        .then(({ ok, data }) => {
+          if (ok && data.ok) {
+            input.value = '';
+            showToast('Thank you for subscribing to product updates and company news from NIVA Power Industries.', 'Subscribed');
+          } else {
+            showToast((data && data.error) || 'Something went wrong. Please try again.', 'Subscription Failed');
+          }
+        })
+        .catch(() => {
+          showToast('Could not reach the server. Please check your connection and try again.', 'Subscription Failed');
+        })
+        .finally(() => {
+          if (submitBtn) submitBtn.disabled = false;
+        });
     });
   });
 

@@ -33,6 +33,7 @@
 9. [Image Assets](#9-image-assets)
 10. [SEO & Accessibility](#10-seo--accessibility)
 11. [How to Run](#11-how-to-run)
+12. [Form Email (SMTP)](#12-form-email-smtp)
 
 ---
 
@@ -498,8 +499,8 @@ All JS lives in `js/script.js` (~380 lines). It is structured as a single `DOMCo
 | 7a | **General FAQ Accordion** | Animates `maxHeight` on `.accordion-content` panels; collapses siblings on open |
 | 7b | **Dark Eco Accordion** | Uses CSS `grid-template-rows: 0fr → 1fr` animation (no inline styles) for the dark section accordion |
 | 8 | **Toast Notification System** | Dynamically creates/appends toast divs; auto-dismiss after 4.5 seconds |
-| 9 | **RFQ / Contact Form Validation** | Validates required fields + email regex; shows loading spinner on submit; resets form + shows toast on success |
-| 10 | **Newsletter Subscription** | Validates email input on all footer forms; shows toast on success or invalid input |
+| 9 | **RFQ / Contact Form** | Validates required fields + email regex, then POSTs to `/api/contact`, which emails the enquiry to the company inbox (see [§12](#12-form-email-smtp)); shows a toast with the real result |
+| 10 | **Newsletter Subscription** | Validates the footer email on every page, then POSTs to `/api/subscribe`, which emails the new subscriber's address to the company inbox |
 | 12 | **Timeline Dot Indicators** | Active class toggle for about page timeline milestone dots |
 
 **Animated Counter Detail:**
@@ -669,6 +670,45 @@ python -m http.server 8080
 cd niva-industries-website
 npx serve .
 # Visit the URL shown in terminal
+```
+
+> The options above serve the pages only. The two forms post to serverless functions in `api/`, so to test them locally run `vercel dev` instead (see §12).
+
+---
+
+## 12. Form Email (SMTP)
+
+Both website forms are delivered by email through Gmail SMTP, using two Vercel serverless functions:
+
+| Form | Where | Endpoint | Email sent to the company inbox |
+|---|---|---|---|
+| Request a Quotation | `contact.html` | `api/contact.js` | `New RFQ — <product> — <company>`; Reply-To is the customer, so replying goes straight to them |
+| Newsletter signup | Footer on every page | `api/subscribe.js` | `New newsletter subscriber — <email>` |
+
+Shared SMTP code lives in `api/_lib/mailer.js` (the leading underscore keeps it from being a public route). Mail only ever goes to `CONTACT_TO`; nothing is sent to the address a visitor types in, so the forms can't be used to email third parties. Both forms include a hidden honeypot field that silently drops simple spam bots.
+
+### Required Vercel environment variables
+
+Set in Vercel → Project → Settings → Environment Variables (Production and Preview):
+
+| Name | Value |
+|---|---|
+| `SMTP_HOST` | `smtp.gmail.com` |
+| `SMTP_PORT` | `465` |
+| `SMTP_USER` | `nivaindustries14@gmail.com` |
+| `SMTP_PASS` | Gmail **App Password** for that account (16 characters), not the normal password |
+| `CONTACT_TO` | `nivaindustries14@gmail.com` |
+
+To create the App Password, turn on 2-Step Verification for the Google account, then generate one at <https://myaccount.google.com/apppasswords>. After changing any variable, redeploy (`vercel --prod`) so it takes effect.
+
+If these are missing, the forms show "Email is not configured on the server yet." Gmail allows roughly 500 messages a day from one account.
+
+### Testing locally
+
+```bash
+cd niva-industries-website
+npm install
+vercel dev            # serves the site and the /api functions together
 ```
 
 ---
