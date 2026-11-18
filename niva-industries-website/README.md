@@ -687,6 +687,17 @@ Both website forms are delivered by email through Gmail SMTP, using two Vercel s
 
 Shared SMTP code lives in `api/_lib/mailer.js` (the leading underscore keeps it from being a public route). Mail only ever goes to `CONTACT_TO`; nothing is sent to the address a visitor types in, so the forms can't be used to email third parties. Both forms include a hidden honeypot field that silently drops simple spam bots.
 
+Every request also passes `readFormBody()` in `api/_lib/mailer.js`, which rejects:
+
+| Check | Response |
+|---|---|
+| Not `POST` | 405 |
+| `Origin` header missing or not the same host the request was sent to (blocks other websites posting from a visitor's browser) | 403 |
+| Body not `application/json` / not a JSON object | 415 / 400 |
+| More than 5 submissions per IP in 10 minutes **on one warm serverless instance** (best effort only — add a Vercel Firewall rate-limit rule on `/api/*` for a hard limit) | 429 |
+
+`api/contact.js` additionally validates the email (no commas/angle brackets) and phone (7–15 digits; `+ - . ( )` and spaces allowed). The browser applies the same rules before sending.
+
 ### Required Vercel environment variables
 
 Set in Vercel → Project → Settings → Environment Variables (Production and Preview):
@@ -710,6 +721,29 @@ cd niva-industries-website
 npm install
 vercel dev            # serves the site and the /api functions together
 ```
+
+---
+
+## 13. Deployment (Vercel)
+
+| Setting | Value |
+|---|---|
+| Root Directory | `niva-industries-website` (this folder — `api/`, `package.json` and `vercel.json` must sit at the deployment root, or the form functions are not deployed) |
+| Framework Preset | Other |
+| Build / Output | none (static files served as-is) |
+| Canonical domain | `https://nivapowerindustries.com` (apex); `www` redirects to it in Vercel → Domains |
+
+`vercel.json` holds:
+
+- **Redirects** — the old `/niva-industries-website/*` URLs 301 to the same page at the root.
+- **Security headers** on every response: `Content-Security-Policy`, `X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy` (HSTS is sent by Vercel itself). The CSP allows scripts only from this site, Google Fonts for CSS/fonts, and `fetch` only to this site — if you add analytics, a map embed or another third-party script, add its domain to the matching CSP directive.
+- **Cache-Control** of 7 days for `/images/*`.
+
+SEO files: `robots.txt`, `sitemap.xml` (update `<lastmod>` when a page changes), and per-page canonical / Open Graph / Twitter / JSON-LD tags in each `<head>`.
+
+### Images
+
+Pages use the WebP files in `images/optimized/` (generated from the originals in `images/`, which are kept as sources and for `og:image`). When replacing a photo, export a WebP into `images/optimized/` and keep the `width`/`height` attributes matching its aspect ratio.
 
 ---
 
