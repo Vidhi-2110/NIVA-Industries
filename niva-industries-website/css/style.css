@@ -4169,9 +4169,12 @@ textarea.form-control {
   }
 }
 
-/* Fail-safe visibility for hero banners and critical headers */
+/* Fail-safe visibility for hero banners and critical headers.
+   The homepage hero image is the LCP element: keep it visible from first paint
+   instead of waiting for script.js to fade it in. */
 .page-header-banner .reveal,
-.brochure-metrics-section .reveal {
+.brochure-metrics-section .reveal,
+.hero-fullbleed-banner.reveal {
   opacity: 1 !important;
   transform: translate(0) !important;
 }
