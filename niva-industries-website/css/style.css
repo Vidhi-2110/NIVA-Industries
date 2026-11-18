@@ -4,7 +4,8 @@
    Exact Match to Master Layout Reference
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
+/* Fonts (Plus Jakarta Sans, JetBrains Mono) are loaded via <link> tags in each page <head>,
+   not @import, so the browser can fetch them in parallel with this stylesheet. */
 
 /* --------------------------------------------------------------------------
    1. CSS Custom Properties / Design Tokens
