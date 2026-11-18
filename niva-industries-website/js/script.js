@@ -79,15 +79,15 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ==========================================================================
      3. Active Navigation Link Detection
      ========================================================================== */
-  const currentPath = window.location.pathname;
+  // Links are clean URLs ("/", "/about"). Normalise the current path the same way so this also
+  // works for "/about.html", "/index.html" or a trailing slash (e.g. when previewing locally).
+  const normalisePath = (p) => p.replace(/\/index(\.html)?$/, '/').replace(/\.html$/, '').replace(/(.)\/$/, '$1');
+  const currentPath = normalisePath(window.location.pathname);
   navLinks.forEach(link => {
     const href = link.getAttribute('href');
     if (!href) return;
-    
-    const isHome = (currentPath.endsWith('/') || currentPath.endsWith('index.html')) && (href === 'index.html' || href === './');
-    const isCurrentPage = currentPath.endsWith(href);
 
-    if (isHome || isCurrentPage) {
+    if (normalisePath(href) === currentPath) {
       link.classList.add('active');
     } else {
       link.classList.remove('active');

@@ -735,7 +735,8 @@ vercel dev            # serves the site and the /api functions together
 
 `vercel.json` holds:
 
-- **Redirects** — the old `/niva-industries-website/*` URLs 301 to the same page at the root.
+- **Clean URLs** — `cleanUrls: true` serves `about.html` at `/about` (and 308-redirects `/about.html` → `/about`, `/index.html` → `/`); `trailingSlash: false` redirects `/about/` → `/about`. Internal links therefore use `/`, `/about`, `/products`, … — keep that form when adding links or pages.
+- **Redirects** — the old `/niva-industries-website/*` URLs redirect permanently to the same page at the root (e.g. `/niva-industries-website/about.html` → `/about`).
 - **Security headers** on every response: `Content-Security-Policy`, `X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy` (HSTS is sent by Vercel itself). The CSP allows scripts only from this site, Google Fonts for CSS/fonts, and `fetch` only to this site — if you add analytics, a map embed or another third-party script, add its domain to the matching CSP directive.
 - **Cache-Control** of 7 days for `/images/*`.
 

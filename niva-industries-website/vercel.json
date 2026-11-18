@@ -1,9 +1,12 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "trailingSlash": false,
   "redirects": [
     { "source": "/niva-industries-website", "destination": "/", "permanent": true },
-    { "source": "/niva-industries-website/index.html", "destination": "/", "permanent": true },
-    { "source": "/niva-industries-website/:path*", "destination": "/:path*", "permanent": true }
+    { "source": "/niva-industries-website/index", "destination": "/", "permanent": true },
+    { "source": "/niva-industries-website/:path*", "destination": "/:path*", "permanent": true },
+    { "source": "/index", "destination": "/", "permanent": true }
   ],
   "headers": [
     {
