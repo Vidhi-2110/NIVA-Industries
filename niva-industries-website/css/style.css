@@ -3984,6 +3984,17 @@ a.footer-contact-value:hover {
   background-color: #EBF3FD;
 }
 
+/* Contact form fields use .form-input / .form-textarea, which the rule above never matched,
+   so invalid fields previously showed no feedback at all. */
+.form-input.is-invalid,
+.form-input.is-invalid:focus,
+.form-textarea.is-invalid,
+.form-textarea.is-invalid:focus {
+  border-color: #B42318;
+  background-color: #FEF3F2;
+  box-shadow: 0 0 0 2px rgba(180, 35, 24, 0.15);
+}
+
 .form-error-msg {
   display: none;
   font-size: 0.75rem;
