@@ -6,12 +6,12 @@
  * via SMTP to the company inbox. SMTP settings: see api/_lib/mailer.js.
  */
 
-const { escapeHtml, cleanLine, cleanText, isValidEmail, getMailer, readFormBody } = require('./_lib/mailer');
+const { escapeHtml, cleanLine, cleanText, isValidEmail, isValidPhone, getMailer, readFormBody } = require('./_lib/mailer');
 
 const REQUIRED_FIELDS = ['first_name', 'last_name', 'email', 'phone', 'company', 'product_interest', 'comments'];
 
 module.exports = async function handler(req, res) {
-  const body = readFormBody(req, res);
+  const body = readFormBody(req, res, 'contact');
   if (!body) return;
 
   const fields = {
@@ -33,6 +33,10 @@ module.exports = async function handler(req, res) {
 
   if (!isValidEmail(fields.email)) {
     return res.status(400).json({ ok: false, error: 'Please provide a valid email address.' });
+  }
+
+  if (!isValidPhone(fields.phone)) {
+    return res.status(400).json({ ok: false, error: 'Please provide a valid phone number (7–15 digits).' });
   }
 
   const mailer = getMailer();

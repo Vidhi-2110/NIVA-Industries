@@ -54,7 +54,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     navLinks.forEach(link => {
       link.addEventListener('click', () => {
-        if (window.innerWidth <= 768) {
+        // The slide-out menu is used whenever the hamburger is visible (<=1150px in CSS).
+        if (hamburgerBtn.offsetParent !== null) {
           closeMenu();
         }
       });
@@ -260,21 +261,27 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!container) {
       container = document.createElement('div');
       container.className = 'toast-container';
+      // Announce toasts to screen readers.
+      container.setAttribute('role', 'status');
+      container.setAttribute('aria-live', 'polite');
       document.body.appendChild(container);
     }
 
     const toast = document.createElement('div');
     toast.className = 'toast';
     toast.innerHTML = `
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0063EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0063EB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
         <polyline points="22 4 12 14.01 9 11.01"></polyline>
       </svg>
       <div>
-        <div class="toast-title">${title}</div>
-        <div class="toast-desc">${message}</div>
+        <div class="toast-title"></div>
+        <div class="toast-desc"></div>
       </div>
     `;
+    // Text may come from a server response: set it as text, never as HTML.
+    toast.querySelector('.toast-title').textContent = title;
+    toast.querySelector('.toast-desc').textContent = message;
 
     container.appendChild(toast);
     setTimeout(() => toast.classList.add('show'), 50);
@@ -294,28 +301,31 @@ document.addEventListener('DOMContentLoaded', () => {
     contactForm.addEventListener('submit', (e) => {
       e.preventDefault();
 
-      let isValid = true;
-      const requiredInputs = contactForm.querySelectorAll('[required]');
+      // Same rules as the server (api/_lib/mailer.js).
+      const isPhoneOk = (value) => {
+        const digits = value.replace(/\D/g, '').length;
+        return /^\+?[\d\s().-]+$/.test(value) && digits >= 7 && digits <= 15;
+      };
 
-      requiredInputs.forEach(input => {
+      const invalidFields = [];
+      contactForm.querySelectorAll('[required]').forEach(input => {
+        const value = input.value.trim();
         const errorMsg = input.parentElement.querySelector('.form-error-msg');
-        if (!input.value.trim()) {
-          isValid = false;
-          input.classList.add('is-invalid');
-          if (errorMsg) errorMsg.style.display = 'block';
-        } else {
-          if (input.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value)) {
-            isValid = false;
-            input.classList.add('is-invalid');
-            if (errorMsg) errorMsg.style.display = 'block';
-          } else {
-            input.classList.remove('is-invalid');
-            if (errorMsg) errorMsg.style.display = 'none';
-          }
-        }
+        const bad = !value ||
+          (input.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)) ||
+          (input.type === 'tel' && !isPhoneOk(value));
+
+        input.classList.toggle('is-invalid', bad);
+        input.setAttribute('aria-invalid', bad ? 'true' : 'false');
+        if (errorMsg) errorMsg.style.display = bad ? 'block' : 'none';
+        if (bad) invalidFields.push(input);
       });
 
-      if (!isValid) return;
+      if (invalidFields.length > 0) {
+        invalidFields[0].focus();
+        showToast('Please complete the highlighted fields with a valid work email and phone number.', 'Check Your Details');
+        return;
+      }
 
       const submitBtn = contactForm.querySelector('button[type="submit"]');
       const originalText = submitBtn.innerHTML;
@@ -357,6 +367,7 @@ document.addEventListener('DOMContentLoaded', () => {
     contactForm.querySelectorAll('input, select, textarea').forEach(field => {
       field.addEventListener('input', () => {
         field.classList.remove('is-invalid');
+        field.removeAttribute('aria-invalid');
         const errorMsg = field.parentElement.querySelector('.form-error-msg');
         if (errorMsg) errorMsg.style.display = 'none';
       });

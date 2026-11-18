@@ -10,7 +10,7 @@
 const { escapeHtml, cleanLine, isValidEmail, getMailer, readFormBody } = require('./_lib/mailer');
 
 module.exports = async function handler(req, res) {
-  const body = readFormBody(req, res);
+  const body = readFormBody(req, res, 'subscribe');
   if (!body) return;
 
   const email = cleanLine(body.email, 160);

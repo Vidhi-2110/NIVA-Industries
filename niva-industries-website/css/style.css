@@ -4,7 +4,8 @@
    Exact Match to Master Layout Reference
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
+/* Fonts (Plus Jakarta Sans, JetBrains Mono) are loaded via <link> tags in each page <head>,
+   not @import, so the browser can fetch them in parallel with this stylesheet. */
 
 /* --------------------------------------------------------------------------
    1. CSS Custom Properties / Design Tokens
@@ -3983,6 +3984,17 @@ a.footer-contact-value:hover {
   background-color: #EBF3FD;
 }
 
+/* Contact form fields use .form-input / .form-textarea, which the rule above never matched,
+   so invalid fields previously showed no feedback at all. */
+.form-input.is-invalid,
+.form-input.is-invalid:focus,
+.form-textarea.is-invalid,
+.form-textarea.is-invalid:focus {
+  border-color: #B42318;
+  background-color: #FEF3F2;
+  box-shadow: 0 0 0 2px rgba(180, 35, 24, 0.15);
+}
+
 .form-error-msg {
   display: none;
   font-size: 0.75rem;
@@ -4168,9 +4180,12 @@ textarea.form-control {
   }
 }
 
-/* Fail-safe visibility for hero banners and critical headers */
+/* Fail-safe visibility for hero banners and critical headers.
+   The homepage hero image is the LCP element: keep it visible from first paint
+   instead of waiting for script.js to fade it in. */
 .page-header-banner .reveal,
-.brochure-metrics-section .reveal {
+.brochure-metrics-section .reveal,
+.hero-fullbleed-banner.reveal {
   opacity: 1 !important;
   transform: translate(0) !important;
 }
@@ -6381,5 +6396,77 @@ textarea.form-control {
 
   .legal-contact-box {
     padding: 1.25rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Accessibility: skip link, keyboard focus, touch targets, reduced motion
+   -------------------------------------------------------------------------- */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  z-index: 10000;
+  padding: 0.75rem 1.25rem;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  transition: top var(--transition-fast);
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* <main> receives focus from the skip link; it should not show a ring itself. */
+#main-content:focus {
+  outline: none;
+}
+
+/* Keyboard-only focus ring. #028FEB keeps >= 3:1 contrast on both white and navy. */
+:focus-visible {
+  outline: 2px solid var(--color-accent-bright);
+  outline-offset: 3px;
+}
+
+/* Eyebrow labels on navy backgrounds: #0063EB is only 2.9:1 there; this lighter shade of the
+   brand blue is 5.9:1 (WCAG AA for small text). Light sections keep #0063EB (5.3:1 on white). */
+.section-dark .eyebrow,
+.mfg-services-highlight .eyebrow {
+  color: #3AA8F5;
+}
+
+/* Accent words inside large headings on navy: brand bright blue gives 4.45:1 (AA large text needs 3:1). */
+.section-dark .accent-text {
+  color: var(--color-accent-bright);
+}
+
+.footer-boxed-input:focus-within {
+  outline: 2px solid var(--color-accent-bright);
+  outline-offset: 2px;
+}
+
+/* The hamburger icon is 32x22px; extend its tap area to 44x44px without moving the icon. */
+.nav-hamburger {
+  position: relative;
+}
+
+.nav-hamburger::before {
+  content: '';
+  position: absolute;
+  inset: -11px -6px;
+}
+
+.form-noscript {
+  margin-bottom: 1rem;
+  padding: 0.85rem 1rem;
+  border-left: 3px solid var(--color-accent);
+  background-color: var(--color-accent-light);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }
