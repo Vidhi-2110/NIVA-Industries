@@ -418,6 +418,29 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ==========================================================================
+     10b. Client Logo Row — load every logo once the row nears the screen
+     On phones the row is a horizontal swipe strip. Browsers only lazy-load images
+     that are close to the viewport, so logos off to the right stayed blank until
+     the visitor had already swiped to them. Fetch them all as the row approaches.
+     ========================================================================== */
+  const clientLogoGrids = document.querySelectorAll('.clients-logo-grid');
+  const loadAllLogos = (grid) => grid.querySelectorAll('img[loading="lazy"]').forEach((img) => { img.loading = 'eager'; });
+
+  if ('IntersectionObserver' in window && clientLogoGrids.length > 0) {
+    const logoObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          loadAllLogos(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '800px 0px' });
+    clientLogoGrids.forEach((grid) => logoObserver.observe(grid));
+  } else {
+    clientLogoGrids.forEach(loadAllLogos);
+  }
+
+  /* ==========================================================================
      11. Back to Top Button
      ========================================================================== */
   const backToTopBtn = document.getElementById('back-to-top');

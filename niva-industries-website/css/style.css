@@ -3998,7 +3998,7 @@ a.footer-contact-value:hover {
 .form-error-msg {
   display: none;
   font-size: 0.75rem;
-  color: #00215E;
+  color: #B42318;
   margin-top: 0.35rem;
   font-family: var(--font-mono);
 }
@@ -6468,5 +6468,24 @@ textarea.form-control {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+}
+
+/* Toast notifications: keep a 16px gutter on both sides on phones and cap the width elsewhere
+   (previously the toast stretched to the left screen edge below ~420px). */
+.toast {
+  max-width: 420px;
+}
+
+@media (max-width: 576px) {
+  .toast-container {
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+  }
+
+  .toast {
+    max-width: none;
+    width: 100%;
   }
 }

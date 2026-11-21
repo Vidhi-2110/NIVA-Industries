@@ -60,7 +60,7 @@ The website communicates NIVA Industries' engineering authority, type-tested saf
 | **Scripting** | Vanilla JavaScript (ES6+) | No jQuery, no frameworks |
 | **Fonts** | Google Fonts | `Plus Jakarta Sans` (primary) + `JetBrains Mono` (mono) |
 | **Icons** | Inline SVG | All icons are inline SVGs — zero extra HTTP requests |
-| **Images** | Local `.jpg`, `.png`, `.svg` | All assets stored in `images/` folder |
+| **Images** | Local `.webp` (+ a few `.jpg`/`.png`) | Page images in `images/optimized/`; share/SEO images and favicon in `images/` |
 
 ---
 
@@ -81,16 +81,11 @@ niva-industries-website/
 ├── js/
 │   └── script.js           ← Single master JS file (~380 lines, modular sections)
 │
-└── images/                 ← 63 image assets (JPGs, PNGs, SVGs)
-    ├── logo.svg
-    ├── favicon.svg
-    ├── hero-superstructure.jpg
-    ├── product-*.jpg / .svg
-    ├── about-*.jpg / .png
-    ├── media-*.jpg
-    ├── news-*.jpg
-    ├── contact-*.jpg
-    └── ... (63 total files)
+└── images/                 ← only images the site uses (see §9)
+    ├── optimized/          ← 58 WebP files shown on the pages (logos, products, photos, client logos)
+    ├── favicon-emblem.png  ← browser tab icon
+    ├── value-icon-*.png    ← 3 small About-page icons
+    └── *.jpg               ← 6 social-share (og:image) photos
 ```
 
 > **Key Principle:** One CSS file + One JS file — shared across all 5 pages. This keeps the codebase lean and ensures consistent behavior everywhere.
@@ -417,7 +412,7 @@ This **Heading | Spacer | Body** pattern appears on nearly every section and cre
 ```html
 <div class="exact-split-banner">  <!-- grid: 1fr 1fr -->
   <div class="split-photo-col">
-    <img src="images/steelworker-careers.jpg" ...>
+    <img src="images/optimized/niva-workforce.webp" ...>
   </div>
   <div class="split-orange-col">
     <!-- Orange bg careers text + CTA -->
@@ -529,7 +524,7 @@ Identical `<header>` structure on all 5 pages:
 
     <!-- Brand Logo -->
     <a href="index.html" class="nav-brand" aria-label="NIVA Industries Home">
-      <img src="images/logo.svg" alt="NIVA Industries Logo" width="200" height="50">
+      <img src="images/optimized/niva-industries1-1.webp" alt="NIVA Power Industries Pvt. Ltd. Logo" class="nav-logo-img" width="4636" height="1250">
     </a>
 
     <!-- Desktop Navigation -->
@@ -597,25 +592,19 @@ The newsletter form is wired to JavaScript — validates the email and shows a t
 
 ## 9. Image Assets
 
-All 63 assets are in `images/`. Naming uses a `context-descriptor.ext` convention:
+`images/` holds only files the website actually uses (68 files, ~6 MB). Unused images were removed on 2026-11-18; they remain in git history (tag `pre-optimization-checkpoint`) if ever needed.
 
-| Prefix | Count | Purpose |
+| Location | Count | Purpose |
 |---|---|---|
-| `hero-` | 6 | Hero section backgrounds and SVG icons |
-| `product-` | 12 | Product catalog photos + SVG drawings |
-| `about-` | 7 | About page photos and PNGs |
-| `media-` | 6 | Media gallery editorial photos |
-| `news-` | 3 | Newsroom article thumbnail images |
-| `contact-` | 2 | Contact page panorama + truss image |
-| `value-icon-` | 3 | Core values icon PNGs |
-| `logo` / `favicon` | 2 | SVG brand identity files |
-| Other | 22 | SVG illustrations, backgrounds, report icons |
+| `images/optimized/*.webp` | 58 | Every image shown on the pages: logos, product photos, plant/service photos, client logos |
+| `images/*.jpg` | 6 | `og:image` / `twitter:image` share pictures (JPG for social-network compatibility) |
+| `images/favicon-emblem.png` | 1 | Browser tab icon |
+| `images/value-icon-*.png` | 3 | About page core-value icons (1 KB each, not worth converting) |
 
 **Performance practices applied:**
 - `loading="eager"` — above-the-fold hero images only
 - `loading="lazy"` — all other images
 - `width` + `height` attributes always set — prevents Cumulative Layout Shift (CLS)
-- SVG illustrations serve as fallbacks and icon sets with zero quality loss at any resolution
 
 ---
 
@@ -744,7 +733,7 @@ SEO files: `robots.txt`, `sitemap.xml` (update `<lastmod>` when a page changes),
 
 ### Images
 
-Pages use the WebP files in `images/optimized/` (generated from the originals in `images/`, which are kept as sources and for `og:image`). When replacing a photo, export a WebP into `images/optimized/` and keep the `width`/`height` attributes matching its aspect ratio.
+Pages use the WebP files in `images/optimized/`. The full-size originals they were generated from were removed to keep the repo small; recover any of them from git history (tag `pre-optimization-checkpoint`) if a higher-resolution export is needed. When replacing a photo, export a WebP into `images/optimized/` and keep the `width`/`height` attributes matching its aspect ratio.
 
 ---
 

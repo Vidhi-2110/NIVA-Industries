@@ -264,29 +264,34 @@
                 <div class="form-row-2col">
                   <div class="form-group">
                     <label for="first-name" class="form-label">First name *</label>
-                    <input type="text" id="first-name" name="first_name" class="form-input" placeholder="e.g. Rahul" required autocomplete="given-name">
+                    <input type="text" id="first-name" name="first_name" class="form-input" placeholder="e.g. Rahul" required autocomplete="given-name" aria-describedby="first-name-error">
+                    <span class="form-error-msg" id="first-name-error">Please enter your first name.</span>
                   </div>
                   <div class="form-group">
                     <label for="last-name" class="form-label">Last name *</label>
-                    <input type="text" id="last-name" name="last_name" class="form-input" placeholder="e.g. Patel" required autocomplete="family-name">
+                    <input type="text" id="last-name" name="last_name" class="form-input" placeholder="e.g. Patel" required autocomplete="family-name" aria-describedby="last-name-error">
+                    <span class="form-error-msg" id="last-name-error">Please enter your last name.</span>
                   </div>
                 </div>
 
                 <div class="form-row-2col">
                   <div class="form-group">
                     <label for="email-address" class="form-label">Work Email address *</label>
-                    <input type="email" id="email-address" name="email" class="form-input" placeholder="name@company.com" required autocomplete="email">
+                    <input type="email" id="email-address" name="email" class="form-input" placeholder="name@company.com" required autocomplete="email" aria-describedby="email-address-error">
+                    <span class="form-error-msg" id="email-address-error">Please enter a valid work email address.</span>
                   </div>
                   <div class="form-group">
                     <label for="phone-number" class="form-label">Phone number *</label>
-                    <input type="tel" id="phone-number" name="phone" class="form-input" placeholder="+91 98765 43210" required autocomplete="tel">
+                    <input type="tel" id="phone-number" name="phone" class="form-input" placeholder="+91 98765 43210" required autocomplete="tel" aria-describedby="phone-number-error">
+                    <span class="form-error-msg" id="phone-number-error">Please enter a valid phone number (7–15 digits).</span>
                   </div>
                 </div>
 
                 <div class="form-row-2col">
                   <div class="form-group">
                     <label for="company-name" class="form-label">Company / Organization *</label>
-                    <input type="text" id="company-name" name="company" class="form-input" placeholder="e.g. EPC Infra Ltd." required autocomplete="organization">
+                    <input type="text" id="company-name" name="company" class="form-input" placeholder="e.g. EPC Infra Ltd." required autocomplete="organization" aria-describedby="company-name-error">
+                    <span class="form-error-msg" id="company-name-error">Please enter your company or organization.</span>
                   </div>
                   <div class="form-group">
                     <label for="project-location" class="form-label">Project Site Location (City / State)</label>
@@ -297,8 +302,9 @@
                 <div class="form-row-2col">
                   <div class="form-group">
                     <label for="product-interest" class="form-label">Product / Solution of Interest *</label>
-                    <select id="product-interest" name="product_interest" class="form-input" style="background:#fff; height:46px;" required>
-                      <option value="CSS" selected>Compact Secondary Substation (CSS)</option>
+                    <select id="product-interest" name="product_interest" class="form-input" style="background:#fff; height:46px;" required aria-describedby="product-interest-error">
+                      <option value="" selected disabled>Select a product or solution…</option>
+                      <option value="CSS">Compact Secondary Substation (CSS)</option>
                       <option value="Dry-Transformer">Transformer Enclosure</option>
                       <option value="PCC-Panel">PCC Panel (Power Control Centre)</option>
                       <option value="MCC-Panel">MCC Panel (Motor Control Centre)</option>
@@ -311,6 +317,7 @@
                       <option value="Busbar-Fabrication">Busbar Fabrication</option>
                       <option value="Sheet-Metal">Sheet Metal Fabrication</option>
                     </select>
+                    <span class="form-error-msg" id="product-interest-error">Please choose a product or solution.</span>
                   </div>
                   <div class="form-group">
                     <label for="application-type" class="form-label">Application</label>
@@ -326,7 +333,8 @@
 
                 <div class="form-group full-width">
                   <label for="comments-questions" class="form-label">Project Scope &amp; Requirements *</label>
-                  <textarea id="comments-questions" name="comments" rows="4" class="form-textarea" placeholder="Please share your requirements: quantity, ratings, enclosure sizes, materials, finish, delivery timeline, or attach drawings by email..." required></textarea>
+                  <textarea id="comments-questions" name="comments" rows="4" class="form-textarea" placeholder="Please share your requirements: quantity, ratings, enclosure sizes, materials, finish, delivery timeline, or attach drawings by email..." required aria-describedby="comments-questions-error"></textarea>
+                  <span class="form-error-msg" id="comments-questions-error">Please describe your project scope or requirements.</span>
                 </div>
 
                 <div class="form-submit-row">
