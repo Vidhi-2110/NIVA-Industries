@@ -454,12 +454,23 @@ document.addEventListener('DOMContentLoaded', () => {
      ========================================================================== */
   const backToTopBtn = document.getElementById('back-to-top');
   if (backToTopBtn) {
+    // The button floats over the bottom-right corner, so it is only shown when it is useful:
+    // after scrolling down past the first screen AND (the visitor is scrolling back up, or has
+    // reached the end of the page). While reading downwards it stays out of the way instead of
+    // sitting on top of text, links and form fields. The footer has bottom padding so that at the
+    // end of the page the button rests on empty background.
+    let lastY = window.scrollY;
+    let scrollingUp = false;
+
     const toggleBackToTop = () => {
-      if (window.scrollY > 500) {
-        backToTopBtn.classList.add('is-visible');
-      } else {
-        backToTopBtn.classList.remove('is-visible');
+      const y = window.scrollY;
+      if (Math.abs(y - lastY) > 6) {
+        scrollingUp = y < lastY;
+        lastY = y;
       }
+      const nearEnd = window.innerHeight + y >= document.documentElement.scrollHeight - 160;
+      const show = y > 500 && (scrollingUp || nearEnd);
+      backToTopBtn.classList.toggle('is-visible', show);
     };
     toggleBackToTop();
     window.addEventListener('scroll', toggleBackToTop, { passive: true });

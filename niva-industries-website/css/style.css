@@ -2560,7 +2560,9 @@ ul, ol {
   background: linear-gradient(180deg, #00215E 0%, #012463 100%);
   color: #EBF3FD;
   padding-top: 5.5rem;
-  padding-bottom: 2.75rem;
+  /* Extra room under the legal bar: at the end of a page the fixed back-to-top button rests here,
+     and used to sit on top of the LinkedIn icon / footer links. */
+  padding-bottom: 5.5rem;
   border-top: 1px solid rgba(2, 143, 235, 0.2);
 }
 
@@ -6150,7 +6152,7 @@ textarea.form-control {
   /* ---- Footer: compact phone layout ---- */
   .master-dark-footer {
     padding-top: 2.75rem;
-    padding-bottom: 1.75rem;
+    padding-bottom: 5rem; /* clearance for the back-to-top button */
   }
 
   .footer-logo-wrap {
