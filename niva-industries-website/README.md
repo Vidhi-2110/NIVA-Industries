@@ -671,7 +671,7 @@ Both website forms are delivered by email through Gmail SMTP, using two Vercel s
 
 | Form | Where | Endpoint | Email sent to the company inbox |
 |---|---|---|---|
-| Request a Quotation | `contact.html` | `api/contact.js` | `New RFQ — <product> — <company>`; Reply-To is the customer, so replying goes straight to them |
+| Request a Quotation | `contact.html` | `api/contact.js` | `New RFQ — <product> — <company>`; Reply-To is the customer, so replying goes straight to them. The customer also gets a short acknowledgement email |
 | Newsletter signup | Footer on every page | `api/subscribe.js` | `New newsletter subscriber — <email>`; the subscriber also gets a confirmation email |
 
 Shared SMTP code lives in `api/_lib/mailer.js` (the leading underscore keeps it from being a public route). The contact form only ever emails `CONTACT_TO`. The newsletter signup also sends the subscriber a short fixed-text confirmation (see below). Both forms include a hidden honeypot field that silently drops simple spam bots.
@@ -694,7 +694,14 @@ Every request also passes `readFormBody()` in `api/_lib/mailer.js`, which reject
 
 Without the store the check falls back to memory on the current serverless instance only, so a repeat signup can slip through after a cold start. The store being down never blocks a signup. To let someone re-subscribe, delete their key `niva:subscriber:<sha256 of the lower-cased address>` in the Upstash console.
 
-`api/contact.js` additionally validates the email (no commas/angle brackets) and phone (7–15 digits; `+ - . ( )` and spaces allowed). The browser applies the same rules before sending.
+**Contact form validation** (the browser applies the same rules first; `api/contact.js` enforces them again):
+
+| Field | Rule |
+|---|---|
+| Mobile number | Exactly **10 digits, numbers only**, first digit 6–9 (an Indian mobile number). The field strips letters and symbols as you type, stops at 10 digits, and turns a pasted `+91 98765 43210`, `91…` or `0…` into the plain 10 digits. The company email shows it as `+91 XXXXXXXXXX`. |
+| Email | Well-formed (no spaces, commas, angle brackets, `..`, over-long parts) **and** its domain must be able to receive mail: the server looks up the domain's MX (or address) record. A domain that doesn't exist or publishes a "null MX" (e.g. `example.com`) is rejected with an inline message on the email field. A DNS timeout never blocks an enquiry. |
+
+**Acknowledgement email.** After the enquiry reaches the company, the person who filled the form gets "We have received your enquiry" from `"NIVA Power Industries" <SMTP_USER>`. Because it mails an address typed by a visitor, the text is fixed (none of the visitor's words are echoed back) and it is sent at most once per address per hour (a repeat enquiry is still delivered to the company, just without a second acknowledgement). That hourly limit is shared across serverless instances when the Upstash store described above is connected, and per-instance otherwise. A failed acknowledgement never fails the enquiry, and the page only says a confirmation was emailed when one was actually sent.
 
 ### Required Vercel environment variables
 

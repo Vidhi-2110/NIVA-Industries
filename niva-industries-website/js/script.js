@@ -298,32 +298,78 @@ document.addEventListener('DOMContentLoaded', () => {
   const contactForm = document.getElementById('contact-inquiry-form');
 
   if (contactForm) {
+    // Same rules as the server (api/contact.js + api/_lib/mailer.js).
+    const EMAIL_RE = /^[^\s@<>()[\]\,;:"]+@[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?)*\.[A-Za-z]{2,}$/;
+    const isEmailOk = (v) => {
+      if (v.length > 254 || !EMAIL_RE.test(v)) return false;
+      const [local, domain] = v.split('@');
+      return local.length <= 64 && !/^\.|\.$|\.\./.test(local) && !/\.\./.test(domain);
+    };
+    const isMobileOk = (v) => /^[6-9]\d{9}$/.test(v); // 10 digits, first digit 6-9
+
+    // Keep only digits; a pasted "+91 98765 43210" / "91…" / "0…" becomes the plain 10-digit number.
+    const cleanMobile = (raw) => {
+      let digits = String(raw).replace(/\D/g, '');
+      if (digits.length === 12 && digits.startsWith('91')) digits = digits.slice(2);
+      else if (digits.length === 11 && digits.startsWith('0')) digits = digits.slice(1);
+      return digits.slice(0, 10);
+    };
+
+    const setFieldState = (input, bad, message) => {
+      const errorMsg = input.parentElement.querySelector('.form-error-msg');
+      input.classList.toggle('is-invalid', bad);
+      if (bad) input.setAttribute('aria-invalid', 'true'); else input.removeAttribute('aria-invalid');
+      if (errorMsg) {
+        if (bad && message) errorMsg.textContent = message;
+        errorMsg.style.display = bad ? 'block' : 'none';
+      }
+    };
+
+    const isFieldBad = (input) => {
+      const value = input.value.trim();
+      if (!input.required && !value) return false;
+      if (!value) return true;
+      if (input.name === 'email') return !isEmailOk(value);
+      if (input.name === 'phone') return !isMobileOk(value);
+      return false;
+    };
+
+    const phoneInput = contactForm.querySelector('input[name="phone"]');
+    if (phoneInput) {
+      phoneInput.addEventListener('input', () => {
+        const cleaned = cleanMobile(phoneInput.value);
+        if (cleaned !== phoneInput.value) phoneInput.value = cleaned;
+      });
+      phoneInput.addEventListener('paste', (e) => {
+        e.preventDefault();
+        const text = (e.clipboardData || window.clipboardData).getData('text');
+        phoneInput.value = cleanMobile(text);
+        phoneInput.dispatchEvent(new Event('input', { bubbles: true }));
+      });
+    }
+
+    // Check email and phone as soon as the visitor leaves the field (only once they typed something).
+    ['email', 'phone'].forEach((name) => {
+      const field = contactForm.querySelector(`[name="${name}"]`);
+      if (!field) return;
+      field.addEventListener('blur', () => {
+        if (field.value.trim()) setFieldState(field, isFieldBad(field));
+      });
+    });
+
     contactForm.addEventListener('submit', (e) => {
       e.preventDefault();
 
-      // Same rules as the server (api/_lib/mailer.js).
-      const isPhoneOk = (value) => {
-        const digits = value.replace(/\D/g, '').length;
-        return /^\+?[\d\s().-]+$/.test(value) && digits >= 7 && digits <= 15;
-      };
-
       const invalidFields = [];
       contactForm.querySelectorAll('[required]').forEach(input => {
-        const value = input.value.trim();
-        const errorMsg = input.parentElement.querySelector('.form-error-msg');
-        const bad = !value ||
-          (input.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)) ||
-          (input.type === 'tel' && !isPhoneOk(value));
-
-        input.classList.toggle('is-invalid', bad);
-        input.setAttribute('aria-invalid', bad ? 'true' : 'false');
-        if (errorMsg) errorMsg.style.display = bad ? 'block' : 'none';
+        const bad = isFieldBad(input);
+        setFieldState(input, bad);
         if (bad) invalidFields.push(input);
       });
 
       if (invalidFields.length > 0) {
         invalidFields[0].focus();
-        showToast('Please complete the highlighted fields with a valid work email and phone number.', 'Check Your Details');
+        showToast('Please complete the highlighted fields. Use a valid email address and a 10-digit mobile number.', 'Check Your Details');
         return;
       }
 
@@ -331,6 +377,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const originalText = submitBtn.innerHTML;
       const formData = new FormData(contactForm);
       const payload = Object.fromEntries(formData.entries());
+      const enteredEmail = String(payload.email || '').trim();
 
       submitBtn.disabled = true;
       submitBtn.innerHTML = `
@@ -350,10 +397,21 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(({ ok, data }) => {
           if (ok && data.ok) {
             contactForm.reset();
-            showToast('Thank you! Your quotation request has been sent to our team. We will respond within 4 business hours.', 'RFQ Submitted Successfully');
-          } else {
-            showToast((data && data.error) || 'Something went wrong. Please try again or call us directly.', 'Submission Failed');
+            showToast(
+              data.confirmationSent
+                ? `Thank you! Your quotation request has been sent to our team. A confirmation has been emailed to ${enteredEmail}. If you don't see it, please check your spam folder.`
+                : 'Thank you! Your quotation request has been sent to our team. We will respond within 4 business hours.',
+              'RFQ Submitted Successfully'
+            );
+            return;
           }
+          // The server rejected one specific field (e.g. an email domain that cannot receive mail).
+          const badField = data && data.field && contactForm.querySelector(`[name="${data.field}"]`);
+          if (badField) {
+            setFieldState(badField, true, data.error);
+            badField.focus();
+          }
+          showToast((data && data.error) || 'Something went wrong. Please try again or call us directly.', 'Submission Failed');
         })
         .catch(() => {
           showToast('Could not reach the server. Please check your connection and try again.', 'Submission Failed');

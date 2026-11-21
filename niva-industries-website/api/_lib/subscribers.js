@@ -93,4 +93,30 @@ async function releaseSubscription(email) {
   }
 }
 
-module.exports = { claimSubscription, releaseSubscription, canonicalEmail, fingerprint };
+// Time-limited slot, e.g. "at most one enquiry acknowledgement per address per hour".
+// Returns true when the slot was free (and is now taken for `ttlSeconds`), false when it is taken.
+// Same storage and fallback behaviour as claimSubscription; a store outage never blocks.
+const timedMemory = new Map();
+
+async function claimTimedSlot(scope, email, ttlSeconds) {
+  const id = `${scope}:${fingerprint(email)}`;
+  const config = storeConfig();
+
+  if (config) {
+    try {
+      const result = await redis(config, ['SET', `niva:slot:${id}`, '1', 'NX', 'EX', String(ttlSeconds)]);
+      return result === 'OK';
+    } catch (err) {
+      console.error('Slot store unavailable, using in-memory check.', err.message);
+    }
+  }
+
+  const now = Date.now();
+  const until = timedMemory.get(id);
+  if (until && until > now) return false;
+  timedMemory.set(id, now + ttlSeconds * 1000);
+  if (timedMemory.size > 5000) timedMemory.clear();
+  return true;
+}
+
+module.exports = { claimSubscription, releaseSubscription, claimTimedSlot, canonicalEmail, fingerprint };

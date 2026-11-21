@@ -16,8 +16,8 @@ const nodemailer = require('nodemailer');
 // recipients into the Reply-To header), and a TLD of at least two letters.
 const EMAIL_RE = /^[^\s@<>()[\]\\,;:"]+@[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?)*\.[A-Za-z]{2,}$/;
 
-// Digits plus the usual separators (+ - . space parentheses), 7–15 digits in total (E.164 max).
-const PHONE_CHARS_RE = /^\+?[\d\s().-]+$/;
+// Indian mobile numbers: exactly 10 digits, first digit 6–9.
+const MOBILE_RE = /^[6-9]\d{9}$/;
 
 // Best-effort rate limit. Serverless instances are short-lived and not shared, so this only
 // slows down a burst hitting one warm instance; use Vercel Firewall rate-limit rules for a hard limit.
@@ -45,13 +45,51 @@ function cleanText(value, max = 5000) {
 }
 
 function isValidEmail(value) {
-  return typeof value === 'string' && value.length <= 254 && EMAIL_RE.test(value);
+  if (typeof value !== 'string' || value.length > 254 || !EMAIL_RE.test(value)) return false;
+  const [local, domain] = value.split('@');
+  // RFC limits, and no empty labels such as "a..b@x.com", ".a@x.com" or "a.@x.com".
+  return local.length <= 64 && !/^\.|\.$|\.\./.test(local) && !/\.\./.test(domain);
 }
 
-function isValidPhone(value) {
-  if (typeof value !== 'string' || !PHONE_CHARS_RE.test(value)) return false;
-  const digits = value.replace(/\D/g, '').length;
-  return digits >= 7 && digits <= 15;
+// Returns the 10-digit mobile number for input like "9876543210", "98765 43210",
+// "+91 98765 43210", "91-9876543210" or "09876543210"; returns null for anything else
+// (letters, wrong length, or a first digit outside 6–9).
+function normalizeMobile(value) {
+  if (typeof value !== 'string' || /[^\d\s+().-]/.test(value)) return null;
+  let digits = value.replace(/\D/g, '');
+  if (digits.length === 12 && digits.startsWith('91')) digits = digits.slice(2);
+  else if (digits.length === 11 && digits.startsWith('0')) digits = digits.slice(1);
+  return MOBILE_RE.test(digits) ? digits : null;
+}
+
+// True when the domain of an email address can receive mail: it has an MX record, or (as mail
+// standards allow) an address record. A domain that does not exist, or that publishes a "null MX"
+// (such as example.com) to say it takes no mail, is rejected. A DNS timeout or server failure
+// returns true, so a flaky lookup never blocks a genuine enquiry.
+const DNS_TIMEOUT_MS = 3000;
+const NO_RECORD = new Set(['ENODATA', 'ENOTFOUND']);
+
+function withTimeout(promise) {
+  let timer;
+  const timeout = new Promise((_, reject) => { timer = setTimeout(() => reject(Object.assign(new Error('DNS timeout'), { code: 'ETIMEOUT' })), DNS_TIMEOUT_MS); });
+  return Promise.race([promise, timeout]).finally(() => clearTimeout(timer));
+}
+
+async function domainCanReceiveMail(domain) {
+  const dns = require('dns').promises;
+  try {
+    const mx = await withTimeout(dns.resolveMx(domain));
+    if (mx.some((r) => r.exchange && r.exchange !== '.')) return true;
+    if (mx.length > 0) return false; // explicit null MX
+  } catch (err) {
+    if (!NO_RECORD.has(err.code)) return true; // lookup problem, not a verdict on the domain
+  }
+  try {
+    const a = await withTimeout(dns.resolve4(domain));
+    return a.length > 0;
+  } catch (err) {
+    return !NO_RECORD.has(err.code);
+  }
 }
 
 function clientIp(req) {
@@ -145,4 +183,4 @@ function readFormBody(req, res, scope = 'form') {
   return body;
 }
 
-module.exports = { escapeHtml, cleanLine, cleanText, isValidEmail, isValidPhone, getMailer, readFormBody };
+module.exports = { escapeHtml, cleanLine, cleanText, isValidEmail, normalizeMobile, domainCanReceiveMail, getMailer, readFormBody };

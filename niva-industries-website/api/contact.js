@@ -3,10 +3,51 @@
  * Vercel serverless function (Node.js runtime).
  *
  * Receives the "Request a Quotation" form from contact.html and emails it
- * via SMTP to the company inbox. SMTP settings: see api/_lib/mailer.js.
+ * via SMTP to the company inbox, then sends the person who filled it in a short
+ * acknowledgement at the address they gave. SMTP settings: see api/_lib/mailer.js.
+ *
+ * Validation (the browser applies the same rules first):
+ *  - email: well-formed, and its domain must be able to receive mail (MX / address record);
+ *  - phone: exactly 10 digits, first digit 6-9 (an Indian mobile number). "+91", "91" or "0"
+ *    prefixes and spaces are accepted and stripped.
+ *
+ * The acknowledgement mails an address typed by a visitor, so it is fixed text (none of the
+ * visitor's own words are echoed back) and limited to one per address per hour.
  */
 
-const { escapeHtml, cleanLine, cleanText, isValidEmail, isValidPhone, getMailer, readFormBody } = require('./_lib/mailer');
+const { escapeHtml, cleanLine, cleanText, isValidEmail, normalizeMobile, domainCanReceiveMail, getMailer, readFormBody } = require('./_lib/mailer');
+const { claimTimedSlot } = require('./_lib/subscribers');
+
+const SITE_URL = 'https://www.nivapowerindustries.com/';
+const ACK_INTERVAL_SECONDS = 60 * 60;
+
+function acknowledgementMessage() {
+  const text = [
+    'Thank you for contacting NIVA Power Industries Pvt. Ltd.',
+    '',
+    'We have received your enquiry and our team will review it and get back to you as soon as possible.',
+    '',
+    'If you did not submit this enquiry, you can ignore this email.',
+    '',
+    'NIVA Power Industries Pvt. Ltd.',
+    'Powering Progress. Energizing Tomorrow.',
+    SITE_URL,
+  ].join('\n');
+
+  const html = `
+    <div style="font-family: Arial, sans-serif; font-size: 14px; color: #1a1a1a; line-height: 1.6; max-width: 560px;">
+      <h2 style="color: #00215E; margin-bottom: 4px;">Thank you for contacting us</h2>
+      <p style="margin-top: 0;">We have received your enquiry at <strong>NIVA Power Industries Pvt. Ltd.</strong>
+      Our team will review it and get back to you as soon as possible.</p>
+      <p style="color: #595959;">If you did not submit this enquiry, you can ignore this email.</p>
+      <p style="margin-bottom: 0;"><strong style="color: #00215E;">NIVA Power Industries Pvt. Ltd.</strong><br>
+      Powering Progress. Energizing Tomorrow.<br>
+      <a href="${SITE_URL}">${SITE_URL}</a></p>
+    </div>
+  `;
+
+  return { subject: 'We have received your enquiry — NIVA Power Industries', text, html };
+}
 
 const REQUIRED_FIELDS = ['first_name', 'last_name', 'email', 'phone', 'company', 'product_interest', 'comments'];
 
@@ -32,11 +73,18 @@ module.exports = async function handler(req, res) {
   }
 
   if (!isValidEmail(fields.email)) {
-    return res.status(400).json({ ok: false, error: 'Please provide a valid email address.' });
+    return res.status(400).json({ ok: false, field: 'email', error: 'Please enter a valid email address, for example name@company.com.' });
   }
 
-  if (!isValidPhone(fields.phone)) {
-    return res.status(400).json({ ok: false, error: 'Please provide a valid phone number (7–15 digits).' });
+  const mobile = normalizeMobile(fields.phone);
+  if (!mobile) {
+    return res.status(400).json({ ok: false, field: 'phone', error: 'Please enter a valid 10-digit mobile number (digits only, starting with 6, 7, 8 or 9).' });
+  }
+  fields.phone = mobile;
+
+  // Last, because it needs a network lookup: the address's domain must be able to receive mail.
+  if (!(await domainCanReceiveMail(fields.email.split('@')[1]))) {
+    return res.status(400).json({ ok: false, field: 'email', error: 'This email address does not look reachable. Please check it for typing mistakes.' });
   }
 
   const mailer = getMailer();
@@ -52,7 +100,7 @@ module.exports = async function handler(req, res) {
     ``,
     `Name: ${fields.first_name} ${fields.last_name}`,
     `Work Email: ${fields.email}`,
-    `Phone: ${fields.phone}`,
+    `Phone: +91 ${fields.phone}`,
     `Company / Organization: ${fields.company}`,
     `Project Site Location: ${fields.project_location || '—'}`,
     `Product / Solution of Interest: ${fields.product_interest}`,
@@ -69,7 +117,7 @@ module.exports = async function handler(req, res) {
       <table cellpadding="6" cellspacing="0" style="border-collapse: collapse; width: 100%; max-width: 560px;">
         <tr><td style="color:#595959; width:220px;">Name</td><td><strong>${escapeHtml(fields.first_name)} ${escapeHtml(fields.last_name)}</strong></td></tr>
         <tr><td style="color:#595959;">Work Email</td><td><a href="mailto:${escapeHtml(fields.email)}">${escapeHtml(fields.email)}</a></td></tr>
-        <tr><td style="color:#595959;">Phone</td><td><a href="tel:${escapeHtml(fields.phone)}">${escapeHtml(fields.phone)}</a></td></tr>
+        <tr><td style="color:#595959;">Phone</td><td><a href="tel:+91${fields.phone}">+91 ${fields.phone}</a></td></tr>
         <tr><td style="color:#595959;">Company / Organization</td><td>${escapeHtml(fields.company)}</td></tr>
         <tr><td style="color:#595959;">Project Site Location</td><td>${escapeHtml(fields.project_location || '—')}</td></tr>
         <tr><td style="color:#595959;">Product / Solution of Interest</td><td>${escapeHtml(fields.product_interest)}</td></tr>
@@ -90,9 +138,22 @@ module.exports = async function handler(req, res) {
       html: htmlBody,
     });
 
-    return res.status(200).json({ ok: true });
   } catch (err) {
     console.error('Contact form: failed to send email.', err);
     return res.status(502).json({ ok: false, error: 'Could not send your enquiry right now. Please try again shortly.' });
   }
+
+  // The enquiry is with the company by now. A failed or skipped acknowledgement must not turn
+  // that into an error for the visitor.
+  let confirmationSent = false;
+  if (await claimTimedSlot('contact-ack', fields.email, ACK_INTERVAL_SECONDS)) {
+    try {
+      await mailer.transporter.sendMail({ from: mailer.publicFrom, to: fields.email, ...acknowledgementMessage() });
+      confirmationSent = true;
+    } catch (err) {
+      console.error('Contact form: acknowledgement email could not be delivered.', err);
+    }
+  }
+
+  return res.status(200).json({ ok: true, confirmationSent });
 };
