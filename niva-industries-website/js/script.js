@@ -403,7 +403,12 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(({ ok, data }) => {
           if (ok && data.ok) {
             input.value = '';
-            showToast('Thank you for subscribing to product updates and company news from NIVA Power Industries.', 'Subscribed');
+            showToast(
+              data.confirmationSent
+                ? `Thank you for subscribing! We have sent a confirmation email to ${email}. If you don't see it, please check your spam folder.`
+                : 'Thank you for subscribing to product updates and company news from NIVA Power Industries.',
+              'Subscribed'
+            );
           } else {
             showToast((data && data.error) || 'Something went wrong. Please try again.', 'Subscription Failed');
           }

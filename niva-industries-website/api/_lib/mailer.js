@@ -54,6 +54,22 @@ function isValidPhone(value) {
   return digits >= 7 && digits <= 15;
 }
 
+// Confirmation emails go to an address typed by a visitor, so cap how often any one address can
+// be mailed (same best-effort, per-instance caveat as the IP limit above).
+const CONFIRM_WINDOW_MS = 60 * 60 * 1000;
+const confirmed = new Map();
+
+// Returns true (and records the attempt) when this address has not been mailed in the last hour.
+function claimConfirmationSlot(email) {
+  const key = String(email).toLowerCase();
+  const now = Date.now();
+  const last = confirmed.get(key);
+  if (last && now - last < CONFIRM_WINDOW_MS) return false;
+  confirmed.set(key, now);
+  if (confirmed.size > 5000) confirmed.clear();
+  return true;
+}
+
 function clientIp(req) {
   const fwd = String(req.headers['x-forwarded-for'] || '').split(',')[0].trim();
   return fwd || req.headers['x-real-ip'] || (req.socket && req.socket.remoteAddress) || 'unknown';
@@ -95,7 +111,12 @@ function getMailer() {
     auth: { user: SMTP_USER, pass: SMTP_PASS },
   });
 
-  return { transporter, from: `"NIVA Website" <${SMTP_USER}>`, to: CONTACT_TO };
+  return {
+    transporter,
+    from: `"NIVA Website" <${SMTP_USER}>`,                  // internal notifications to the company
+    publicFrom: `"NIVA Power Industries" <${SMTP_USER}>`,   // emails that visitors receive
+    to: CONTACT_TO,
+  };
 }
 
 // Common request guard: POST only, same-origin, JSON body, rate limit, honeypot check.
@@ -140,4 +161,4 @@ function readFormBody(req, res, scope = 'form') {
   return body;
 }
 
-module.exports = { escapeHtml, cleanLine, cleanText, isValidEmail, isValidPhone, getMailer, readFormBody };
+module.exports = { escapeHtml, cleanLine, cleanText, isValidEmail, isValidPhone, claimConfirmationSlot, getMailer, readFormBody };

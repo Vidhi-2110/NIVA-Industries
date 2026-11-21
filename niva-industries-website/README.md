@@ -672,9 +672,9 @@ Both website forms are delivered by email through Gmail SMTP, using two Vercel s
 | Form | Where | Endpoint | Email sent to the company inbox |
 |---|---|---|---|
 | Request a Quotation | `contact.html` | `api/contact.js` | `New RFQ — <product> — <company>`; Reply-To is the customer, so replying goes straight to them |
-| Newsletter signup | Footer on every page | `api/subscribe.js` | `New newsletter subscriber — <email>` |
+| Newsletter signup | Footer on every page | `api/subscribe.js` | `New newsletter subscriber — <email>`; the subscriber also gets a confirmation email |
 
-Shared SMTP code lives in `api/_lib/mailer.js` (the leading underscore keeps it from being a public route). Mail only ever goes to `CONTACT_TO`; nothing is sent to the address a visitor types in, so the forms can't be used to email third parties. Both forms include a hidden honeypot field that silently drops simple spam bots.
+Shared SMTP code lives in `api/_lib/mailer.js` (the leading underscore keeps it from being a public route). The contact form only ever emails `CONTACT_TO`. The newsletter signup also sends the subscriber a short fixed-text confirmation (see below). Both forms include a hidden honeypot field that silently drops simple spam bots.
 
 Every request also passes `readFormBody()` in `api/_lib/mailer.js`, which rejects:
 
@@ -684,6 +684,8 @@ Every request also passes `readFormBody()` in `api/_lib/mailer.js`, which reject
 | `Origin` header missing or not the same host the request was sent to (blocks other websites posting from a visitor's browser) | 403 |
 | Body not `application/json` / not a JSON object | 415 / 400 |
 | More than 5 submissions per IP in 10 minutes **on one warm serverless instance** (best effort only — add a Vercel Firewall rate-limit rule on `/api/*` for a hard limit) | 429 |
+
+**Newsletter confirmation email.** After the company notice is sent, `api/subscribe.js` emails the subscriber "Thank you for subscribing" from `"NIVA Power Industries" <SMTP_USER>`. Because it mails an address typed by a visitor, it is limited so it can't be used to spam third parties: the text is fixed (the only visitor value in it is their own address, HTML-escaped), at most one confirmation per address per hour, and the checks in the table above apply (same-origin, 5 requests per IP per 10 minutes per instance, honeypot). A confirmation that fails to deliver (e.g. a mistyped address) never fails the signup; the page only says "we have sent a confirmation email" when one was actually sent. Subscribers unsubscribe by replying to the email; there is no stored list. The per-instance limits are best-effort, so also add a Vercel Firewall rate-limit rule on `/api/*` to protect the Gmail account from abuse.
 
 `api/contact.js` additionally validates the email (no commas/angle brackets) and phone (7–15 digits; `+ - . ( )` and spaces allowed). The browser applies the same rules before sending.
 

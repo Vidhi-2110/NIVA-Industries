@@ -2,12 +2,52 @@
  * NIVA Power Industries — Footer Newsletter Signup Handler
  * Vercel serverless function (Node.js runtime).
  *
- * Emails each new subscriber's address to the company inbox. Nothing is stored and
- * nothing is sent to the subscriber, so this can't be used to mail third parties.
+ * 1. Emails each new subscriber's address to the company inbox (nothing is stored).
+ * 2. Sends the subscriber a short confirmation email.
+ *
+ * Because step 2 mails an address typed by a visitor, it is deliberately constrained:
+ *  - the message is fixed text; the only visitor-supplied value in it is their own address
+ *    (HTML-escaped), so it can't carry attacker-written content;
+ *  - at most one confirmation per address per hour (claimConfirmationSlot);
+ *  - the shared guard in readFormBody applies: same-origin only, per-IP rate limit, honeypot.
+ * For a hard limit across all serverless instances add a Vercel Firewall rate-limit rule on /api/*.
+ *
  * SMTP settings: see api/_lib/mailer.js.
  */
 
-const { escapeHtml, cleanLine, isValidEmail, getMailer, readFormBody } = require('./_lib/mailer');
+const { escapeHtml, cleanLine, isValidEmail, claimConfirmationSlot, getMailer, readFormBody } = require('./_lib/mailer');
+
+const SITE_URL = 'https://www.nivapowerindustries.com/';
+
+function confirmationMessage(email) {
+  const text = [
+    'Thank you for subscribing to NIVA Power Industries Pvt. Ltd.',
+    '',
+    'We will send you occasional product updates and company news at this address.',
+    '',
+    'If you did not request this, or you no longer want to hear from us, just reply to this email',
+    'with the word "unsubscribe" and we will remove you.',
+    '',
+    'NIVA Power Industries Pvt. Ltd.',
+    'Powering Progress. Energizing Tomorrow.',
+    SITE_URL,
+  ].join('\n');
+
+  const html = `
+    <div style="font-family: Arial, sans-serif; font-size: 14px; color: #1a1a1a; line-height: 1.6; max-width: 560px;">
+      <h2 style="color: #00215E; margin-bottom: 4px;">Thank you for subscribing</h2>
+      <p style="margin-top: 0;">Thank you for subscribing to <strong>NIVA Power Industries Pvt. Ltd.</strong>
+      We will send occasional product updates and company news to <strong>${escapeHtml(email)}</strong>.</p>
+      <p style="color: #595959;">If you did not request this, or you no longer want to hear from us, simply reply to this
+      email with the word &ldquo;unsubscribe&rdquo; and we will remove you.</p>
+      <p style="margin-bottom: 0;"><strong style="color: #00215E;">NIVA Power Industries Pvt. Ltd.</strong><br>
+      Powering Progress. Energizing Tomorrow.<br>
+      <a href="${SITE_URL}">${SITE_URL}</a></p>
+    </div>
+  `;
+
+  return { subject: 'Thank you for subscribing — NIVA Power Industries', text, html };
+}
 
 module.exports = async function handler(req, res) {
   const body = readFormBody(req, res, 'subscribe');
@@ -47,10 +87,22 @@ module.exports = async function handler(req, res) {
         </div>
       `,
     });
-
-    return res.status(200).json({ ok: true });
   } catch (err) {
     console.error('Newsletter signup: failed to send email.', err);
     return res.status(502).json({ ok: false, error: 'Could not complete your signup right now. Please try again shortly.' });
   }
+
+  // The signup is recorded once the company has been notified. A failed or skipped confirmation
+  // (e.g. a mistyped address that the mail server rejects) must not turn that into an error.
+  let confirmationSent = false;
+  if (claimConfirmationSlot(email)) {
+    try {
+      await mailer.transporter.sendMail({ from: mailer.publicFrom, to: email, ...confirmationMessage(email) });
+      confirmationSent = true;
+    } catch (err) {
+      console.error('Newsletter signup: confirmation email could not be delivered.', err);
+    }
+  }
+
+  return res.status(200).json({ ok: true, confirmationSent });
 };

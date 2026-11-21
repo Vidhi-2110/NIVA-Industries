@@ -6475,6 +6475,9 @@ textarea.form-control {
    (previously the toast stretched to the left screen edge below ~420px). */
 .toast {
   max-width: 420px;
+  /* thin light edge so the toast stays visible over the navy footer */
+  outline: 1px solid rgba(255, 255, 255, 0.28);
+  outline-offset: -1px;
 }
 
 @media (max-width: 576px) {
