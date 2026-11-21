@@ -403,6 +403,10 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(({ ok, data }) => {
           if (ok && data.ok) {
             input.value = '';
+            if (data.alreadySubscribed) {
+              showToast(`${email} is already subscribed to NIVA Power Industries updates. No further action is needed.`, 'Already Subscribed');
+              return;
+            }
             showToast(
               data.confirmationSent
                 ? `Thank you for subscribing! We have sent a confirmation email to ${email}. If you don't see it, please check your spam folder.`

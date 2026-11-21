@@ -2,20 +2,23 @@
  * NIVA Power Industries — Footer Newsletter Signup Handler
  * Vercel serverless function (Node.js runtime).
  *
- * 1. Emails each new subscriber's address to the company inbox (nothing is stored).
- * 2. Sends the subscriber a short confirmation email.
+ * 1. Checks the address has not subscribed before (api/_lib/subscribers.js). A repeat signup
+ *    gets { ok: true, alreadySubscribed: true } and sends nothing.
+ * 2. Emails the new subscriber's address to the company inbox.
+ * 3. Sends the subscriber a short confirmation email.
  *
- * Because step 2 mails an address typed by a visitor, it is deliberately constrained:
+ * Because step 3 mails an address typed by a visitor, it is deliberately constrained:
  *  - the message is fixed text; the only visitor-supplied value in it is their own address
  *    (HTML-escaped), so it can't carry attacker-written content;
- *  - at most one confirmation per address per hour (claimConfirmationSlot);
+ *  - each address can trigger it only once (step 1);
  *  - the shared guard in readFormBody applies: same-origin only, per-IP rate limit, honeypot.
  * For a hard limit across all serverless instances add a Vercel Firewall rate-limit rule on /api/*.
  *
  * SMTP settings: see api/_lib/mailer.js.
  */
 
-const { escapeHtml, cleanLine, isValidEmail, claimConfirmationSlot, getMailer, readFormBody } = require('./_lib/mailer');
+const { escapeHtml, cleanLine, isValidEmail, getMailer, readFormBody } = require('./_lib/mailer');
+const { claimSubscription, releaseSubscription } = require('./_lib/subscribers');
 
 const SITE_URL = 'https://www.nivapowerindustries.com/';
 
@@ -66,6 +69,11 @@ module.exports = async function handler(req, res) {
     return res.status(500).json({ ok: false, error: 'Signup is not available right now. Please try again later.' });
   }
 
+  // One subscription per address: a repeat signup is acknowledged but triggers no email at all.
+  if ((await claimSubscription(email)) === 'duplicate') {
+    return res.status(200).json({ ok: true, alreadySubscribed: true });
+  }
+
   try {
     await mailer.transporter.sendMail({
       from: mailer.from,
@@ -89,20 +97,19 @@ module.exports = async function handler(req, res) {
     });
   } catch (err) {
     console.error('Newsletter signup: failed to send email.', err);
+    await releaseSubscription(email); // let the visitor try again instead of being told they already subscribed
     return res.status(502).json({ ok: false, error: 'Could not complete your signup right now. Please try again shortly.' });
   }
 
   // The signup is recorded once the company has been notified. A failed or skipped confirmation
   // (e.g. a mistyped address that the mail server rejects) must not turn that into an error.
   let confirmationSent = false;
-  if (claimConfirmationSlot(email)) {
-    try {
-      await mailer.transporter.sendMail({ from: mailer.publicFrom, to: email, ...confirmationMessage(email) });
-      confirmationSent = true;
-    } catch (err) {
-      console.error('Newsletter signup: confirmation email could not be delivered.', err);
-    }
+  try {
+    await mailer.transporter.sendMail({ from: mailer.publicFrom, to: email, ...confirmationMessage(email) });
+    confirmationSent = true;
+  } catch (err) {
+    console.error('Newsletter signup: confirmation email could not be delivered.', err);
   }
 
-  return res.status(200).json({ ok: true, confirmationSent });
+  return res.status(200).json({ ok: true, alreadySubscribed: false, confirmationSent });
 };
